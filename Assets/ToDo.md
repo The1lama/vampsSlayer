@@ -1,7 +1,7 @@
 # --------------Must Do------------
 
 ### GamePlay
-- [ ] Add spawners for the mobs 
+- [x] Add spawners for the mobs 
 - [x] Player attacks automaticly 
 - [ ] Give XP and upgrades the player
 - [ ] After death restart with old stats
@@ -11,7 +11,7 @@
 ### UI
 #### Show 
   - [ ] Current score 
-  - [ ] health 
+  - [x] health 
   - [ ] XP  
   - [ ] time passage
 

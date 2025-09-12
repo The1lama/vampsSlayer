@@ -10,9 +10,10 @@ public class GameManager : MonoBehaviour
     // A simpleton, everything can access this file
     public static GameManager gameManager { get; private set; }
 
-    public HealthUnit PlayerHealth = new HealthUnit(100, 100);
-
-    private GameObject[] _Enemies;
+    // public HealthUnit PlayerHealth = new HealthUnit(100, 100);
+    // public HealthUnit PlayerHealth;
+    
+    private GameObject[] _enemies;
 
     [SerializeField] private float _ESpeed;
     [SerializeField] private GameObject Player;
@@ -23,6 +24,8 @@ public class GameManager : MonoBehaviour
     
     void Awake()
     {
+        // Playerhealth = new HealthUnit(100, 100);
+        
         // if there are more game managers in the scene this game manager gets removed
         if (gameManager != null && gameManager != this)
         {
@@ -80,6 +83,8 @@ public class GameManager : MonoBehaviour
     
     public void GameOver()
     {
+        
+        
         // Debug.Log("Game Over");
         // saves score 
         // Plays sad sounds, show death screen with current score and highscore, option to restart or quit to main menu/game

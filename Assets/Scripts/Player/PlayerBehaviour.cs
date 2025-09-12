@@ -6,51 +6,55 @@ using PrimeTween;
 
 public class PlayerBehaviour : MonoBehaviour
 { 
-    public InputSystem_Actions _input;
+    InputSystem_Actions _input;
     
-    SpriteRenderer spriteRenderer;
+    SpriteRenderer _spriteRenderer;
 
-    private bool isInvincible;
+    private bool _isInvincible;
     [SerializeField] private float IFrameTime;
     [SerializeField] private Color hitTint = Color.red;
     
+    private HealthScript _healthScript;
+    
+    public healthBar healthBar;
+    
     void Start()
     {
-        spriteRenderer =  GetComponent<SpriteRenderer>();
+        _spriteRenderer =  GetComponent<SpriteRenderer>();
+        _healthScript = GetComponent<HealthScript>();
         
         _input = new InputSystem_Actions();
         
         _input.Enable();
 
-        _input.HealthDamage._Damage.performed += playerdamae;
-        _input.HealthDamage._Healing.performed += playerhealthing;
+        healthBar.SetMaxHealth(_healthScript.GetHealth());
+
     }
     
+    private void PlayerHeal(int healing)
+    {
+        _healthScript.Healing(healing);
+        healthBar.SetHealth(_healthScript.GetHealth());
+    }
     
-    // test functions for damage player and heal player
-    private void playerdamae(InputAction.CallbackContext context)
-    {
-        PlayerTakeDamage(10);
-    }
-    private void playerhealthing(InputAction.CallbackContext context)
-    {
-        PlayerHeal(10);
-    }
     
     public void PlayerTakeDamage(int damage)
     {
         // if player has iFrames do nothing
-        if (isInvincible)  return;
+        if (_isInvincible)  return;
         
         
-        GameManager.gameManager.PlayerHealth.TakeDamage(damage);
+        _healthScript.TakeDamage(damage);
+        healthBar.SetHealth(_healthScript.GetHealth());
+
+        Debug.Log(_healthScript.GetHealth());
         
-        
-        // Debug.Log(GameManager.gameManager.PlayerHealth.CurrentHealth);
-        if (GameManager.gameManager.PlayerHealth.CurrentHealth <= 0)
+        if (_healthScript.GetHealth() <= 0)
         {
+            Debug.LogError("Game Over Bitch");
             GameManager.gameManager.GameOver();
         }
+
         
         StartCoroutine(IFrames());
         
@@ -61,26 +65,23 @@ public class PlayerBehaviour : MonoBehaviour
     {
         // Debug.Log("HurtAnimation");
         Sequence.Create()
-            .Group(Tween.Color(spriteRenderer, hitTint, 0.1f))
-            // .Group(Tween.Scale(transform, new Vector3(transform.localScale.x * 1.2f, 1.2f, 1.2f), 0.1f))
+            .Group(Tween.Color(_spriteRenderer, hitTint, 0.1f))
+            .Group(Tween.Scale(transform, new Vector3(transform.localScale.x * 1.2f, 1.2f, 1.2f), 0.1f))
             .ChainDelay(0.5f)
-            // .Group(Tween.Scale(transform, new Vector3(transform.localScale.x * 1f, 1f, 1f), IFrameTime))
-            .Group(Tween.Color(spriteRenderer, Color.white, IFrameTime));
+            
+            .Group(Tween.Scale(transform, new Vector3(transform.localScale.x * 1f, 1f, 1f), IFrameTime))
+            .Group(Tween.Color(_spriteRenderer, Color.white, IFrameTime));
     }
     
-    private static void PlayerHeal(int healing)
-    {
-        GameManager.gameManager.PlayerHealth.Heal(healing);
-    }
-
+    
     private IEnumerator  IFrames()
     {
-        isInvincible = true;
+        _isInvincible = true;
         // Debug.Log("IFrame True");
         HurtAnimation();
         yield return new WaitForSeconds(IFrameTime);
         // Debug.Log("IFrame False");
-        isInvincible = false;
+        _isInvincible = false;
     }
     
     

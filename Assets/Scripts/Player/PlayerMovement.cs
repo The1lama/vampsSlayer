@@ -7,42 +7,39 @@ public class PlayerMovement : MonoBehaviour
 {
 
     private Animator _animator;
-    public Rigidbody2D rb;
+    private Rigidbody2D _rb;
     private SpriteRenderer _spriteRenderer;
+    private InputSystem_Actions _playerControl;
     
-    public InputAction playerControl;
     public float speed = 10f;
-
     public bool isfacingRight = true;
     
-    private Vector2 _moveDirection =  Vector2.zero;
-
-
-    public void OnEnable()
-    {
-        playerControl.Enable();
-    }
-
+    private Vector2 _moveDirection = Vector2.zero;
+    
+    
     public void OnDisable()
     {
-        playerControl.Disable();
+        _playerControl.Disable();
     }
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        _rb = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
+        
+        _playerControl = new InputSystem_Actions();
+        _playerControl.Enable();
+        
     }
 
     void Update()
     {
-        _moveDirection =  playerControl.ReadValue<Vector2>();
+        _moveDirection =  _playerControl.Player.Move.ReadValue<Vector2>();
+        _rb.linearVelocity = new Vector2(_moveDirection.x, _moveDirection.y).normalized * speed;
 
-        rb.linearVelocity = new Vector2(_moveDirection.x, _moveDirection.y).normalized * speed;
-
-        AnimationStates();
         
+        AnimationStates();
         ChangeDirection();
         
     }
@@ -50,14 +47,16 @@ public class PlayerMovement : MonoBehaviour
 
     void ChangeDirection()
     {
-        if (_moveDirection.x > 0 )
+        if (_moveDirection.x > 0 )  // if facing right
         {
              _spriteRenderer.flipX = false;
+             // weapons.transform.localScale *= -1;
             //transform.localScale *= new Vector2(1, 1);
             isfacingRight = true;
-        } else if (_moveDirection.x < 0)
+        } else if (_moveDirection.x < 0)    // if facing left
         {
              _spriteRenderer.flipX = true;
+             // weapons.transform.localScale *= -1;
             //transform.localScale *= new Vector2(-1, 1);
             isfacingRight = false;
         }
@@ -122,7 +121,7 @@ public class PlayerMovement : MonoBehaviour
     
     private void AnimationStates()
     {
-        if (rb.linearVelocity.x == 0 && rb.linearVelocity.y == 0)
+        if (_rb.linearVelocity.x == 0 && _rb.linearVelocity.y == 0)
         {
             _animator.SetBool("isRuning", false);
         }

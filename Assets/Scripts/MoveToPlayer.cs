@@ -4,7 +4,7 @@ using UnityEngine.Serialization;
 public class MoveToPlayer : MonoBehaviour
 {
 
-    [SerializeField] private  Animator animator;
+    // [SerializeField] private  Animator animator;
     [SerializeField] private SpriteRenderer spriteRenderer;
 
     [SerializeField] private float speed = 5; 
