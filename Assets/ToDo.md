@@ -13,7 +13,7 @@
   - [ ] Current score 
   - [x] health 
   - [ ] XP  
-  - [ ] time passage
+  - [x] time passage
 
   - [ ] Upgrade menu
   - [ ] Start menu
