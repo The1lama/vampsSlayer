@@ -31,7 +31,7 @@ public class EnemyBehaviour : MonoBehaviour
         if (_healthScript.GetHealth() > 0) return;
         
         // Debug.Log("Enemy Dead");
-        // GameManager.gameManager.AddScore(scoreAmount);
+        GameManager.gameManager.AddScore(scoreAmount);
         // GameManager.gameManager.AddExperiencePoints(experience);
         
         Destroy(gameObject);

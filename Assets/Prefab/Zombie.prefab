@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 2999363142242250491}
   - component: {fileID: 8376169067229037713}
   - component: {fileID: 3275124960740124108}
-  - component: {fileID: 8187642131454683546}
   - component: {fileID: 7856653412834371749}
+  - component: {fileID: 8187642131454683546}
   - component: {fileID: 6395919331110839370}
   m_Layer: 7
   m_Name: Zombie
@@ -191,6 +191,20 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.6127529, y: 0.8169377}
   m_EdgeRadius: 0
+--- !u!114 &7856653412834371749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2544472624264667037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e649ce75ab3eb4418915ae16d91028b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MoveToPlayer
+  spriteRenderer: {fileID: 2999363142242250491}
+  speed: 5
 --- !u!114 &8187642131454683546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,20 +221,6 @@ MonoBehaviour:
   experience: 5
   scoreAmount: 10
   speed: 6
---- !u!114 &7856653412834371749
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2544472624264667037}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e649ce75ab3eb4418915ae16d91028b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MoveToPlayer
-  spriteRenderer: {fileID: 2999363142242250491}
-  speed: 5
 --- !u!114 &6395919331110839370
 MonoBehaviour:
   m_ObjectHideFlags: 0
