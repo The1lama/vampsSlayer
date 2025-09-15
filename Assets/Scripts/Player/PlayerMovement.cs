@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D _rb;
     private SpriteRenderer _spriteRenderer;
     private InputSystem_Actions _playerControl;
+    [SerializeField] private GameObject hoe;
     
     public float speed = 10f;
     public bool isfacingRight = true;
@@ -36,88 +37,57 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         _moveDirection =  _playerControl.Player.Move.ReadValue<Vector2>();
-        _rb.linearVelocity = new Vector2(_moveDirection.x, _moveDirection.y).normalized * speed;
-
+        
+        Debug.Log("<color=green>" + transform.position.x + "</color>, <color=blue> "+ transform.position.y + "</color>");
+               
+        
+        _rb.linearVelocity = new Vector2(_moveDirection.x, _moveDirection.y) * speed;
         
         AnimationStates();
-        ChangeDirection();
+        ChangeDirection(); 
         
     }
 
 
     void ChangeDirection()
     {
-        if (_moveDirection.x > 0 )  // if facing right
+        if (_moveDirection.x > 0  && !isfacingRight)  // if facing right
         {
-             _spriteRenderer.flipX = false;
+            SpriteChangeDirection();
+             // _spriteRenderer.flipX = false;
              // weapons.transform.localScale *= -1;
             //transform.localScale *= new Vector2(1, 1);
-            isfacingRight = true;
-        } else if (_moveDirection.x < 0)    // if facing left
+            // isfacingRight = true;
+            // transform.localScale = new Vector3(1, 1, 1);
+            
+            
+        } else if (_moveDirection.x < 0 && isfacingRight)    // if facing left
         {
-             _spriteRenderer.flipX = true;
+            SpriteChangeDirection();
+            // transform.localScale = new Vector3(-1, 1 , 1);
+             // _spriteRenderer.flipX = true;
              // weapons.transform.localScale *= -1;
             //transform.localScale *= new Vector2(-1, 1);
-            isfacingRight = false;
+            // isfacingRight = false;
+           
+            
+            
         }
     }
+
+    void SpriteChangeDirection()
+    {
+        Vector3 currentScale = transform.localScale;
+        // Debug.Log("Incoming input: " +currentScale.x);
+        currentScale.x *= -1;
+        // Debug.Log(currentScale.x);
+        // Debug.Log("-------------------------------------");
+        transform.localScale = currentScale;
+        
+        isfacingRight = !isfacingRight; // makes the var reverse of what it is true
+        
+    }
     
-    
-    // void Update()
-    // {
-        // IsMoving();
-        // _moveDirection = playerControl.ReadValue<Vector2>();
-        // SetFacingDirection(_moveDirection);
-        //
-        // rb.linearVelocity = new Vector2(_moveDirection.x, _moveDirection.y) * speed;
-        //
-        // Debug.Log(_moveDirection);
-        //
-        // AnimationStates();
-    // }
-    
-    // private void IsMoving()
-    // {
-    //     _moveDirection = playerControl.ReadValue<Vector2>();
-    //     SetFacingDirection(_moveDirection);
-    // }
-    //
-    // private void FixedUpdate()
-    // {
-    //      IsMoving();
-    //     
-    //      rb.linearVelocity = new Vector2(_moveDirection.x, _moveDirection.y).normalized * speed;
-    //     
-    //      Debug.Log(_moveDirection);
-    //     
-    //      AnimationStates();
-    //     
-    //      Keyboard kb = InputSystem.GetDevice<Keyboard>();
-    //      if (kb.pKey.wasPressedThisFrame)
-    //     {
-    //         _animator.SetBool("isDead", true);
-    //     }
-    //     
-    // }
-    //
-    // private void SetFacingDirection(Vector2 moveInput)
-    // {
-    //     switch (moveInput.x)
-    //     {
-    //         case > 0 :
-    //             isfacingRight = true;
-    //             _spriteRenderer.flipX = false;
-    //             // transform.localScale *= new Vector2(1, 1);
-    //             break;
-    //         
-    //         case < 0:
-    //             isfacingRight = false;
-    //             _spriteRenderer.flipX = true;
-    //
-    //             // transform.localScale *= new Vector2(-1, 1);
-    //             break;
-    //     }
-    // }
     
     private void AnimationStates()
     {

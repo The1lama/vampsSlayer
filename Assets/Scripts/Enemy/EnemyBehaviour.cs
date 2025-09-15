@@ -32,7 +32,7 @@ public class EnemyBehaviour : MonoBehaviour
         
         // Debug.Log("Enemy Dead");
         GameManager.gameManager.AddScore(scoreAmount);
-        // GameManager.gameManager.AddExperiencePoints(experience);
+        GameManager.gameManager.AddExperiencePoints(experience);
         
         Destroy(gameObject);
         

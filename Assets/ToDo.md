@@ -3,16 +3,17 @@
 ### GamePlay
 - [x] Add spawners for the mobs 
 - [x] Player attacks automaticly 
-- [ ] Give XP and upgrades the player
+- [x] Give XP to player
+- [ ] Give upgrades to player
 - [ ] After death restart with old stats
-- [ ] Camera bound area
-- [ ] World barrier
+- [x] Camera bound area
+- [x] World barrier
  
 ### UI
 #### Show 
-  - [ ] Current score 
+  - [x] Current score 
   - [x] health 
-  - [ ] XP  
+  - [x] XP  
   - [x] time passage
 
   - [ ] Upgrade menu
@@ -51,4 +52,5 @@
 
 # --------------Notes------------
 - Weapon Prefab? for diffrent kindes of weapons?
+- Scriptible weapons and enemyes?
 

@@ -9,7 +9,9 @@ public class GameManager : MonoBehaviour
     
     public int currentScore;
     public int currentExp;
+    public int levelUpExp = 100;
     
+    [SerializeField] private ExperienceBar experienceBar;
     private UiScoreChanger _textScoreChanger;
     
     void Awake()
@@ -31,6 +33,9 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _textScoreChanger = GetComponent<UiScoreChanger>();
+        
+        MaxExperiencePoints(levelUpExp);
+        
     }
     
     
@@ -43,9 +48,34 @@ public class GameManager : MonoBehaviour
 
     public void AddExperiencePoints(int amount)
     {
+        
         currentExp += amount;
+        experienceBar.slider.value = currentExp;
+
+        
+        if (currentExp < levelUpExp) return;
+        
+        LevelUp();
+        
     }
-    
+
+    public void MaxExperiencePoints(int amount)
+    {
+        experienceBar.slider.maxValue = amount;
+    }
+
+    private void LevelUp()
+    { 
+        levelUpExp += levelUpExp;
+        MaxExperiencePoints(levelUpExp);
+        currentExp *= 0;
+        AddExperiencePoints(0);
+        
+        
+          // Pause game 
+          // Play sound and ad a menu for choosing player uppgrade
+        Debug.Log("Level Up");
+    }
     
     public void GameOver()
     {

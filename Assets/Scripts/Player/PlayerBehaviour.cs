@@ -47,11 +47,11 @@ public class PlayerBehaviour : MonoBehaviour
         _healthScript.TakeDamage(damage);
         healthBar.SetHealth(_healthScript.GetHealth());
 
-        Debug.Log(_healthScript.GetHealth());
+        // Debug.Log(_healthScript.GetHealth());
         
         if (_healthScript.GetHealth() <= 0)
         {
-            Debug.LogError("Game Over Bitch");
+            // Debug.LogError("Game Over Bitch");
             GameManager.gameManager.GameOver();
         }
 
@@ -66,10 +66,10 @@ public class PlayerBehaviour : MonoBehaviour
         // Debug.Log("HurtAnimation");
         Sequence.Create()
             .Group(Tween.Color(_spriteRenderer, hitTint, 0.1f))
-            .Group(Tween.Scale(transform, new Vector3(transform.localScale.x * 1.2f, 1.2f, 1.2f), 0.1f))
+            // .Group(Tween.Scale(transform, new Vector3(transform.localScale.x * 1.2f, 1.2f, 1.2f), 0.1f))
             .ChainDelay(0.5f)
             
-            .Group(Tween.Scale(transform, new Vector3(transform.localScale.x * 1f, 1f, 1f), IFrameTime))
+            // .Group(Tween.Scale(transform, new Vector3(transform.localScale.x * 1f, 1f, 1f), IFrameTime))
             .Group(Tween.Color(_spriteRenderer, Color.white, IFrameTime));
     }
     
