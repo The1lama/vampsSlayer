@@ -51,7 +51,7 @@ public class PlayerBehaviour : MonoBehaviour
         
         if (_healthScript.GetHealth() <= 0)
         {
-            // Debug.LogError("Game Over Bitch");
+            Debug.LogError("Game Over Bitch");
             GameManager.gameManager.GameOver();
         }
 

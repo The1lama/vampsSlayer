@@ -54,3 +54,6 @@
 - Weapon Prefab? for diffrent kindes of weapons?
 - Scriptible weapons and enemyes?
 
+
+# --------------Known BUGS------------
+- Health bar not setting max val 

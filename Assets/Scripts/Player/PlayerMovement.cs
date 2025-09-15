@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _moveDirection =  _playerControl.Player.Move.ReadValue<Vector2>();
         
-        Debug.Log("<color=green>" + transform.position.x + "</color>, <color=blue> "+ transform.position.y + "</color>");
+        // Debug.Log("<color=green>" + transform.position.x + "</color>, <color=blue> "+ transform.position.y + "</color>");
                
         
         _rb.linearVelocity = new Vector2(_moveDirection.x, _moveDirection.y) * speed;
