@@ -1,0 +1,10 @@
+{
+  "UppgradeList" : [
+    {
+      "strength": 10,
+      "health": 10,
+      "attackSpeed": 10,
+      "speed": 1
+    }
+  ]
+}

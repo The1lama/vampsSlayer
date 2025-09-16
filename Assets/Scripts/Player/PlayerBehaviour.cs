@@ -7,10 +7,10 @@ using PrimeTween;
 public class PlayerBehaviour : MonoBehaviour
 { 
     
-    SpriteRenderer _spriteRenderer;
+    private SpriteRenderer _spriteRenderer;
 
     private bool _isInvincible;
-    [SerializeField] private float IFrameTime;
+    [SerializeField] private float iFrameTime;
     [SerializeField] private Color hitTint = Color.red;
     
     private HealthScript _healthScript;
@@ -62,7 +62,7 @@ public class PlayerBehaviour : MonoBehaviour
             .ChainDelay(0.5f)
             
             // .Group(Tween.Scale(transform, new Vector3(transform.localScale.x * 1f, 1f, 1f), IFrameTime))
-            .Group(Tween.Color(_spriteRenderer, Color.white, IFrameTime));
+            .Group(Tween.Color(_spriteRenderer, Color.white, iFrameTime));
     }
     
     
@@ -71,7 +71,7 @@ public class PlayerBehaviour : MonoBehaviour
         _isInvincible = true;
         // Debug.Log("IFrame True");
         HurtAnimation();
-        yield return new WaitForSeconds(IFrameTime);
+        yield return new WaitForSeconds(iFrameTime);
         // Debug.Log("IFrame False");
         _isInvincible = false;
     }

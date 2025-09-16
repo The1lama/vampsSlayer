@@ -4,7 +4,7 @@ using UnityEngine;
 public class EnemyBehaviour : MonoBehaviour
 {
 
-    public int strenght;
+    public int strength;
     public int experience;
     public int scoreAmount;
     public float speed = 6;
@@ -37,14 +37,13 @@ public class EnemyBehaviour : MonoBehaviour
         
         Destroy(gameObject);
         
-
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.GetComponent<PlayerBehaviour>().PlayerTakeDamage(strenght);
+            collision.GetComponent<PlayerBehaviour>().PlayerTakeDamage(strength);
         }
     }
     
