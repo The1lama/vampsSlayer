@@ -7,12 +7,13 @@ public class GameManager : MonoBehaviour
     // A simpleton, everything can access this file
     public static GameManager gameManager { get; private set; }
     
-    public int currentScore;
-    public int currentExp;
-    public int levelUpExp = 100;
+    private int _currentScore;
+    private int _currentExp;
+    private int _levelUpExp = 100;
     
     [SerializeField] private ExperienceBar experienceBar;
     private UiScoreChanger _textScoreChanger;
+    
     private UIScript _uiScript;
     
     void Awake()
@@ -36,25 +37,28 @@ public class GameManager : MonoBehaviour
         _textScoreChanger = GetComponent<UiScoreChanger>();
         _uiScript =  GetComponent<UIScript>();
         
-        MaxExperiencePoints(levelUpExp);
+        MaxExperiencePoints(_levelUpExp);
         
     }
     
     public void AddScore(int amount)
     {
-        currentScore += amount;
-        Debug.Log("Current Score " +currentScore);
-        _textScoreChanger.ChangeScoreText(currentScore);
+        _currentScore += amount;
+        _textScoreChanger.ChangeScoreText(_currentScore);
     }
 
+    public int GetCurrentScore()
+    {
+        return _currentScore;
+    }
+    
     public void AddExperiencePoints(int amount)
     {
         
-        currentExp += amount;
-        experienceBar.slider.value = currentExp;
-
+        _currentExp += amount;
+        experienceBar.slider.value = _currentExp;
         
-        if (currentExp < levelUpExp) return;
+        if (_currentExp < _levelUpExp) return;
         
         LevelUp();
         
@@ -67,9 +71,9 @@ public class GameManager : MonoBehaviour
 
     private void LevelUp()
     { 
-        levelUpExp += levelUpExp;
-        MaxExperiencePoints(levelUpExp);
-        currentExp *= 0;
+        _levelUpExp += _levelUpExp;
+        MaxExperiencePoints(_levelUpExp);
+        _currentExp *= 0;
         AddExperiencePoints(0);
         
         
