@@ -6,7 +6,6 @@ using PrimeTween;
 
 public class PlayerBehaviour : MonoBehaviour
 { 
-    InputSystem_Actions _input;
     
     SpriteRenderer _spriteRenderer;
 
@@ -22,39 +21,32 @@ public class PlayerBehaviour : MonoBehaviour
     {
         _spriteRenderer =  GetComponent<SpriteRenderer>();
         _healthScript = GetComponent<HealthScript>();
-        
-        _input = new InputSystem_Actions();
-        
-        _input.Enable();
 
-        healthBar.SetMaxHealth(_healthScript.GetHealth());
+        healthBar.SetMaxHealth(_healthScript.GetMaxHealth());
 
     }
     
     private void PlayerHeal(int healing)
     {
         _healthScript.Healing(healing);
-        healthBar.SetHealth(_healthScript.GetHealth());
+        healthBar.SetHealth(_healthScript.GetCurrentHealth());
     }
     
     
     public void PlayerTakeDamage(int damage)
     {
-        // if player has iFrames do nothing
-        if (_isInvincible)  return;
+        
+        if (_isInvincible)  return;     // if player has iFrames do nothing
         
         
         _healthScript.TakeDamage(damage);
-        healthBar.SetHealth(_healthScript.GetHealth());
-
-        // Debug.Log(_healthScript.GetHealth());
+        healthBar.SetHealth(_healthScript.GetCurrentHealth());
         
-        if (_healthScript.GetHealth() <= 0)
+        if (_healthScript.GetCurrentHealth() <= 0)
         {
             Debug.LogError("Game Over Bitch");
             GameManager.gameManager.GameOver();
         }
-
         
         StartCoroutine(IFrames());
         

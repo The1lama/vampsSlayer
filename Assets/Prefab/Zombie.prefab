@@ -234,3 +234,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthScript
   maxHealth: 50
+  currentHealth: 0

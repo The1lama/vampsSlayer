@@ -1,7 +1,0 @@
-<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="HealthBarBackground" style="flex-grow: 1; position: absolute; width: 348px; height: 34px; background-color: rgba(0, 0, 0, 0); top: 0; left: 0; right: 0; bottom: 0;">
-        <ui:VisualElement name="HealthBarMask" style="flex-grow: 1; position: absolute; width: 350px; height: 39px; overflow: hidden; top: 0; left: 0; right: 0; bottom: 0;">
-            <ui:VisualElement name="HealthBarFill" style="flex-grow: 1; background-color: rgb(255, 64, 64); position: absolute; width: 500px; height: 100%; overflow: visible;" />
-        </ui:VisualElement>
-    </ui:VisualElement>
-</ui:UXML>

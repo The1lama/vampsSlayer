@@ -11,9 +11,9 @@ public class PlayerAttack : MonoBehaviour
     
     [SerializeField] private float meleeSpeed;
     [SerializeField] private int strenght = 5;
+    [SerializeField] private int knockbackForce;
     
-    
-    private float timeUntilMelee;
+    private float _timeUntilMelee;
 
 
     void Start()
@@ -32,14 +32,14 @@ public class PlayerAttack : MonoBehaviour
 
     private void playerAttack()
     {
-        if (timeUntilMelee <= 0f)
+        if (_timeUntilMelee <= 0f)
         {
             animatorPlayer.SetTrigger("Attack");
-            timeUntilMelee = meleeSpeed;
+            _timeUntilMelee = meleeSpeed;
         }
         else
         {
-            timeUntilMelee -= Time.deltaTime;
+            _timeUntilMelee -= Time.deltaTime;
         }
     }
     
@@ -49,6 +49,12 @@ public class PlayerAttack : MonoBehaviour
 
         collision.GetComponent<EnemyBehaviour>().EnemyTakeDamage(strenght);
         
+        
+        // Adds knockback hopefully
+        Vector2 difference = (transform.position - collision.transform.position).normalized;
+        Vector2 force = difference * knockbackForce;
+        collision.GetComponent<Rigidbody2D>().AddForce(force,  ForceMode2D.Force);
+
     }
 
 }

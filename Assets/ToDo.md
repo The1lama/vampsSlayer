@@ -17,12 +17,11 @@
   - [x] time passage
 
   - [ ] Upgrade menu
-  - [ ] Start menu
+  - [x] Start menu
+  - [x] Pause menu
   - [ ] Show Death screen
     - [ ] With HighScore
     - [ ] Curren Score
-
-
 
 ### Sound
 #### Player
@@ -39,7 +38,6 @@
   - [ ] Background music
   - [ ] Click noise in menu
 
-
 # --------------Nice To Have------------
 
 ### GamePlay
@@ -48,6 +46,7 @@
 - [ ] More Enemy types
 - [ ] Tool to create Enemy
 - [ ] Presistent highscore between sessions
+- [ ] Add knockback to enemies
 
 
 # --------------Notes------------
@@ -56,4 +55,4 @@
 
 
 # --------------Known BUGS------------
-- Health bar not setting max val 
+- .

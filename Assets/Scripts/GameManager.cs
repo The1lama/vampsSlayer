@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     
     [SerializeField] private ExperienceBar experienceBar;
     private UiScoreChanger _textScoreChanger;
+    private UIScript _uiScript;
     
     void Awake()
     {
@@ -33,11 +34,11 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _textScoreChanger = GetComponent<UiScoreChanger>();
+        _uiScript =  GetComponent<UIScript>();
         
         MaxExperiencePoints(levelUpExp);
         
     }
-    
     
     public void AddScore(int amount)
     {
@@ -79,10 +80,28 @@ public class GameManager : MonoBehaviour
     
     public void GameOver()
     {
-        
+        _uiScript.DeathMenu();
+
         // Debug.Log("Game Over");
+
         // saves score 
         // Plays sad sounds, show death screen with current score and highscore, option to restart or quit to main menu/game
+
+    }
+
+    public void SaveScore()
+    {
+        
+    }
+    
+    public void Restart()
+    {
+        
+    }
+
+    public void Quit()
+    {
+        
     }
     
 }

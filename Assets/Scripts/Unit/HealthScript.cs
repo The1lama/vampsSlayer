@@ -4,27 +4,43 @@ public class HealthScript : MonoBehaviour
 {
 
     [SerializeField] private int maxHealth;
-    private int _currentHealth;
+    public int currentHealth;
 
 
     private void Start()
     {
-        _currentHealth = maxHealth;
+        currentHealth = maxHealth;
     }
 
+    public void SetMaxHealth(int _maxHealth)
+    {
+        maxHealth = _maxHealth;
+    }
+
+    private void MaxToCurrent()
+    {
+        currentHealth = maxHealth;
+    }
+    
+    
     public void TakeDamage(int damage)
     {
-        _currentHealth -= damage;
+        currentHealth -= damage;
     }
 
     public void Healing(int heal)
     {
-        _currentHealth += heal;
+        currentHealth += heal;
     }
 
-    public int GetHealth()
+    public int GetCurrentHealth()
     {
-        return _currentHealth;
+        return currentHealth;
+    }
+
+    public int GetMaxHealth()
+    {
+        return maxHealth;
     }
     
 }

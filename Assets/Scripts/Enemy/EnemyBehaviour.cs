@@ -9,7 +9,7 @@ public class EnemyBehaviour : MonoBehaviour
     public int scoreAmount;
     public float speed = 6;
 
-    
+    private Rigidbody2D _rb;
     private HealthScript _healthScript;
     private Animator _animator;
     
@@ -18,6 +18,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _healthScript = GetComponent<HealthScript>();
+        _rb = GetComponent<Rigidbody2D>();
 
     }
    
@@ -28,7 +29,7 @@ public class EnemyBehaviour : MonoBehaviour
         _animator.SetTrigger("isHurt");
         
         // If entety is dead
-        if (_healthScript.GetHealth() > 0) return;
+        if (_healthScript.GetCurrentHealth() > 0) return;
         
         // Debug.Log("Enemy Dead");
         GameManager.gameManager.AddScore(scoreAmount);

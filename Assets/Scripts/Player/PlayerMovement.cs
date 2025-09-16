@@ -10,7 +10,6 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D _rb;
     private SpriteRenderer _spriteRenderer;
     private InputSystem_Actions _playerControl;
-    [SerializeField] private GameObject hoe;
     
     public float speed = 10f;
     public bool isfacingRight = true;
