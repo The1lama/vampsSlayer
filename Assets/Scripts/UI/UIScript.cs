@@ -21,13 +21,12 @@ public class UIScript : MonoBehaviour
         _input.Player.Pause.performed += PauseFunction;
         
         _deathScore = GetComponent<DeathScore>();
-
-
+        
     }
     
     public void DeathMenu()
     {
-        _deathScore.ChangeScoreText(GameManager.gameManager.GetCurrentScore());
+        _deathScore.ChangeScoreText(GameManager.Instance.GetCurrentScore());
         Time.timeScale = 0;
         
         
@@ -45,7 +44,7 @@ public class UIScript : MonoBehaviour
 
     public void Quit()
     {
-        GameManager.gameManager.SaveScore();
+        GameManager.Instance.SaveScore();
         SceneManager.LoadScene(0);
         Time.timeScale = 1;
     }
@@ -63,9 +62,12 @@ public class UIScript : MonoBehaviour
         {
             Time.timeScale = 0;
             _isPaused = true;
-            pauseMenuCanvas.gameObject.SetActive(true);
-        }
-        else if(_isPaused)
+            if(pauseMenuCanvas != null) 
+            {
+                pauseMenuCanvas.gameObject.SetActive(true);
+            }
+        } 
+        else if (_isPaused)
         {
             Time.timeScale = 1;
             _isPaused = false;

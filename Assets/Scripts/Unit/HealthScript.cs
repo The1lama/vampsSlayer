@@ -4,7 +4,7 @@ public class HealthScript : MonoBehaviour
 {
 
     [SerializeField] private int maxHealth;
-    public int currentHealth;
+    private int currentHealth;
 
 
     private void Start()

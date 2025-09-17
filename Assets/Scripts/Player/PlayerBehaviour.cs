@@ -1,7 +1,6 @@
 
 using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using PrimeTween;
 
 public class PlayerBehaviour : MonoBehaviour
@@ -45,7 +44,7 @@ public class PlayerBehaviour : MonoBehaviour
         if (_healthScript.GetCurrentHealth() <= 0)
         {
             Debug.LogError("Game Over Bitch");
-            GameManager.gameManager.GameOver();
+            GameManager.Instance.GameOver();
         }
         
         StartCoroutine(IFrames());

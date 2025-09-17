@@ -5,7 +5,7 @@ using UnityEngine.Serialization;
 public class GameManager : MonoBehaviour
 {
     // A simpleton, everything can access this file
-    public static GameManager gameManager { get; private set; }
+    public static GameManager Instance { get; private set; }
     
     private int _currentScore;
     private int _currentExp;
@@ -18,16 +18,15 @@ public class GameManager : MonoBehaviour
     
     void Awake()
     {
-        // Playerhealth = new HealthUnit(100, 100);
-        
+
         // if there are more game managers in the scene this game manager gets removed
-        if (gameManager != null && gameManager != this)
+        if (Instance != null && Instance != this)
         {
             Destroy(this);
         }
         else
         {
-            gameManager = this;
+            Instance = this;
         }
         
     }
