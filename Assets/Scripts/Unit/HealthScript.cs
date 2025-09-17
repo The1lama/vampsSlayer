@@ -1,46 +1,54 @@
+using System;
 using UnityEngine;
 
 public class HealthScript : MonoBehaviour
 {
 
-    [SerializeField] private int maxHealth;
-    private int currentHealth;
+    private int _maxHealth;
+    private int _currentHealth;
 
 
-    private void Start()
+    // private void Start()
+    // {
+    //     currentHealth = maxHealth;
+    // }
+
+
+    private void Update()
     {
-        currentHealth = maxHealth;
+        Debug.Log(_maxHealth);
     }
 
-    public void SetMaxHealth(int _maxHealth)
+    public void SetMaxHealth(int maxHealth)
     {
-        maxHealth = _maxHealth;
+        _maxHealth = maxHealth;
+        // Debug.Log("Max Health: " + _maxHealth);
     }
 
-    private void MaxToCurrent()
+    private void CurrentToMax()
     {
-        currentHealth = maxHealth;
+        _currentHealth = _maxHealth;
     }
     
     
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
+        _currentHealth -= damage;
     }
 
     public void Healing(int heal)
     {
-        currentHealth += heal;
+        _currentHealth += heal;
     }
 
     public int GetCurrentHealth()
     {
-        return currentHealth;
+        return _currentHealth;
     }
 
     public int GetMaxHealth()
     {
-        return maxHealth;
+        return _maxHealth;
     }
     
 }

@@ -5,17 +5,21 @@ using UnityEngine;
 public class EnemyBehaviour : MonoBehaviour
 {
 
-    public int strength;
-    public int experience;
-    public int scoreAmount;
-    public float speed = 6;
+    // public int strength;
+    // public int experience;
+    // public int scoreAmount;
+    // public float speed = 6;
 
     private Rigidbody2D _rb;
     private HealthScript _healthScript;
+    private MoveToPlayer _moveToPlayerScript;
     private Animator _animator;
     private PlayerBehaviour _player;
-
-    private float _waitAttackTime = 2;
+    
+    
+    public EnemyScriptableObject statSo;
+    
+    // private float _waitAttackTime = 2;
     private bool _isAttacking;
     
     private void Start()
@@ -24,9 +28,16 @@ public class EnemyBehaviour : MonoBehaviour
         _healthScript = GetComponent<HealthScript>();
         _rb = GetComponent<Rigidbody2D>();
         _player = GetComponent<PlayerBehaviour>();
+        _moveToPlayerScript = GetComponent<MoveToPlayer>();
+
         
+        
+        _healthScript.SetMaxHealth(statSo.health);
+        _moveToPlayerScript.SetSpeed(statSo.speed);
+
+
         // StartCoroutine(AttackTime());
-        
+
     }
 
     void Update()
@@ -49,8 +60,8 @@ public class EnemyBehaviour : MonoBehaviour
         if (_healthScript.GetCurrentHealth() > 0) return;
         
         // Debug.Log("Enemy Dead");
-        GameManager.Instance.AddScore(scoreAmount);
-        GameManager.Instance.AddExperiencePoints(experience);
+        GameManager.Instance.AddScore(statSo.scoreAmount);
+        GameManager.Instance.AddExperiencePoints(statSo.experienceAmount);
         
         Destroy(gameObject);
         
@@ -60,7 +71,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.GetComponent<PlayerBehaviour>().PlayerTakeDamage(strength);
+            collision.GetComponent<PlayerBehaviour>().PlayerTakeDamage(statSo.strenght);
         }
     }
     

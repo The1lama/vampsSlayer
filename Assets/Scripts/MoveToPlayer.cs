@@ -7,7 +7,9 @@ public class MoveToPlayer : MonoBehaviour
     // [SerializeField] private  Animator animator;
     [SerializeField] private SpriteRenderer spriteRenderer;
 
-    [SerializeField] private float speed = 5; 
+    // [SerializeField] private float speed = 5; 
+
+    private float speed = 5;
     
     private GameObject _player;
 
@@ -15,6 +17,12 @@ public class MoveToPlayer : MonoBehaviour
     {
         _player = GameObject.Find("Player");
     }
+
+    public void SetSpeed(float _speed)
+    {
+        speed = _speed;
+    }
+    
     
     void Update()
     {

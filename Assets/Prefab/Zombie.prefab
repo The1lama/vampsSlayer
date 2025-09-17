@@ -204,7 +204,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoveToPlayer
   spriteRenderer: {fileID: 2999363142242250491}
-  speed: 5
 --- !u!114 &8187642131454683546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,10 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3d24e8349769cb4ebad01b7011c368d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  strength: 10
-  experience: 5
-  scoreAmount: 10
-  speed: 6
+  statSo: {fileID: 11400000, guid: 6b5c07eba8c0b0844aabca220dabc18c, type: 2}
 --- !u!114 &6395919331110839370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,4 +230,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthScript
   maxHealth: 50
-  currentHealth: 0
