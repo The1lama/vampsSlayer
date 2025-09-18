@@ -11,6 +11,7 @@ public class EnemyDataWindow : EditorWindow
     private int _enemyScore = 10;
 
     private Sprite _enemyImage;
+    private Color _enemyHit;
     
     
     [MenuItem("FG25/EnemyCreator")]
@@ -25,6 +26,7 @@ public class EnemyDataWindow : EditorWindow
 
         _enemyName = EditorGUILayout.TextField("Name", _enemyName);
         _enemyImage = EditorGUILayout.ObjectField(_enemyImage, typeof(Sprite), false) as Sprite;
+        _enemyHit  = EditorGUILayout.ColorField("Hit", Color.red);
         
         GUILayout.Label(" ", EditorStyles.boldLabel);
 
@@ -48,6 +50,7 @@ public class EnemyDataWindow : EditorWindow
             var newEnemy = ScriptableObject.CreateInstance<EnemyScriptableObject>();
             newEnemy.enemyName = _enemyName;
             newEnemy.enemySprite = _enemyImage;
+            newEnemy.enemyHit = _enemyHit;
             newEnemy.health = _enemyHealth;
             newEnemy.speed = _enemySpeed;
             newEnemy.strenght = _enemyStrength;

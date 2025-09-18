@@ -29,7 +29,6 @@ public class UIScript : MonoBehaviour
         _deathScore.ChangeScoreText(GameManager.Instance.GetCurrentScore());
         Time.timeScale = 0;
         
-        
         uIMenuCanvas.SetActive(false);
         diedMenuCanvas.SetActive(true);
     }

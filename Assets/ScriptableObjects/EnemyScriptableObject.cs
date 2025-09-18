@@ -7,7 +7,7 @@ public class EnemyScriptableObject : ScriptableObject
     [Header("Basics of Enemy")]
     public string enemyName;
     public Sprite enemySprite;
-    // public GameObject enemyPrefab;
+    public Color enemyHit;
     
     [Header("Basic Stat")]
     public int health;

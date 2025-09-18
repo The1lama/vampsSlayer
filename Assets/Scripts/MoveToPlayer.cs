@@ -5,7 +5,7 @@ public class MoveToPlayer : MonoBehaviour
 {
 
     // [SerializeField] private  Animator animator;
-    [SerializeField] private SpriteRenderer spriteRenderer;
+    private SpriteRenderer _spriteRenderer;
 
     // [SerializeField] private float speed = 5; 
 
@@ -16,6 +16,7 @@ public class MoveToPlayer : MonoBehaviour
     void Start()
     {
         _player = GameObject.Find("Player");
+        _spriteRenderer =  GetComponent<SpriteRenderer>();
     }
 
     public void SetSpeed(float _speed)
@@ -37,10 +38,10 @@ public class MoveToPlayer : MonoBehaviour
         switch ((_player.transform.position -  transform.position).normalized[0])
         {
             case < 0:
-                spriteRenderer.flipX = true;
+                _spriteRenderer.flipX = true;
                 break;
             case > 0:
-                spriteRenderer.flipX = false;
+                _spriteRenderer.flipX = false;
                 break;
         }
     }
