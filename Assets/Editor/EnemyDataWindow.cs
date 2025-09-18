@@ -58,7 +58,7 @@ public class EnemyDataWindow : EditorWindow
             newEnemy.scoreAmount = _enemyScore;
             
             
-            AssetDatabase.CreateAsset(newEnemy, $"Assets/Data/Enemies/{_enemyName}.asset");
+            AssetDatabase.CreateAsset(newEnemy, $"Assets/Prefab/Data/Enemies/{_enemyName}.asset");
             AssetDatabase.SaveAssets();
         }
     }

@@ -28,7 +28,6 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
-        
     }
 
     void Start()
@@ -37,7 +36,6 @@ public class GameManager : MonoBehaviour
         _uiScript =  GetComponent<UIScript>();
         
         MaxExperiencePoints(_levelUpExp);
-        
     }
     
     public void AddScore(int amount)
@@ -60,7 +58,6 @@ public class GameManager : MonoBehaviour
         if (_currentExp < _levelUpExp) return;
         
         LevelUp();
-        
     }
 
     public void MaxExperiencePoints(int amount)

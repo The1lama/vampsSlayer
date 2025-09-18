@@ -71,7 +71,7 @@ public class PlayerBehaviour : MonoBehaviour, IDamageable
     
     void HurtAnimation()
     {
-        Tween.ShakeCamera(Camera.current, strengthFactor: 0.5f);
+        // Tween.ShakeCamera(Camera.current, strengthFactor: 0.5f);
         Sequence.Create()
             .Group(Tween.Color(_spriteRenderer, _hitTint, 0.1f))
             .ChainDelay(0.5f)

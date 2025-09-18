@@ -8,7 +8,6 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
 {
     private HealthScript _healthScript;
     private MoveToPlayer _moveToPlayerScript;
-    // private Animator _animator;
     private SpriteRenderer _spriteRenderer;
     
     public EnemyScriptableObject statSo;
@@ -18,7 +17,6 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
     
     private void Start()
     {
-        // _animator = GetComponent<Animator>();
         _healthScript = GetComponent<HealthScript>();
         _moveToPlayerScript = GetComponent<MoveToPlayer>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -33,9 +31,6 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         
         _spriteRenderer.sprite = statSo.enemySprite;
 
-        
-        
-        
         // Starts walk animation
         StartCoroutine(AnimationWalk());
     }
@@ -47,7 +42,9 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         
         // If entety is dead
         if (_healthScript.GetCurrentHealth() > 0) return;
-        
+
+
+        _isAlive = false;
         GameManager.Instance.AddScore(statSo.scoreAmount);
         GameManager.Instance.AddExperiencePoints(statSo.experienceAmount);
         
@@ -67,20 +64,18 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
     {
         while (_isAlive)
         {
-            // Tween.PositionZ(transform, endValue:10, duration: 1, Ease.Linear);
-            Tween.Rotation(transform, endValue: Quaternion.Euler(0, 0, 90), duration: 1f);
+            Tween.Rotation(transform, endValue: Quaternion.Euler(0, 0, 20), duration: 0.5f);
            
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(0.5f);
             
-            Tween.Rotation(transform, endValue: Quaternion.Euler(0, 0, 0), duration: 1f);
-
-            yield return new WaitForSeconds(2f);
             
-            // Tween.Rotation(transform, endValue: Quaternion.Euler(0, 0, -180), duration: 1f); 
+            Tween.Rotation(transform, endValue: Quaternion.Euler(0, 0, -20), duration: 0.5f);
+            
+            yield return new WaitForSeconds(0.5f);
+            
         }
 
     }
-    
     
     private void AnimationHurt()
     {
@@ -89,8 +84,6 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
             .Group(Tween.Color(_spriteRenderer, statSo.enemyHit, 0.1f))
             .ChainDelay(0.5f)
             .Group(Tween.Color(_spriteRenderer, Color.white, 0.1f));
-        
     }
-    
     
 }
