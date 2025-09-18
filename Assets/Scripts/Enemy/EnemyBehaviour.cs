@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour, IDamageable
 {
-    
-    private Rigidbody2D _rb;
     private HealthScript _healthScript;
     private MoveToPlayer _moveToPlayerScript;
     private Animator _animator;
-    private PlayerBehaviour _player;
     // private SpriteRenderer _renderer;
     
     public EnemyScriptableObject statSo;
@@ -20,10 +17,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
     {
         _animator = GetComponent<Animator>();
         _healthScript = GetComponent<HealthScript>();
-        _rb = GetComponent<Rigidbody2D>();
-        _player = GetComponent<PlayerBehaviour>();
         _moveToPlayerScript = GetComponent<MoveToPlayer>();
-        // _renderer = GetComponent<SpriteRenderer>();
         
         _healthScript.SetMaxHealth(statSo.health);
         _moveToPlayerScript.SetSpeed(statSo.speed);
@@ -52,7 +46,6 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         {
             obj.TakeDamage(statSo.strenght);
         }
-
     }
     
 }

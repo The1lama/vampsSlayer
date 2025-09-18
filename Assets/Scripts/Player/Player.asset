@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Player
   m_EditorClassIdentifier: Assembly-CSharp::PlayerScriptableObject
   health: 100
-  speed: 20
+  speed: 10
   strenght: 10
   attackSpeed: 1
   iFrameTime: 0.2
-  hitTint: {r: 1, g: 0, b: 0, a: 0}
+  hitTint: {r: 1, g: 0, b: 0, a: 1}

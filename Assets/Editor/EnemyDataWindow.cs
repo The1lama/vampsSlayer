@@ -4,6 +4,14 @@ using UnityEditor;
 public class EnemyDataWindow : EditorWindow
 {
     private string _enemyName = "New Enemy";
+    private int _enemyHealth = 100;
+    private int _enemySpeed = 5;
+    private int _enemyStrength = 10;
+    private int _enemyExp = 10;
+    private int _enemyScore = 10;
+
+    private Sprite _enemyImage;
+    
     
     [MenuItem("FG25/EnemyCreator")]
     public static void ShowWindow()
@@ -16,15 +24,20 @@ public class EnemyDataWindow : EditorWindow
         GUILayout.Label("Create New Enemy", EditorStyles.boldLabel);
 
         _enemyName = EditorGUILayout.TextField("Name", _enemyName);
+        _enemyImage = EditorGUILayout.ObjectField(_enemyImage, typeof(Sprite), false) as Sprite;
         
+        GUILayout.Label(" ", EditorStyles.boldLabel);
+
         GUILayout.Label("Stat", EditorStyles.boldLabel);
-        var enemyHealth = EditorGUILayout.IntField("Health",100);
-        var enemySpeed = EditorGUILayout.IntField("Speed", 5);
-        var enemyStrength = EditorGUILayout.IntField("Strength", 10);
+        _enemyHealth = EditorGUILayout.IntField("Health",_enemyHealth);
+        _enemySpeed = EditorGUILayout.IntField("Speed", _enemySpeed);
+        _enemyStrength = EditorGUILayout.IntField("Strength", _enemyStrength);
         
+        GUILayout.Label(" ", EditorStyles.boldLabel);
+
         GUILayout.Label("Game Setting", EditorStyles.boldLabel);
-        var enemyExp = EditorGUILayout.IntField("Experience Points", 10);
-        var enemyScore = EditorGUILayout.IntField("Score Amount", 20);
+        _enemyExp = EditorGUILayout.IntField("Experience Points", _enemyExp);
+        _enemyScore = EditorGUILayout.IntField("Score Amount", _enemyScore);
         
 
         
@@ -34,11 +47,12 @@ public class EnemyDataWindow : EditorWindow
         {
             var newEnemy = ScriptableObject.CreateInstance<EnemyScriptableObject>();
             newEnemy.enemyName = _enemyName;
-            newEnemy.health = enemyHealth;
-            newEnemy.speed = enemySpeed;
-            newEnemy.strenght = enemyStrength;
-            newEnemy.experienceAmount = enemyExp;
-            newEnemy.scoreAmount = enemyScore;
+            newEnemy.enemySprite = _enemyImage;
+            newEnemy.health = _enemyHealth;
+            newEnemy.speed = _enemySpeed;
+            newEnemy.strenght = _enemyStrength;
+            newEnemy.experienceAmount = _enemyExp;
+            newEnemy.scoreAmount = _enemyScore;
             
             
             AssetDatabase.CreateAsset(newEnemy, $"Assets/Data/Enemies/{_enemyName}.asset");

@@ -6,7 +6,7 @@ public class EnemyScriptableObject : ScriptableObject
 {
     [Header("Basics of Enemy")]
     public string enemyName;
-    // public Sprite enemySprite;
+    public Sprite enemySprite;
     // public GameObject enemyPrefab;
     
     [Header("Basic Stat")]
