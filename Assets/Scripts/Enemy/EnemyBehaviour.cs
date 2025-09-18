@@ -26,7 +26,6 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         // _renderer = GetComponent<SpriteRenderer>();
         
         _healthScript.SetMaxHealth(statSo.health);
-        _healthScript.CurrentToMax();
         _moveToPlayerScript.SetSpeed(statSo.speed);
     
 

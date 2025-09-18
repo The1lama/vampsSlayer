@@ -4,27 +4,12 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] private Animator animatorPlayer;
-    // [SerializeField] private Animator animatorHoe;
 
-    // [SerializeField] private GameObject hoe;
-    // [SerializeField] private PlayerMovement playerMovement;
-    
-    [SerializeField] private float meleeSpeed;
-    [SerializeField] private int strenght = 5;
-    [SerializeField] private int knockbackForce;
+    [HideInInspector] public float meleeSpeed;
+    [HideInInspector] public int strenght;
     
     private float _timeUntilMelee;
-
-
-    void Start()
-    {
-        // playerMovement = GetComponent<PlayerMovement>();
-    }
     
-    
-    // Another way to switch side to attack is to 
-    // Flip Hoe position with * -1 and flip Hoe Graphic on X
-
     private void Update()
     {
         playerAttack();

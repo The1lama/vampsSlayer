@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.Serialization;
+
 
 [CreateAssetMenu(fileName = "Enemy", menuName = "FG25/Enemy")]
 public class EnemyScriptableObject : ScriptableObject

@@ -6,25 +6,42 @@ using PrimeTween;
 public class PlayerBehaviour : MonoBehaviour, IDamageable
 { 
     
-    private SpriteRenderer _spriteRenderer;
-
-    private bool _isInvincible;
-    [SerializeField] private float iFrameTime;
-    [SerializeField] private Color hitTint = Color.red;
-    [SerializeField] private int maxHealth;
+    public PlayerScriptableObject playerSo;
     
+    private SpriteRenderer _spriteRenderer;
     private HealthScript _healthScript;
+    private PlayerAttack _playerAttack;
+    private PlayerMovement _playerMovement;
+    private Animator _animator;
     
     public healthBar healthBar;
     
+    private bool _isInvincible;
+    private float _iFrameTime;
+    private Color _hitTint;
+    
+
     void Start()
     {
         _spriteRenderer =  GetComponent<SpriteRenderer>();
         _healthScript = GetComponent<HealthScript>();
+        _playerAttack = GetComponent<PlayerAttack>();
+        _playerMovement = GetComponent<PlayerMovement>();
+        _animator = GetComponent<Animator>();
         
-        _healthScript.SetMaxHealth(maxHealth);
-        _healthScript.CurrentToMax();
+        _healthScript.SetMaxHealth(playerSo.health);
         healthBar.SetMaxHealth(_healthScript.GetMaxHealth());
+        
+        // Player Behaviour
+        _iFrameTime = playerSo.iFrameTime;
+        _hitTint = playerSo.hitTint;
+        
+        // Player Attack
+        _playerAttack.strenght =  playerSo.strenght;
+        _playerAttack.meleeSpeed = playerSo.attackSpeed;
+        
+        // Player Movement
+        _playerMovement.speed = playerSo.speed;
         
     }
     
@@ -44,6 +61,8 @@ public class PlayerBehaviour : MonoBehaviour, IDamageable
         if (_healthScript.GetCurrentHealth() <= 0)
         {
             Debug.LogError("Game Over Bitch");
+            _animator.SetBool("isDead", true);
+            
             GameManager.Instance.GameOver();
         }
         
@@ -53,9 +72,9 @@ public class PlayerBehaviour : MonoBehaviour, IDamageable
     void HurtAnimation()
     {
         Sequence.Create()
-            .Group(Tween.Color(_spriteRenderer, hitTint, 0.1f))
+            .Group(Tween.Color(_spriteRenderer, _hitTint, 0.1f))
             .ChainDelay(0.5f)
-            .Group(Tween.Color(_spriteRenderer, Color.white, iFrameTime));
+            .Group(Tween.Color(_spriteRenderer, Color.white, _iFrameTime));
     }
     
     
@@ -63,7 +82,7 @@ public class PlayerBehaviour : MonoBehaviour, IDamageable
     {
         _isInvincible = true;
         HurtAnimation();
-        yield return new WaitForSeconds(iFrameTime);
+        yield return new WaitForSeconds(_iFrameTime);
         _isInvincible = false;
     }
     
