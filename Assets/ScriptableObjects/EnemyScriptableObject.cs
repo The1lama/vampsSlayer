@@ -4,8 +4,10 @@ using UnityEngine.Serialization;
 [CreateAssetMenu(fileName = "Enemy", menuName = "FG25/Enemy")]
 public class EnemyScriptableObject : ScriptableObject
 {
-    [Header("Name of Enemy")]
+    [Header("Basics of Enemy")]
     public string enemyName;
+    // public Sprite enemySprite;
+    // public GameObject enemyPrefab;
     
     [Header("Basic Stat")]
     public int health;

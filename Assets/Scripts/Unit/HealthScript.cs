@@ -16,7 +16,7 @@ public class HealthScript : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(_maxHealth);
+        // Debug.Log(_maxHealth);
     }
 
     public void SetMaxHealth(int maxHealth)
@@ -25,7 +25,7 @@ public class HealthScript : MonoBehaviour
         // Debug.Log("Max Health: " + _maxHealth);
     }
 
-    private void CurrentToMax()
+    public void CurrentToMax()
     {
         _currentHealth = _maxHealth;
     }

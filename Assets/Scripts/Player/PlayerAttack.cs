@@ -45,16 +45,13 @@ public class PlayerAttack : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.gameObject.CompareTag("Enemy")) return;
-
-        collision.GetComponent<EnemyBehaviour>().EnemyTakeDamage(strenght);
         
+        var obj = collision.GetComponent<IDamageable>();
+        if (obj != null)
+        {
+            obj.TakeDamage(strenght);
+        }
         
-        // Adds knockback hopefully
-        Vector2 difference = (transform.position - collision.transform.position).normalized;
-        Vector2 force = difference * knockbackForce;
-        collision.GetComponent<Rigidbody2D>().AddForce(force,  ForceMode2D.Force);
-
     }
 
 }

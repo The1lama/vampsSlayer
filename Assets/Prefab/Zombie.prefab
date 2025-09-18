@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6165903638906522381}
   - component: {fileID: 5189492083841456903}
   - component: {fileID: 2999363142242250491}
-  - component: {fileID: 8376169067229037713}
   - component: {fileID: 3275124960740124108}
   - component: {fileID: 7856653412834371749}
   - component: {fileID: 8187642131454683546}
@@ -118,33 +117,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &8376169067229037713
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2544472624264667037}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!61 &3275124960740124108
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -229,4 +201,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46339679553838341971b58894fdb24b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthScript
-  maxHealth: 50

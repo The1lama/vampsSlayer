@@ -2,24 +2,18 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class EnemyBehaviour : MonoBehaviour
+public class EnemyBehaviour : MonoBehaviour, IDamageable
 {
-
-    // public int strength;
-    // public int experience;
-    // public int scoreAmount;
-    // public float speed = 6;
-
+    
     private Rigidbody2D _rb;
     private HealthScript _healthScript;
     private MoveToPlayer _moveToPlayerScript;
     private Animator _animator;
     private PlayerBehaviour _player;
-    
+    // private SpriteRenderer _renderer;
     
     public EnemyScriptableObject statSo;
     
-    // private float _waitAttackTime = 2;
     private bool _isAttacking;
     
     private void Start()
@@ -29,79 +23,37 @@ public class EnemyBehaviour : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _player = GetComponent<PlayerBehaviour>();
         _moveToPlayerScript = GetComponent<MoveToPlayer>();
-
-        
+        // _renderer = GetComponent<SpriteRenderer>();
         
         _healthScript.SetMaxHealth(statSo.health);
+        _healthScript.CurrentToMax();
         _moveToPlayerScript.SetSpeed(statSo.speed);
-
-
-        // StartCoroutine(AttackTime());
-
-    }
-
-    void Update()
-    {
-        // if (!_isAttacking) return;
-
-
-        // StartCoroutine(AttackTime());
-        // _player.PlayerTakeDamage(10);
-        
-    }
     
-    public void EnemyTakeDamage(int damage)
-    {
 
-        _healthScript.TakeDamage(damage);
+    }
+
+    public void TakeDamage(int strength)
+    {
+        _healthScript.TakeDamage(strength);
         _animator.SetTrigger("isHurt");
         
         // If entety is dead
         if (_healthScript.GetCurrentHealth() > 0) return;
         
-        // Debug.Log("Enemy Dead");
         GameManager.Instance.AddScore(statSo.scoreAmount);
         GameManager.Instance.AddExperiencePoints(statSo.experienceAmount);
         
         Destroy(gameObject);
-        
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            collision.GetComponent<PlayerBehaviour>().PlayerTakeDamage(statSo.strenght);
-        }
     }
     
-    //
-    // private void OnCollisionEnter2D(Collision2D collision)
-    // {
-    //     if (collision.gameObject.CompareTag("Player"))
-    //     {
-    //         Debug.Log("Collision Enter");
-    //         _isAttacking = true; 
-    //         // collision.collider.GetComponent<PlayerBehaviour>().PlayerTakeDamage(strength);
-    //     }    
-    // }
-    //
-    // private void OnCollisionExit2D(Collision2D collision)
-    // {
-    //     if (collision.gameObject.CompareTag("Player"))
-    //     {
-    //         Debug.Log("Collision Exit");
-    //         _isAttacking = false;
-    //     }
-    // }
-    //
-    // private IEnumerator  AttackTime()
-    // {
-    //     if (_isAttacking)
-    //     {
-    //         _player.PlayerTakeDamage(10);
-    //     } 
-    //     yield return new WaitForSeconds(_waitAttackTime);
-    // }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        var obj = collision.GetComponent<IDamageable>();
+        if (obj != null)
+        {
+            obj.TakeDamage(statSo.strenght);
+        }
+
+    }
     
 }

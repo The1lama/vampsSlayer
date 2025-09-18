@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using PrimeTween;
 
-public class PlayerBehaviour : MonoBehaviour
+public class PlayerBehaviour : MonoBehaviour, IDamageable
 { 
     
     private SpriteRenderer _spriteRenderer;
@@ -11,6 +11,7 @@ public class PlayerBehaviour : MonoBehaviour
     private bool _isInvincible;
     [SerializeField] private float iFrameTime;
     [SerializeField] private Color hitTint = Color.red;
+    [SerializeField] private int maxHealth;
     
     private HealthScript _healthScript;
     
@@ -20,9 +21,11 @@ public class PlayerBehaviour : MonoBehaviour
     {
         _spriteRenderer =  GetComponent<SpriteRenderer>();
         _healthScript = GetComponent<HealthScript>();
-
+        
+        _healthScript.SetMaxHealth(maxHealth);
+        _healthScript.CurrentToMax();
         healthBar.SetMaxHealth(_healthScript.GetMaxHealth());
-
+        
     }
     
     private void PlayerHeal(int healing)
@@ -31,14 +34,11 @@ public class PlayerBehaviour : MonoBehaviour
         healthBar.SetHealth(_healthScript.GetCurrentHealth());
     }
     
-    
-    public void PlayerTakeDamage(int damage)
+    public void TakeDamage(int strength)
     {
-        
         if (_isInvincible)  return;     // if player has iFrames do nothing
         
-        
-        _healthScript.TakeDamage(damage);
+        _healthScript.TakeDamage(strength);
         healthBar.SetHealth(_healthScript.GetCurrentHealth());
         
         if (_healthScript.GetCurrentHealth() <= 0)
@@ -48,19 +48,13 @@ public class PlayerBehaviour : MonoBehaviour
         }
         
         StartCoroutine(IFrames());
-        
     }
-    
     
     void HurtAnimation()
     {
-        // Debug.Log("HurtAnimation");
         Sequence.Create()
             .Group(Tween.Color(_spriteRenderer, hitTint, 0.1f))
-            // .Group(Tween.Scale(transform, new Vector3(transform.localScale.x * 1.2f, 1.2f, 1.2f), 0.1f))
             .ChainDelay(0.5f)
-            
-            // .Group(Tween.Scale(transform, new Vector3(transform.localScale.x * 1f, 1f, 1f), IFrameTime))
             .Group(Tween.Color(_spriteRenderer, Color.white, iFrameTime));
     }
     
@@ -68,13 +62,9 @@ public class PlayerBehaviour : MonoBehaviour
     private IEnumerator  IFrames()
     {
         _isInvincible = true;
-        // Debug.Log("IFrame True");
         HurtAnimation();
         yield return new WaitForSeconds(iFrameTime);
-        // Debug.Log("IFrame False");
         _isInvincible = false;
     }
     
-    
-
 }
