@@ -15,7 +15,7 @@ MonoBehaviour:
   enemyName: Zombie
   enemySprite: {fileID: 0}
   enemyHit: {r: 0, g: 0, b: 0, a: 0}
-  health: 100
+  health: 40
   speed: 5
   strenght: 23
   experienceAmount: 10
