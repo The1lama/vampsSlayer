@@ -9,6 +9,7 @@ public class UIScript : MonoBehaviour
     public GameObject pauseMenuCanvas;
     public GameObject diedMenuCanvas;
     public GameObject uIMenuCanvas;
+    public GameObject levelUpCanvas;
     
     private InputSystem_Actions _input;
     private DeathScore _deathScore;
