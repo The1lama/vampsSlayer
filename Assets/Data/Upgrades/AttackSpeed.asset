@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: efc976bf37906f740912b11b842939cd, type: 3}
-  m_Name: Strenght
+  m_Name: AttackSpeed
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeScriptableObject
-  upgradeName: Strenght
+  upgradeName: AttackSpeed
   upgradeSprite: {fileID: 0}
   upgradeColor: {r: 0, g: 0, b: 0, a: 0}
-  upgradeDescription: you Feel stronger
-  upgradeStat: 10
+  upgradeDescription: You are Faster
+  upgradeStat: 1
   catagory: 

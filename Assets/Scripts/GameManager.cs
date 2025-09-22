@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     private UiScoreChanger _textScoreChanger;
     
     private UIScript _uiScript;
+    private UiStateManager _uiStateManager;
     
     void Awake()
     {
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
     {
         _textScoreChanger = GetComponent<UiScoreChanger>();
         _uiScript =  GetComponent<UIScript>();
+        _uiStateManager = GetComponent<UiStateManager>();
         
         MaxExperiencePoints(_levelUpExp);
     }
@@ -71,7 +73,9 @@ public class GameManager : MonoBehaviour
         MaxExperiencePoints(_levelUpExp);
         _currentExp *= 0;
         AddExperiencePoints(0);
-        
+        UIScript.
+
+        _uiScript.LevelUpMenu();
         
           // Pause game 
           // Play sound and ad a menu for choosing player uppgrade
@@ -81,6 +85,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         _uiScript.DeathMenu();
+        // _uiStateManager.SwitchState(UiDeathState);
 
         // Debug.Log("Game Over");
 

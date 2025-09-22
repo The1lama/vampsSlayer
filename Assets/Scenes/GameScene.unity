@@ -7495,7 +7495,7 @@ RectTransform:
   m_Father: {fileID: 1385495002}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.8, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -8070,6 +8070,60 @@ MonoBehaviour:
   minX: -90
   minY: -43
   target: {fileID: 354186608}
+--- !u!1 &634488275
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 634488276}
+  - component: {fileID: 634488277}
+  m_Layer: 0
+  m_Name: Upgrades
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &634488276
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 634488275}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children:
+  - {fileID: 2143754002}
+  - {fileID: 1619525618}
+  - {fileID: 1364625961}
+  m_Father: {fileID: 1409524376}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &634488277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 634488275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1c1b74d4de236a4596700951cbf6742, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  AllPowerups:
+  - {fileID: 11400000, guid: 532484041e8758347be460ac342c0797, type: 2}
+  - {fileID: 11400000, guid: 7ce44746b4ca5cd4b8ef37cb083a7e8d, type: 2}
+  - {fileID: 11400000, guid: dfdbafad3f382de4599710b2264f68c6, type: 2}
+  Upgrade_button1: {fileID: 2143754003}
+  Upgrade_button2: {fileID: 1619525619}
+  Upgrade_button3: {fileID: 1364625962}
 --- !u!1 &670547089
 GameObject:
   m_ObjectHideFlags: 0
@@ -8561,7 +8615,7 @@ RectTransform:
   m_Father: {fileID: 464623762}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.28, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -187217,7 +187271,7 @@ MonoBehaviour:
   pauseMenuCanvas: {fileID: 380914062}
   diedMenuCanvas: {fileID: 2028257772}
   uIMenuCanvas: {fileID: 1894715308}
-  levelUpCanvas: {fileID: 0}
+  levelUpCanvas: {fileID: 1409524372}
 --- !u!114 &1361145682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187259,17 +187313,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1364625960}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 877249077}
-  m_Father: {fileID: 1409524376}
+  m_Father: {fileID: 634488276}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 304, y: -8}
+  m_AnchoredPosition: {x: 287, y: 0}
   m_SizeDelta: {x: 250.528, y: 316.802}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1364625962
@@ -187626,7 +187680,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1409524373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187703,9 +187757,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 419603499}
-  - {fileID: 2143754002}
-  - {fileID: 1619525618}
-  - {fileID: 1364625961}
+  - {fileID: 634488276}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -187770,17 +187822,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1619525617}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 693759821}
-  m_Father: {fileID: 1409524376}
+  m_Father: {fileID: 634488276}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -8}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 250.528, y: 316.802}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1619525619
@@ -187826,7 +187878,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1619525620}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 634488275}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1619525620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188651,7 +188715,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1894715309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189169,6 +189233,7 @@ GameObject:
   - component: {fileID: 2143754005}
   - component: {fileID: 2143754004}
   - component: {fileID: 2143754003}
+  - component: {fileID: 2143754006}
   m_Layer: 5
   m_Name: Uppgrade 1
   m_TagString: Untagged
@@ -189183,17 +189248,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2143754001}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 438688184}
-  m_Father: {fileID: 1409524376}
+  m_Father: {fileID: 634488276}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -304, y: -8}
+  m_AnchoredPosition: {x: -287, y: 0}
   m_SizeDelta: {x: 250.528, y: 316.802}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2143754003
@@ -189239,7 +189304,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2143754004}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2143754006}
+        m_TargetAssemblyTypeName: UpgradeButton, Assembly-CSharp
+        m_MethodName: UpgradeB
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2143754004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189278,6 +189355,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2143754001}
   m_CullTransparentMesh: 1
+--- !u!114 &2143754006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2143754001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 850b325875fbf72459b644b849a66d26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

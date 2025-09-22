@@ -3,11 +3,13 @@ using UnityEngine;
 
 public class UiGameState : UiBaseState
 {
-    // GameObject uiCanvas = GameObject.Find("HUD");
+    public GameObject UiCanvas;
     
-    public override void EnterState(UiStateManager ui )
+    
+    public override void EnterState(UiStateManager ui)
     {
-        // uiCanvas.SetActive(true);
+        Debug.Log("Entered UIstate");
+        UiCanvas.SetActive(true);
     }
     
     
@@ -17,7 +19,6 @@ public class UiGameState : UiBaseState
     
     public override void ExitState(UiStateManager ui)
     {
-        // uiCanvas.SetActive(false);
-
+        UiCanvas.SetActive(false);
     }
 }

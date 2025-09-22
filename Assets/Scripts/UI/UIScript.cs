@@ -33,6 +33,11 @@ public class UIScript : MonoBehaviour
         uIMenuCanvas.SetActive(false);
         diedMenuCanvas.SetActive(true);
     }
+
+    public void LevelUpMenu()
+    {
+        levelUpCanvas.SetActive(true);
+    }
     
 
     public void Restart()

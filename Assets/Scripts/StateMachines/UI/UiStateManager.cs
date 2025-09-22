@@ -15,8 +15,11 @@ public class UiStateManager : MonoBehaviour
     
     void Start()
     {
+        GameState.UiCanvas = uiCanvas;
+        
         _currentState = GameState;
         
+        Debug.Log(_currentState);
         _currentState.EnterState(this);
     }
 
@@ -30,9 +33,37 @@ public class UiStateManager : MonoBehaviour
     {
     }
 
-    void SwitchState(UiBaseState state)
+    public void SwitchState(UiBaseState state)
     {
         _currentState = state;
+
+        // GameObject canvas;
+        //
+        // switch (stateName)
+        // {
+        //     case "UI":
+        //     {
+        //         canvas = uiCanvas;
+        //         break;
+        //     }
+        //     case "Pause":
+        //     {
+        //         canvas = pauseCanvas;
+        //         break;
+        //     }
+        //     case "Death":
+        //     {
+        //         canvas = deathCanvas;
+        //         break;
+        //     }
+        //     default:
+        //     {
+        //         canvas = uiCanvas;
+        //         break;
+        //     }
+        // }
+        //
+        
         state.EnterState(this);
     }
     
