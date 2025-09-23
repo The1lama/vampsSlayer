@@ -5,10 +5,21 @@ public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] private Animator animatorPlayer;
 
-    [HideInInspector] public float meleeSpeed;
-    [HideInInspector] public int strenght;
+    private float _meleeSpeed;
+    private int _strenght;
     
     private float _timeUntilMelee;
+
+
+    public void SetMeleeSpeed(float newMeleeSpeed)
+    {
+        _meleeSpeed = newMeleeSpeed;
+    }
+
+    public void SetStrenght(int newStrenght)
+    {
+        _strenght = newStrenght;
+    }
     
     private void Update()
     {
@@ -20,7 +31,7 @@ public class PlayerAttack : MonoBehaviour
         if (_timeUntilMelee <= 0f)
         {
             animatorPlayer.SetTrigger("Attack");
-            _timeUntilMelee = meleeSpeed;
+            _timeUntilMelee = _meleeSpeed;
         }
         else
         {
@@ -34,7 +45,7 @@ public class PlayerAttack : MonoBehaviour
         var obj = collision.GetComponent<IDamageable>();
         if (obj != null)
         {
-            obj.TakeDamage(strenght);
+            obj.TakeDamage(_strenght);
         }
         
     }

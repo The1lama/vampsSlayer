@@ -7,7 +7,7 @@ public class PlayerScriptableObject :  ScriptableObject
    
     [Header("Basic Stat")]
     public int health;
-    public int speed;
+    public float speed;
     public int strenght;
     public float attackSpeed;
     public float iFrameTime;

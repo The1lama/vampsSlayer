@@ -1,4 +1,3 @@
-
 using System.Collections;
 using UnityEngine;
 using PrimeTween;
@@ -29,6 +28,7 @@ public class PlayerBehaviour : MonoBehaviour, IDamageable
         _playerMovement = GetComponent<PlayerMovement>();
         _animator = GetComponent<Animator>();
         
+        // set player health
         _healthScript.SetMaxHealth(playerSo.health);
         healthBar.SetMaxHealth(_healthScript.GetMaxHealth());
         
@@ -37,12 +37,17 @@ public class PlayerBehaviour : MonoBehaviour, IDamageable
         _hitTint = playerSo.hitTint;
         
         // Player Attack
-        _playerAttack.strenght =  playerSo.strenght;
-        _playerAttack.meleeSpeed = playerSo.attackSpeed;
+        _playerAttack.SetStrenght(playerSo.strenght);
+        _playerAttack.SetMeleeSpeed(playerSo.attackSpeed);
         
         // Player Movement
-        _playerMovement.speed = playerSo.speed;
+        _playerMovement.SetSpeed(playerSo.speed);
         
+    }
+
+    public void SetNewMaxHealth(int maxHealth)
+    {
+        _healthScript.SetMaxHealth(maxHealth);
     }
     
     private void PlayerHeal(int healing)
@@ -71,7 +76,6 @@ public class PlayerBehaviour : MonoBehaviour, IDamageable
     
     void HurtAnimation()
     {
-        // Tween.ShakeCamera(Camera.current, strengthFactor: 0.5f);
         Sequence.Create()
             .Group(Tween.Color(_spriteRenderer, _hitTint, 0.1f))
             .ChainDelay(0.5f)

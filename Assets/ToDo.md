@@ -6,7 +6,7 @@
 - [X]  Player attacks automaticly
 - [X]  Give XP to player
 - [ ]  Give upgrades to player
-- [ ]  After death restart with old stats
+- [X]  After death restart with old stats
 - [X]  Camera bound area
 - [X]  World barrier
 
@@ -24,7 +24,7 @@
 - [ ]  Show Death screen
 
   - [ ]  With HighScore
-  - [ ]  Curren Score
+  - [X]  Curren Score
 
 ### Sound
 
@@ -63,7 +63,7 @@
 - Weapon Prefab? for diffrent kindes of weapons?
 - Scriptible weapons and enemyes?
 - State machine for enemy? One state for moving, another state for attacking
-- State machine UI? One state for Game UI, another for death state.
+- State machine UI? One state for Game UI, another for death state, With Eventsystem to switch between states if dead n stuff.
 
 # --------------Known BUGS------------
 

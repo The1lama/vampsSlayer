@@ -13,6 +13,8 @@ public class UiStateManager : MonoBehaviour
     public GameObject deathCanvas;
     
     
+    
+    
     void Start()
     {
         GameState.UiCanvas = uiCanvas;

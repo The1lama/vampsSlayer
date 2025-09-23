@@ -10,9 +10,7 @@ public class UpgradeScriptableObject : ScriptableObject
         public string upgradeDescription;
 
         [Header("Upgrade stat")] 
-        public int upgradeStat;
-
-        public string catagory;
-
+        public float upgradeStat;
+        
 
 }

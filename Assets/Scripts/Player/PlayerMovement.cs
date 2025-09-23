@@ -30,7 +30,14 @@ public class PlayerMovement : MonoBehaviour
         _playerControl.Enable();
         
     }
-
+    
+    
+    public void SetSpeed(float newSpeed)
+    {
+        speed += newSpeed;
+    }
+    
+    
     void Update()
     {
         _moveDirection =  _playerControl.Player.Move.ReadValue<Vector2>();

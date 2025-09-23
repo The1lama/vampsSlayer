@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     
     private int _currentScore;
     private int _currentExp;
-    private int _levelUpExp = 100;
+    [SerializeField] private int levelUpExp = 100;
     
     [SerializeField] private ExperienceBar experienceBar;
     private UiScoreChanger _textScoreChanger;
@@ -19,7 +19,6 @@ public class GameManager : MonoBehaviour
     
     void Awake()
     {
-
         // if there are more game managers in the scene this game manager gets removed
         if (Instance != null && Instance != this)
         {
@@ -37,7 +36,7 @@ public class GameManager : MonoBehaviour
         _uiScript =  GetComponent<UIScript>();
         _uiStateManager = GetComponent<UiStateManager>();
         
-        MaxExperiencePoints(_levelUpExp);
+        MaxExperiencePoints(levelUpExp);
     }
     
     public void AddScore(int amount)
@@ -57,7 +56,7 @@ public class GameManager : MonoBehaviour
         _currentExp += amount;
         experienceBar.slider.value = _currentExp;
         
-        if (_currentExp < _levelUpExp) return;
+        if (_currentExp <= levelUpExp) return;
         
         LevelUp();
     }
@@ -69,12 +68,12 @@ public class GameManager : MonoBehaviour
 
     private void LevelUp()
     { 
-        _levelUpExp += _levelUpExp;
-        MaxExperiencePoints(_levelUpExp);
+        levelUpExp += levelUpExp;
+        MaxExperiencePoints(levelUpExp);
         _currentExp *= 0;
         AddExperiencePoints(0);
-        UIScript.
-
+        
+        Debug.Log("Level Up Game");
         _uiScript.LevelUpMenu();
         
           // Pause game 

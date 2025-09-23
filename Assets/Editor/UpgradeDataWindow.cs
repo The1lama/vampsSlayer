@@ -42,8 +42,6 @@ public class UpgradeDataWindow : EditorWindow
             newUpgrade.upgradeColor = _upgradeColor;
             newUpgrade.upgradeDescription = _upgradeDescription;
             newUpgrade.upgradeStat = _upgradeStat;
-            newUpgrade.catagory = _upgradeList;
-
             
             
             AssetDatabase.CreateAsset(newUpgrade, $"Assets/Data/Upgrades/{_upgradeName}.asset");

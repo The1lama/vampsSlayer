@@ -24,6 +24,21 @@ public class UIScript : MonoBehaviour
         _deathScore = GetComponent<DeathScore>();
         
     }
+
+    public void GamePause()
+    {
+        if (!_isPaused)
+        {
+            Time.timeScale = 0;
+            _isPaused = true;
+        } 
+        else if (_isPaused)
+        {
+            Time.timeScale = 1;
+            _isPaused = false;
+        }
+    }
+    
     
     public void DeathMenu()
     {
@@ -36,7 +51,11 @@ public class UIScript : MonoBehaviour
 
     public void LevelUpMenu()
     {
+        Debug.Log("Level Up Menu");
+        Debug.Log(levelUpCanvas);
         levelUpCanvas.SetActive(true);
+        GamePause();
+        
     }
     
 
@@ -57,25 +76,14 @@ public class UIScript : MonoBehaviour
     
     private void PauseFunction(InputAction.CallbackContext ctx)
     {
-        PauseFunc();
-    }
-    
-    
-    public void PauseFunc()
-    {
-        if (!_isPaused)
+        GamePause();
+        
+        if(pauseMenuCanvas != null && !pauseMenuCanvas.activeInHierarchy) 
         {
-            Time.timeScale = 0;
-            _isPaused = true;
-            if(pauseMenuCanvas != null) 
-            {
-                pauseMenuCanvas.gameObject.SetActive(true);
-            }
-        } 
-        else if (_isPaused)
+            pauseMenuCanvas.gameObject.SetActive(true);
+        }        
+        else if (pauseMenuCanvas.activeInHierarchy)
         {
-            Time.timeScale = 1;
-            _isPaused = false;
             pauseMenuCanvas.gameObject.SetActive(false);
         }
     }
