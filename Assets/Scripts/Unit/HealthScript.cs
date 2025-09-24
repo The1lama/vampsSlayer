@@ -9,7 +9,7 @@ public class HealthScript : MonoBehaviour
 
     public void SetMaxHealth(int maxHealth)
     {
-        _maxHealth = maxHealth;
+        _maxHealth += maxHealth;
         CurrentToMax();
     }
 

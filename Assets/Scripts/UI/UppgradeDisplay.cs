@@ -15,7 +15,7 @@ public class UppgradeDisplay : MonoBehaviour
         Debug.Log("Initializing upgrade card");
         nameText.text = card.upgradeName;
         descriptionText.text = card.upgradeDescription;
-        upgradeNumText.text = card.upgradeStat.ToString("00.0");
+        upgradeNumText.text = card.upgradeStat.ToString("G");
     }
 
 

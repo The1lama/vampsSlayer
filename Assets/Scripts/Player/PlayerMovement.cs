@@ -10,8 +10,8 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D _rb;
     private InputSystem_Actions _playerControl;
     
-    [HideInInspector] public float speed;
-    private bool _isfacingRight = true;
+    private float _speed;
+    private bool _isFacingRight = true;
     
     private Vector2 _moveDirection = Vector2.zero;
     
@@ -34,7 +34,8 @@ public class PlayerMovement : MonoBehaviour
     
     public void SetSpeed(float newSpeed)
     {
-        speed += newSpeed;
+        
+        _speed += newSpeed;
     }
     
     
@@ -42,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _moveDirection =  _playerControl.Player.Move.ReadValue<Vector2>();
         
-        _rb.linearVelocity = new Vector2(_moveDirection.x, _moveDirection.y) * speed;
+        _rb.linearVelocity = new Vector2(_moveDirection.x, _moveDirection.y) * _speed;
         
         AnimationStates();
         ChangeDirection(); 
@@ -52,11 +53,11 @@ public class PlayerMovement : MonoBehaviour
 
     void ChangeDirection()
     {
-        if (_moveDirection.x > 0  && !_isfacingRight)  // if facing right
+        if (_moveDirection.x > 0  && !_isFacingRight)  // if facing right
         {
             SpriteChangeDirection();
         } 
-        else if (_moveDirection.x < 0 && _isfacingRight)    // if facing left
+        else if (_moveDirection.x < 0 && _isFacingRight)    // if facing left
         {
             SpriteChangeDirection();
         }
@@ -67,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 currentScale = transform.localScale;
         currentScale.x *= -1;
         transform.localScale = currentScale;
-        _isfacingRight = !_isfacingRight; // makes the var reverse of what it is true
+        _isFacingRight = !_isFacingRight; // makes the var reverse of what it is true
         
     }
     

@@ -13,12 +13,12 @@ public class PlayerAttack : MonoBehaviour
 
     public void SetMeleeSpeed(float newMeleeSpeed)
     {
-        _meleeSpeed = newMeleeSpeed;
+        _meleeSpeed += newMeleeSpeed;
     }
 
     public void SetStrenght(int newStrenght)
     {
-        _strenght = newStrenght;
+        _strenght += newStrenght;
     }
     
     private void Update()

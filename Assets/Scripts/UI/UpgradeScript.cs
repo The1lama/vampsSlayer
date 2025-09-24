@@ -15,6 +15,7 @@ public class UpgradeScript : MonoBehaviour
     [SerializeField] private Button upgradeButton1;
     [SerializeField] private Button upgradeButton2;
     [SerializeField] private GameObject levelUpCanvas;
+    [SerializeField] private GameObject player;
 
     
     
@@ -54,7 +55,8 @@ public class UpgradeScript : MonoBehaviour
     private void ButtonOnClick(Button clickedButton)
     {
         string upgradeChosen = clickedButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text;
-        UpgradeChosen(upgradeChosen);
+        float addStat = float.Parse(clickedButton.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text);
+        UpgradeChosen(upgradeChosen, addStat);
         GameManager.Instance.transform.GetComponent<UIScript>().GamePause();
     }
 
@@ -80,42 +82,40 @@ public class UpgradeScript : MonoBehaviour
         UpgradeScriptableObject upgrade2 = allPowerups[availableUpgrades[1]];
 
         // Setting text
-        // upgradeButton1.transform.GetChild(0).gameObject.GetComponent<UppgradeDisplay>().SetUpUpgradeCard(upgrade1);
         upgradeButton1.GetComponent<UppgradeDisplay>().SetUpUpgradeCard(upgrade1);
         upgradeButton2.GetComponent<UppgradeDisplay>().SetUpUpgradeCard(upgrade2);
 
-                // upgradeButton1.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = upgrade1.upgradeName +
-        //     "\n==========\n" + upgrade1.upgradeDescription + "\n" + upgrade1.upgradeStat;
-        // upgradeButton2.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = upgrade2.upgradeName +
-        //     "\n==========\n" + upgrade2.upgradeDescription + "\n" + upgrade2.upgradeStat;
-        
         // Setting color for buttons
         upgradeButton1.GetComponent<Image>().color = upgrade1.upgradeColor;
         upgradeButton2.GetComponent<Image>().color = upgrade2.upgradeColor;
     }
 
     // UPGRADES
-    public void UpgradeChosen(string upgradeChosen)
+    public void UpgradeChosen(string upgradeChosen, float  addStat)
     {
         string[] thing = upgradeChosen.Split("\n");
         
         switch (thing[0])
         {
             case "Strenght":
-                Debug.Log("Strenght");
-                Debug.Log(thing.Last());
+                player.GetComponent<PlayerAttack>().SetStrenght((int)addStat);
+                Debug.Log(upgradeChosen);
+                Debug.Log(addStat);
                 break;
             case "Speed":
-                Debug.Log("Speed");
-                Debug.Log(thing.Last());
+                player.GetComponent<PlayerMovement>().SetSpeed((int)addStat);
+                Debug.Log(upgradeChosen);
+                Debug.Log(addStat);
                 break;
             case "AttackSpeed":
-                Debug.Log("AttackSpeed");
-                Debug.Log(thing.Last());
+                player.GetComponent<PlayerAttack>().SetMeleeSpeed(addStat);
+                Debug.Log(upgradeChosen);
+                Debug.Log(addStat);
                 break;
             case "Health":
-                Debug.Log("AttackSpeed");
-                Debug.Log(thing.Last());
+                player.GetComponent<PlayerBehaviour>().SetNewMaxHealth((int)addStat);
+                Debug.Log(upgradeChosen);
+                Debug.Log(addStat);
                 break;
            default:
                Debug.LogWarning("Could not find chosen upgrade name: " + thing[0]);

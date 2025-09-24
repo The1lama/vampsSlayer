@@ -51,11 +51,10 @@ public class UIScript : MonoBehaviour
 
     public void LevelUpMenu()
     {
-        Debug.Log("Level Up Menu");
         Debug.Log(levelUpCanvas);
+        levelUpCanvas.GetComponentInChildren<UpgradeScript>().ButtonsSet();
         levelUpCanvas.SetActive(true);
         GamePause();
-        
     }
     
 

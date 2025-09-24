@@ -48,6 +48,8 @@ public class PlayerBehaviour : MonoBehaviour, IDamageable
     public void SetNewMaxHealth(int maxHealth)
     {
         _healthScript.SetMaxHealth(maxHealth);
+        healthBar.SetMaxHealth(_healthScript.GetMaxHealth());
+
     }
     
     private void PlayerHeal(int healing)
