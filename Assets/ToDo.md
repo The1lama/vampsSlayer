@@ -5,7 +5,7 @@
 - [X]  Add spawners for the mobs
 - [X]  Player attacks automaticly
 - [X]  Give XP to player
-- [ ]  Give upgrades to player
+- [X]  Give upgrades to player
 - [X]  After death restart with old stats
 - [X]  Camera bound area
 - [X]  World barrier
@@ -18,7 +18,7 @@
 - [X]  health
 - [X]  XP
 - [X]  time passage
-- [ ]  Upgrade menu
+- [X]  Upgrade menu
 - [X]  Start menu
 - [X]  Pause menu
 - [ ]  Show Death screen
