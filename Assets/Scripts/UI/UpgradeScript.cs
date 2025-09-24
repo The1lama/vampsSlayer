@@ -80,10 +80,14 @@ public class UpgradeScript : MonoBehaviour
         UpgradeScriptableObject upgrade2 = allPowerups[availableUpgrades[1]];
 
         // Setting text
-        upgradeButton1.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = upgrade1.upgradeName +
-            "\n==========\n" + upgrade1.upgradeDescription + "\n" + upgrade1.upgradeStat;
-        upgradeButton2.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = upgrade2.upgradeName +
-            "\n==========\n" + upgrade2.upgradeDescription + "\n" + upgrade2.upgradeStat;
+        // upgradeButton1.transform.GetChild(0).gameObject.GetComponent<UppgradeDisplay>().SetUpUpgradeCard(upgrade1);
+        upgradeButton1.GetComponent<UppgradeDisplay>().SetUpUpgradeCard(upgrade1);
+        upgradeButton2.GetComponent<UppgradeDisplay>().SetUpUpgradeCard(upgrade2);
+
+                // upgradeButton1.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = upgrade1.upgradeName +
+        //     "\n==========\n" + upgrade1.upgradeDescription + "\n" + upgrade1.upgradeStat;
+        // upgradeButton2.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = upgrade2.upgradeName +
+        //     "\n==========\n" + upgrade2.upgradeDescription + "\n" + upgrade2.upgradeStat;
         
         // Setting color for buttons
         upgradeButton1.GetComponent<Image>().color = upgrade1.upgradeColor;
@@ -97,8 +101,8 @@ public class UpgradeScript : MonoBehaviour
         
         switch (thing[0])
         {
-            case "Strength":
-                Debug.Log("Strength");
+            case "Strenght":
+                Debug.Log("Strenght");
                 Debug.Log(thing.Last());
                 break;
             case "Speed":
@@ -106,6 +110,10 @@ public class UpgradeScript : MonoBehaviour
                 Debug.Log(thing.Last());
                 break;
             case "AttackSpeed":
+                Debug.Log("AttackSpeed");
+                Debug.Log(thing.Last());
+                break;
+            case "Health":
                 Debug.Log("AttackSpeed");
                 Debug.Log(thing.Last());
                 break;

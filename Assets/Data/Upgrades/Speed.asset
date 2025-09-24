@@ -16,4 +16,4 @@ MonoBehaviour:
   upgradeSprite: {fileID: 0}
   upgradeColor: {r: 0, g: 0.5943396, b: 0.54414606, a: 1}
   upgradeDescription: You are Faster
-  upgradeStat: 2
+  upgradeStat: 1

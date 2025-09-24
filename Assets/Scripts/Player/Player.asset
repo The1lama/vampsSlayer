@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Player
   m_EditorClassIdentifier: Assembly-CSharp::PlayerScriptableObject
   health: 100
-  speed: 7
+  speed: 6
   strenght: 15
   attackSpeed: 1
   iFrameTime: 0.2
