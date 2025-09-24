@@ -72,9 +72,8 @@ public class UIScript : MonoBehaviour
         SceneManager.LoadScene(0);
         Time.timeScale = 1;
     }
-    
-    
-    private void PauseFunction(InputAction.CallbackContext ctx)
+
+    public void PauseScreen()
     {
         GamePause();
         
@@ -86,6 +85,12 @@ public class UIScript : MonoBehaviour
         {
             pauseMenuCanvas.gameObject.SetActive(false);
         }
+    }
+    
+    
+    private void PauseFunction(InputAction.CallbackContext ctx)
+    {
+        PauseScreen();
     }
     
 }
