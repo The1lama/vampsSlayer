@@ -108,7 +108,7 @@ public class UpgradeScript : MonoBehaviour
                 Debug.Log(addStat);
                 break;
             case "AttackSpeed":
-                player.GetComponent<PlayerAttack>().SetMeleeSpeed(addStat);
+                player.GetComponent<PlayerAttack>().SetNewMeleeSpeed(addStat);
                 Debug.Log(upgradeChosen);
                 Debug.Log(addStat);
                 break;
@@ -130,8 +130,6 @@ public class UpgradeScript : MonoBehaviour
         {
             Debug.LogWarning("Level up canvas was already of: In UpgradeScript.cs" );
         }
-        
-        
     }
     
     // SHUFFLE LIST

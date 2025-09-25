@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 
@@ -14,6 +15,15 @@ public class PlayerAttack : MonoBehaviour
     public void SetMeleeSpeed(float newMeleeSpeed)
     {
         _meleeSpeed += newMeleeSpeed;
+    }
+
+    public void SetNewMeleeSpeed(float newMeleeSpeed)
+    {
+        _meleeSpeed -= newMeleeSpeed;
+        if (_meleeSpeed <= 0)
+        {
+            _meleeSpeed = 0.1f;
+        }
     }
 
     public void SetStrenght(int newStrenght)
