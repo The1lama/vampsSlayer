@@ -12,8 +12,6 @@
 
 ### UI
 
-#### Show
-
 - [X]  Current score
 - [X]  health
 - [X]  XP
