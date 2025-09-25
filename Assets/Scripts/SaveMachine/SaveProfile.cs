@@ -2,26 +2,51 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public sealed class SaveProfile<T> where T : SaveHighScoreData
+public sealed class SaveProfile<T> where T : SavePlayerHighScore
 {
-    public string name;
+    public string profileName;
     public T saveData;
     
     private SaveProfile() { }
     
-    public SaveProfile(string name, T saveData)
+    public SaveProfile(string profileName, T saveData)
     {
-        this.name = name;
+        this.profileName = profileName;
         this.saveData = saveData;
     }
-    
 }
 
 
-public abstract record SaveHighScoreProfileData { }
 
-public record SaveHighScoreData : SaveHighScoreProfileData
+// inherent from this to create diff save stuff
+public abstract record SaveProfileData { }
+
+
+// one example of saving highsocre and uses this for saving 
+/*
+var playerScoreSave = new SaveHighScoreData{ HighScore = _currentScore };
+var saveProfile = new SaveProfile<SaveHighScoreData>("playerHighScore", playerScoreSave);
+SaveManager.Save(saveProfile);
+ */
+
+public record SavePlayerHighScore : SaveProfileData
 {
     public int HighScore;
 }
+
+// one example of saving player stat and uses this for saving and how to use it
+/*
+var playerSave = new SavePlayer(){ PlayerHealth = playerHealth, PlayerPosition = Vector2.one * 4f, PlayerScore = _currentScore, PlayerStrenght = playerSrenght};
+var saveProfile = new SaveProfile<SavePlayer>("playerHighScore", playerSave);
+SaveManager.Save(saveProfile);
+ */
+
+public record SavePlayer : SaveProfileData
+{
+    public Vector2 PlayerPosition;
+    public int PlayerHealth;
+    public int PlayerScore;
+    public int PlayerStrenght;
+}
+
 

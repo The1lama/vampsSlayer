@@ -43,6 +43,7 @@ public class UIScript : MonoBehaviour
     public void DeathMenu()
     {
         _deathScore.ChangeScoreText(GameManager.Instance.GetCurrentScore());
+        _deathScore.ChangeHighScoreText();
         Time.timeScale = 0;
         
         uIMenuCanvas.SetActive(false);
@@ -67,7 +68,7 @@ public class UIScript : MonoBehaviour
 
     public void Quit()
     {
-        GameManager.Instance.SaveScore();
+        GameManager.Instance.SaveHighScore();
         SceneManager.LoadScene(0);
         Time.timeScale = 1;
     }

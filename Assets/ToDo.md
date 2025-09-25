@@ -19,9 +19,9 @@
 - [X]  Upgrade menu
 - [X]  Start menu
 - [X]  Pause menu
-- [ ]  Show Death screen
+- [X]  Show Death screen
 
-  - [ ]  With HighScore
+  - [X]  With HighScore
   - [X]  Curren Score
 
 ### Sound

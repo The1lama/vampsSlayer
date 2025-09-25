@@ -83,29 +83,27 @@ public class GameManager : MonoBehaviour
     
     public void GameOver()
     {
+        SaveHighScore();
         _uiScript.DeathMenu();
-        // _uiStateManager.SwitchState(UiDeathState);
-
-        // Debug.Log("Game Over");
+        
 
         // saves score 
         // Plays sad sounds, show death screen with current score and highscore, option to restart or quit to main menu/game
-
     }
 
-    public void SaveScore()
+    public void SaveHighScore()
     {
-        
+        if (_currentScore > SaveManager.Load<SavePlayerHighScore>("playerHighScore").saveData.HighScore)
+        {
+            var playerScoreSave = new SavePlayerHighScore{ HighScore = _currentScore };
+            var saveProfile = new SaveProfile<SavePlayerHighScore>("playerHighScore", playerScoreSave);
+            SaveManager.Save(saveProfile);
+        }
+        else
+        {
+            Debug.Log("No new high score");
+        }
     }
     
-    public void Restart()
-    {
-        
-    }
-
-    public void Quit()
-    {
-        
-    }
     
 }
