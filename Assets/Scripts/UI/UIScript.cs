@@ -69,7 +69,7 @@ public class UIScript : MonoBehaviour
     public void Quit()
     {
         GameManager.Instance.SaveHighScore();
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("StartMenu");
         Time.timeScale = 1;
     }
 

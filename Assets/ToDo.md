@@ -9,6 +9,7 @@
 - [X]  After death restart with old stats
 - [X]  Camera bound area
 - [X]  World barrier
+- [ ]  The difficulty and/or the number of the enemies increase with the passing of time
 
 ### UI
 
@@ -51,8 +52,8 @@
 
 - [ ]  More weapons
 - [ ]  Health pickups, from mob drops
-- [ ]  More Enemy types
-- [ ]  Tool to create Enemy
+- [X]  More Enemy types
+- [X]  Tool to create Enemy
 - [ ]  Presistent highscore between sessions
 - [ ]  Add knockback to enemies
 

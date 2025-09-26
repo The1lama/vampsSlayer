@@ -40,7 +40,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         _healthScript.TakeDamage(strength);
         AnimationHurt();
         
-        // If entety is dead
+        // If entity is dead
         if (_healthScript.GetCurrentHealth() > 0) return;
 
 
