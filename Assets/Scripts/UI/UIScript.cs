@@ -18,7 +18,7 @@ public class UIScript : MonoBehaviour
 
     private void Awake()
     {
-        GameManager.Instance.onDeath.AddListener(DeathMenu);
+        // GameManager.Instance.onDeath.AddListener(DeathMenu);
         GameManager.Instance.onLevelUp.AddListener(LevelUpMenu);
 
     }

@@ -11,12 +11,21 @@ public class UiStateManager : MonoBehaviour
     public GameObject uiCanvas;
     public GameObject pauseCanvas;
     public GameObject deathCanvas;
-    
-    
+
+
+
+    void Awake()
+    {
+        GameManager.Instance.onDeath.AddListener( () => SwitchState(DeathState));
+    }
     
     void Start()
     {
+        
         GameState.UiCanvas = uiCanvas;
+        PauseState.PauseCanvas = pauseCanvas;
+        DeathState.DeathCanvas = deathCanvas;
+        
         
         _currentState = GameState;
         
