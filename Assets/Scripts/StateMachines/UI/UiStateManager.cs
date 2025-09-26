@@ -14,7 +14,6 @@ public class UiStateManager : MonoBehaviour
     
     
     
-    
     void Start()
     {
         GameState.UiCanvas = uiCanvas;
@@ -38,33 +37,6 @@ public class UiStateManager : MonoBehaviour
     public void SwitchState(UiBaseState state)
     {
         _currentState = state;
-
-        // GameObject canvas;
-        //
-        // switch (stateName)
-        // {
-        //     case "UI":
-        //     {
-        //         canvas = uiCanvas;
-        //         break;
-        //     }
-        //     case "Pause":
-        //     {
-        //         canvas = pauseCanvas;
-        //         break;
-        //     }
-        //     case "Death":
-        //     {
-        //         canvas = deathCanvas;
-        //         break;
-        //     }
-        //     default:
-        //     {
-        //         canvas = uiCanvas;
-        //         break;
-        //     }
-        // }
-        //
         
         state.EnterState(this);
     }

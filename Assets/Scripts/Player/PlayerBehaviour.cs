@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using PrimeTween;
+using UnityEngine.Events;
 
 public class PlayerBehaviour : MonoBehaviour, IDamageable
 { 
@@ -19,7 +20,6 @@ public class PlayerBehaviour : MonoBehaviour, IDamageable
     private float _iFrameTime;
     private Color _hitTint;
     
-
     void Start()
     {
         _spriteRenderer =  GetComponent<SpriteRenderer>();
@@ -70,7 +70,7 @@ public class PlayerBehaviour : MonoBehaviour, IDamageable
             Debug.LogError("Game Over Bitch");
             _animator.SetBool("isDead", true);
             
-            GameManager.Instance.GameOver();
+            GameManager.Instance.onDeath?.Invoke();
         }
         
         StartCoroutine(IFrames());

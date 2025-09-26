@@ -14,6 +14,14 @@ public class UIScript : MonoBehaviour
     private InputSystem_Actions _input;
     private DeathScore _deathScore;
     private bool _isPaused;
+
+
+    private void Awake()
+    {
+        GameManager.Instance.onDeath.AddListener(DeathMenu);
+        GameManager.Instance.onLevelUp.AddListener(LevelUpMenu);
+
+    }
     
     private void Start()
     {
@@ -27,21 +35,23 @@ public class UIScript : MonoBehaviour
 
     public void GamePause()
     {
-        if (!_isPaused)
+        switch (_isPaused)
         {
-            Time.timeScale = 0;
-            _isPaused = true;
-        } 
-        else if (_isPaused)
-        {
-            Time.timeScale = 1;
-            _isPaused = false;
+            case false:
+                Time.timeScale = 0;
+                _isPaused = true;
+                break;
+            case true:
+                Time.timeScale = 1;
+                _isPaused = false;
+                break;
         }
     }
-    
-    
-    public void DeathMenu()
+
+
+    private void DeathMenu()
     {
+        
         _deathScore.ChangeScoreText(GameManager.Instance.GetCurrentScore());
         _deathScore.ChangeHighScoreText();
         Time.timeScale = 0;
@@ -69,7 +79,7 @@ public class UIScript : MonoBehaviour
     public void Quit()
     {
         GameManager.Instance.SaveHighScore();
-        SceneManager.LoadScene("StartMenu");
+        SceneManager.LoadScene(SceneNames.MainMenu);
         Time.timeScale = 1;
     }
 
@@ -81,7 +91,7 @@ public class UIScript : MonoBehaviour
         {
             pauseMenuCanvas.gameObject.SetActive(true);
         }        
-        else if (pauseMenuCanvas.activeInHierarchy)
+        else if (pauseMenuCanvas != null && pauseMenuCanvas.activeInHierarchy)
         {
             pauseMenuCanvas.gameObject.SetActive(false);
         }
@@ -94,3 +104,4 @@ public class UIScript : MonoBehaviour
     }
     
 }
+

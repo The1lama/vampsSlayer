@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
@@ -14,8 +15,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private ExperienceBar experienceBar;
     private UiScoreChanger _textScoreChanger;
     
-    private UIScript _uiScript;
     private UiStateManager _uiStateManager;
+
+    public UnityEvent onDeath;
+    public UnityEvent onLevelUp;
     
     void Awake()
     {
@@ -28,15 +31,18 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
+        
+        onDeath?.AddListener(GameOver);
+        onLevelUp?.AddListener(LevelUp);
+        
     }
 
     void Start()
     {
-        _textScoreChanger = GetComponent<UiScoreChanger>();
-        _uiScript =  GetComponent<UIScript>();
-        _uiStateManager = GetComponent<UiStateManager>();
+       _textScoreChanger = GetComponent<UiScoreChanger>();
+       _uiStateManager = GetComponent<UiStateManager>();
         
-        MaxExperiencePoints(levelUpExp);
+       MaxExperiencePoints(levelUpExp);
     }
     
     public void AddScore(int amount)
@@ -58,37 +64,30 @@ public class GameManager : MonoBehaviour
         
         if (_currentExp <= levelUpExp) return;
         
-        LevelUp();
+        onLevelUp?.Invoke();    // Sends out call for onLevelUp
     }
 
-    public void MaxExperiencePoints(int amount)
+    private void MaxExperiencePoints(int amount)
     {
         experienceBar.slider.maxValue = amount;
     }
 
     private void LevelUp()
     { 
-        levelUpExp += levelUpExp;
+        levelUpExp += levelUpExp/2;
         MaxExperiencePoints(levelUpExp);
-        _currentExp *= 0;
-        AddExperiencePoints(0);
-        
-        Debug.Log("Level Up Game");
-        _uiScript.LevelUpMenu();
+        _currentExp = 0;
+        experienceBar.slider.value = 0;
         
           // Pause game 
-          // Play sound and ad a menu for choosing player uppgrade
-        Debug.Log("Level Up");
+          // Play sound and ad a menu for choosing player uppgrade; Sound manager who lisens to onDeath call and then plays sound? or a method in this file to play sound?
     }
     
-    public void GameOver()
+    private void GameOver()
     {
         SaveHighScore();
-        _uiScript.DeathMenu();
         
-
-        // saves score 
-        // Plays sad sounds, show death screen with current score and highscore, option to restart or quit to main menu/game
+        // Plays sad sounds; Sound manager who lisens to onDeath call and then plays sound? or a method in this file to play sound?
     }
 
     public void SaveHighScore()

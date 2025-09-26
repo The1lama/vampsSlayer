@@ -2,13 +2,14 @@ using UnityEngine;
 
 public class UiDeathState : UiBaseState
 {
-    public GameObject DeathCanvas;
+    // public GameObject DeathCanvas;
     
     
     public override void EnterState(UiStateManager ui)
     {
         Debug.Log("Entered DeathState");
-        DeathCanvas.SetActive(true);
+        ui.deathCanvas.SetActive(true);
+        // DeathCanvas.SetActive(true);
     }
     
     
@@ -19,6 +20,7 @@ public class UiDeathState : UiBaseState
     
     public override void ExitState(UiStateManager ui)
     {
-        DeathCanvas.SetActive(false);
+        ui.deathCanvas.SetActive(false);
+        // DeathCanvas.SetActive(false);
     }
 }

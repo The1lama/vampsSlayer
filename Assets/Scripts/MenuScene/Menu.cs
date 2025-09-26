@@ -17,7 +17,7 @@ public class Menu : MonoBehaviour
 
     public void OnPlayButton()
     {
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene(SceneNames.GameScene);
     }
 
     public void OnQuitButton()
@@ -25,4 +25,10 @@ public class Menu : MonoBehaviour
         Debug.Log("Quit");
         Application.Quit();
     }
+}
+
+public static class SceneNames
+{
+    public const string MainMenu = "StartMenu";
+    public const string GameScene = "GameScene";
 }

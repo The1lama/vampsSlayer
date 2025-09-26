@@ -14,6 +14,12 @@ public class PlayerMovement : MonoBehaviour
     private bool _isFacingRight = true;
     
     private Vector2 _moveDirection = Vector2.zero;
+
+
+    void Awake()
+    {
+        // GameManager.Instance.onDeath.AddListener(() => _playerControl.Disable());
+    }
     
     
     public void OnDisable()
@@ -21,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
         _playerControl.Disable();
     }
 
+    
+    
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();

@@ -18,17 +18,6 @@ public class UpgradeScript : MonoBehaviour
     [SerializeField] private GameObject player;
 
     
-    
-    private Upgrade[] _upgrades;
-
-    public class Upgrade
-    {
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public float Increase { get; set; }
-        
-    }
-    
     private void Start()
     {
         
@@ -138,9 +127,7 @@ public class UpgradeScript : MonoBehaviour
         for (int i = 0; i < list.Count; i++) 
         {
             int randomIndex = Random.Range(i, list.Count);
-            int temp = list[i];
-            list[i] = list[randomIndex];
-            list[randomIndex] = temp;
+            (list[i], list[randomIndex]) = (list[randomIndex], list[i]);
         }
     }
 
