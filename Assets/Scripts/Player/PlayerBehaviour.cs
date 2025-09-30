@@ -67,7 +67,6 @@ public class PlayerBehaviour : MonoBehaviour, IDamageable
         
         if (_healthScript.GetCurrentHealth() <= 0)
         {
-            Debug.LogError("Game Over Bitch");
             _animator.SetBool("isDead", true);
             
             GameManager.Instance.onDeath?.Invoke();

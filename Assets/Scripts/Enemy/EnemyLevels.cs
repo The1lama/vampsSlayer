@@ -6,16 +6,22 @@ public class EnemyLevels : MonoBehaviour
     private int _enemyLevel = 1;
 
     private UnityEvent _enemyLevelUp;
+    public UnityEvent _enemyCalls; 
 
     private void Awake()
+    {
+        _enemyLevelUp.AddListener( EnemyLevelUp );
+    }
+
+    private void Start()
     {
         
     }
     
     
-    private void Level1()
+    public void EnemyLevelUp()
     {
-        
+        _enemyLevel++;
     }
     
 }
