@@ -9,8 +9,8 @@ public class UpgradeScript : MonoBehaviour
 {
 // DEFINE LIST WITH UPGRADES
 
-    [SerializeField] private UpgradeScriptableObject[] allPowerups;
-
+    // [SerializeField] private UpgradeScriptableObject[] allPowerups;
+    [SerializeField] private List<UpgradeScriptableObject> powerUps;
 
     [SerializeField] private Button upgradeButton1;
     [SerializeField] private Button upgradeButton2;
@@ -22,6 +22,12 @@ public class UpgradeScript : MonoBehaviour
     
     private void Start()
     {
+        // Checks if there is powerups in list 
+        if (powerUps == null || powerUps.Count == 0)
+        {
+            Debug.LogError($"No Powerups Set; {name}"); return;
+        }
+        
         upgradeButton1.onClick.AddListener(() => ButtonOnClick(upgradeButton1));
         upgradeButton2.onClick.AddListener(() => ButtonOnClick(upgradeButton2));
     }
@@ -38,24 +44,19 @@ public class UpgradeScript : MonoBehaviour
     {
         _globalStateManager = stateManager;
         
-        // Checks if there is powerups in list 
-        if (allPowerups == null || allPowerups.Length == 0)
-        {
-            Debug.LogError("No Powerups Set"); return;
-        }
         
         
         // CHOOSING UPGRADE FROM UPGRADE ARRAY
         List<int> _availableUpgrades = new List<int>();
 
-        for (int i = 0; i < allPowerups.Length; i++)
+        for (int i = 0; i < powerUps.Count; i++)
         {
             _availableUpgrades.Add(i);
         }
 
         ShuffleList(_availableUpgrades);
-        UpgradeScriptableObject upgrade1 = allPowerups[_availableUpgrades[0]];
-        UpgradeScriptableObject upgrade2 = allPowerups[_availableUpgrades[1]];
+        UpgradeScriptableObject upgrade1 = powerUps[_availableUpgrades[0]];
+        UpgradeScriptableObject upgrade2 = powerUps[_availableUpgrades[1]];
 
         // Setting text
         upgradeButton1.GetComponent<UppgradeDisplay>().SetUpUpgradeCard(upgrade1);
@@ -69,9 +70,9 @@ public class UpgradeScript : MonoBehaviour
     // UPGRADES
     public void UpgradeChosen(string upgradeChosen, float  addStat)
     {
-        string[] thing = upgradeChosen.Split("\n");
+        // string[] thing = upgradeChosen.Split("\n");
         
-        switch (thing[0])
+        switch (upgradeChosen)
         {
             case "Strenght":
                 player.GetComponent<PlayerAttack>().SetStrenght((int)addStat);
@@ -87,19 +88,26 @@ public class UpgradeScript : MonoBehaviour
                 player.GetComponent<PlayerAttack>().SetNewMeleeSpeed(addStat);
                 Debug.Log(upgradeChosen);
                 Debug.Log(addStat);
+                if (player.GetComponent<PlayerAttack>().GetMeleeSpeed() <= 0.2f)
+                {
+                    foreach (var objSo in powerUps)
+                    {
+                        if (objSo.name != upgradeChosen) continue;
+                        powerUps.Remove(objSo);
+                        break;
+                    }
+                }
                 break;
+            
             case "Health":
                 player.GetComponent<PlayerBehaviour>().SetNewMaxHealth((int)addStat);
                 Debug.Log(upgradeChosen);
                 Debug.Log(addStat);
                 break;
            default:
-               Debug.LogWarning("Could not find chosen upgrade name: " + thing[0]);
+               Debug.LogWarning("Could not find chosen upgrade name: " + upgradeChosen);
                break;
         }
-
-        // ShuffleList(_availableUpgrades);
-
         
         if (levelUpCanvas.activeInHierarchy)
         {

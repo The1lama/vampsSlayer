@@ -6292,8 +6292,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1361145681}
-        m_TargetAssemblyTypeName: UIScript, Assembly-CSharp
+      - m_Target: {fileID: 1361145682}
+        m_TargetAssemblyTypeName: UiStateManager, Assembly-CSharp
         m_MethodName: Quit
         m_Mode: 1
         m_Arguments:
@@ -7834,7 +7834,6 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
-  - component: {fileID: 519420033}
   - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Camera
@@ -7962,27 +7961,6 @@ Transform:
   - {fileID: 1244215033}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &519420033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7e31b2e2c05a754781ef4b6bc663ddd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  offset: {x: 0, y: 0, z: 0}
-  damping: 0.02
-  maxX: 61
-  maxY: 69
-  minX: -90
-  minY: -43
-  spawnRadius: 0
-  angleInDegrees: 0
-  target: {fileID: 0}
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8176,8 +8154,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1361145681}
-        m_TargetAssemblyTypeName: UIScript, Assembly-CSharp
+      - m_Target: {fileID: 1361145682}
+        m_TargetAssemblyTypeName: UiStateManager, Assembly-CSharp
         m_MethodName: Quit
         m_Mode: 1
         m_Arguments:
@@ -8663,13 +8641,12 @@ GameObject:
   - component: {fileID: 979308108}
   - component: {fileID: 979308111}
   - component: {fileID: 979308110}
-  - component: {fileID: 979308109}
   m_Layer: 5
   m_Name: Time
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &979308108
 RectTransform:
@@ -8690,19 +8667,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -33}
   m_SizeDelta: {x: 250.777, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &979308109
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 979308107}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6f566e995e5d4c4c930f31191c2a26a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Timer
-  timerText: {fileID: 979308110}
 --- !u!114 &979308110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186828,8 +186792,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1244215033}
-  - component: {fileID: 1244215034}
   - component: {fileID: 1244215035}
+  - component: {fileID: 1244215036}
   m_Layer: 0
   m_Name: Enemy Container
   m_TagString: Untagged
@@ -186852,27 +186816,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 519420032}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1244215034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1244215032}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7e31b2e2c05a754781ef4b6bc663ddd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SmoothCameraFollow
-  offset: {x: 0, y: 0, z: 0}
-  damping: 0
-  maxX: 0
-  maxY: 0
-  minX: 0
-  minY: 0
-  spawnRadius: 8
-  angleInDegrees: 25
-  target: {fileID: 354186608}
 --- !u!114 &1244215035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186886,10 +186829,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   enemies:
-  - {fileID: 2544472624264667037, guid: d5d7bbb08e215f5449efe1801d982371, type: 3}
-  spawnDelay: 1
+  - {fileID: 2544472624264667037, guid: 4b3d3dfa5ea7b1247bfa89f25332d0d1, type: 3}
+  - {fileID: 2544472624264667037, guid: 82ffd1458aad0c14cb233fa1f5196a50, type: 3}
+  spawnDelay0: 1
+  spawnDelay1: 1
+  spawnDelay2: 0.5
+  spawnDelay3: 4
   enemyContainer: {fileID: 1885496685}
-  spawnRadius: 8
+  spawnRadius: 10
+--- !u!114 &1244215036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1244215032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e310c87f38f84554c8e869aff34854df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyLevels
 --- !u!1 &1247962320
 GameObject:
   m_ObjectHideFlags: 0
@@ -186973,8 +186932,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1361145681}
-        m_TargetAssemblyTypeName: UIScript, Assembly-CSharp
+      - m_Target: {fileID: 1361145682}
+        m_TargetAssemblyTypeName: UiStateManager, Assembly-CSharp
         m_MethodName: Restart
         m_Mode: 1
         m_Arguments:
@@ -187269,9 +187228,9 @@ GameObject:
   - component: {fileID: 1361145678}
   - component: {fileID: 1361145677}
   - component: {fileID: 1361145679}
-  - component: {fileID: 1361145681}
   - component: {fileID: 1361145680}
   - component: {fileID: 1361145682}
+  - component: {fileID: 1361145683}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -187300,6 +187259,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   onPause:
+    m_PersistentCalls:
+      m_Calls: []
+  onEnemyLevelUp:
     m_PersistentCalls:
       m_Calls: []
 --- !u!4 &1361145678
@@ -187344,22 +187306,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DeathScore
   textScore: {fileID: 1627608354}
   textHighScore: {fileID: 361022390}
---- !u!114 &1361145681
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1361145676}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: caf74e6c395acad41b2f5fabe8191bf2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UIScript
-  pauseMenuCanvas: {fileID: 380914062}
-  diedMenuCanvas: {fileID: 2028257772}
-  uIMenuCanvas: {fileID: 1894715308}
-  levelUpCanvas: {fileID: 1409524372}
 --- !u!114 &1361145682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187376,6 +187322,20 @@ MonoBehaviour:
   pauseCanvas: {fileID: 380914062}
   deathCanvas: {fileID: 2028257772}
   levelUpCanvas: {fileID: 1409524372}
+--- !u!114 &1361145683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1361145676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6f566e995e5d4c4c930f31191c2a26a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Timer
+  timerText: {fileID: 979308110}
+  enemyLevelUpTime: 30
 --- !u!1 &1363000932
 GameObject:
   m_ObjectHideFlags: 0
@@ -189976,11 +189936,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1c1b74d4de236a4596700951cbf6742, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeScript
-  allPowerups:
-  - {fileID: 11400000, guid: 7ce44746b4ca5cd4b8ef37cb083a7e8d, type: 2}
+  powerUps:
   - {fileID: 11400000, guid: dfdbafad3f382de4599710b2264f68c6, type: 2}
-  - {fileID: 11400000, guid: 532484041e8758347be460ac342c0797, type: 2}
   - {fileID: 11400000, guid: 8a2e3e7b0f65d2b41b45da76c5a915c1, type: 2}
+  - {fileID: 11400000, guid: 7ce44746b4ca5cd4b8ef37cb083a7e8d, type: 2}
+  - {fileID: 11400000, guid: 532484041e8758347be460ac342c0797, type: 2}
   upgradeButton1: {fileID: 2143754003}
   upgradeButton2: {fileID: 1032529744}
   levelUpCanvas: {fileID: 1409524372}

@@ -5,13 +5,18 @@ using Random = UnityEngine.Random;
 public class EnemySpawner : MonoBehaviour
 {
     
-    [SerializeField] private GameObject[] enemies;
-    [SerializeField] private float spawnDelay = 1;
-
+    public GameObject[] enemies;
+    
+    public float spawnDelay0 = 1f;
+    public float spawnDelay1 = 0.5f;
+    public float spawnDelay2 = 4f;
+    public float spawnDelay3 = 10f;
+    
     [SerializeField] private GameObject enemyContainer;
     
     [SerializeField] private float spawnRadius;
     private float _angleInDegrees;
+    
     
     void Start()
     {
@@ -19,13 +24,10 @@ public class EnemySpawner : MonoBehaviour
         {
             Debug.LogWarning($"No enemies assigned, in <color=yellow>{name}</color>");
         }
-        
-        
-        StartCoroutine(SpawnRoutine());
     }
     
     
-    IEnumerator SpawnRoutine()
+    public IEnumerator SpawnRoutine(int enemyListPosition, float spawnDelay)
     {
         while (true)
         {
@@ -33,7 +35,7 @@ public class EnemySpawner : MonoBehaviour
             _angleInDegrees = Random.Range(0, 360);
             Vector2 positionSpawn = GetPositionOnCircle(spawnRadius, _angleInDegrees, transform.position);
             Vector3 spawnHere = new Vector3(positionSpawn.x, positionSpawn.y, 0);
-            GameObject newEnemy = Instantiate(enemies[0], spawnHere, Quaternion.identity);
+            GameObject newEnemy = Instantiate(enemies[enemyListPosition], spawnHere, Quaternion.identity);
             newEnemy.transform.parent = enemyContainer.transform;
         }
     }
@@ -74,6 +76,7 @@ public class EnemySpawner : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawCube(GetPositionOnCircle(spawnRadius, _angleInDegrees, transform.position), Vector3.one);
+        Gizmos.DrawWireSphere(transform.position, spawnRadius);
 
     }
 }

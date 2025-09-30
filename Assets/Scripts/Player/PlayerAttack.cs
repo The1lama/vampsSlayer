@@ -26,6 +26,11 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
+    public float GetMeleeSpeed()
+    {
+        return _meleeSpeed;
+    }
+
     public void SetStrenght(int newStrenght)
     {
         _strenght += newStrenght;

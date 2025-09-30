@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UiStateManager : MonoBehaviour
 {
@@ -76,4 +77,19 @@ public class UiStateManager : MonoBehaviour
                 break;
         }
     }
+    
+    public void Restart()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    
+    public void Quit()
+    {
+        GameManager.Instance.SaveHighScore();
+        SceneManager.LoadScene(SceneNames.MainMenu);
+        Time.timeScale = 1;
+    }
+    
+    
 }

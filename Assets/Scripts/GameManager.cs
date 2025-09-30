@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     public UnityEvent onLevelUp;
     public UnityEvent onPause;
     
+    public UnityEvent onEnemyLevelUp;
+    
     void Awake()
     {
         // if there are more game managers in the scene this game manager gets removed

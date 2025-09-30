@@ -34,9 +34,9 @@ public class SmoothCameraFollow : MonoBehaviour
     private void FixedUpdate()
     {
         
-        // CheckCameraBarrier(target.position);
+        CheckCameraBarrier(target.position);
         
-        // if (!_inPlayArea) return;
+        if (!_inPlayArea) return;
         
         Vector3 targetPosition = target.position + offset;
         targetPosition.z = transform.position.z; 
