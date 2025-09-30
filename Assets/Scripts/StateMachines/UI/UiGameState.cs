@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class UiGameState : UiBaseState
@@ -8,7 +7,7 @@ public class UiGameState : UiBaseState
     
     public override void EnterState(UiStateManager ui)
     {
-        Debug.Log("Entered UIstate");
+        Debug.Log("Entered UI state");
         UiCanvas.SetActive(true);
     }
     

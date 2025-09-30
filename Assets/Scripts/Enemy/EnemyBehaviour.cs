@@ -42,8 +42,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         
         // If entity is dead
         if (_healthScript.GetCurrentHealth() > 0) return;
-
-
+        
         _isAlive = false;
         GameManager.Instance.AddScore(statSo.scoreAmount);
         GameManager.Instance.AddExperiencePoints(statSo.experienceAmount);
@@ -65,25 +64,17 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         while (_isAlive)
         {
             Tween.Rotation(transform, endValue: Quaternion.Euler(0, 0, 20), duration: 0.5f);
-           
             yield return new WaitForSeconds(0.5f);
-            
-            
             Tween.Rotation(transform, endValue: Quaternion.Euler(0, 0, -20), duration: 0.5f);
-            
             yield return new WaitForSeconds(0.5f);
-            
         }
-
     }
     
     private void AnimationHurt()
     {
-   
         Sequence.Create()
             .Group(Tween.Color(_spriteRenderer, statSo.enemyHit, 0.1f))
             .ChainDelay(0.5f)
             .Group(Tween.Color(_spriteRenderer, Color.white, 0.1f));
     }
-    
 }

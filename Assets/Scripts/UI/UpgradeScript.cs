@@ -17,28 +17,13 @@ public class UpgradeScript : MonoBehaviour
     [SerializeField] private GameObject levelUpCanvas;
     [SerializeField] private GameObject player;
 
+    private UiStateManager _globalStateManager;
+    
     
     private void Start()
     {
-        
         upgradeButton1.onClick.AddListener(() => ButtonOnClick(upgradeButton1));
         upgradeButton2.onClick.AddListener(() => ButtonOnClick(upgradeButton2));
-        
-        
-        // for (int i = 0; i < AllPowerups.Length; i++)
-        // {
-        //     _upgrades = new Upgrade
-        //     {
-        //         Name = AllPowerups[i].upgradeName,
-        //         Description = AllPowerups[i].upgradeDescription,
-        //         Increase = AllPowerups[i].upgradeStat,
-        //     };
-        // }
-        //
-        // Debug.Log(_upgrades);
-        
-        
-        ButtonsSet();
     }
 
     private void ButtonOnClick(Button clickedButton)
@@ -46,12 +31,13 @@ public class UpgradeScript : MonoBehaviour
         string upgradeChosen = clickedButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text;
         float addStat = float.Parse(clickedButton.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text);
         UpgradeChosen(upgradeChosen, addStat);
-        GameManager.Instance.transform.GetComponent<UIScript>().GamePause();
     }
 
 
-    public void ButtonsSet()
+    public void ButtonsSet(UiStateManager stateManager)
     {
+        _globalStateManager = stateManager;
+        
         // Checks if there is powerups in list 
         if (allPowerups == null || allPowerups.Length == 0)
         {
@@ -60,15 +46,16 @@ public class UpgradeScript : MonoBehaviour
         
         
         // CHOOSING UPGRADE FROM UPGRADE ARRAY
-        List<int> availableUpgrades = new List<int>();
+        List<int> _availableUpgrades = new List<int>();
+
         for (int i = 0; i < allPowerups.Length; i++)
         {
-            availableUpgrades.Add(i);
+            _availableUpgrades.Add(i);
         }
 
-        ShuffleList(availableUpgrades);
-        UpgradeScriptableObject upgrade1 = allPowerups[availableUpgrades[0]];
-        UpgradeScriptableObject upgrade2 = allPowerups[availableUpgrades[1]];
+        ShuffleList(_availableUpgrades);
+        UpgradeScriptableObject upgrade1 = allPowerups[_availableUpgrades[0]];
+        UpgradeScriptableObject upgrade2 = allPowerups[_availableUpgrades[1]];
 
         // Setting text
         upgradeButton1.GetComponent<UppgradeDisplay>().SetUpUpgradeCard(upgrade1);
@@ -111,19 +98,23 @@ public class UpgradeScript : MonoBehaviour
                break;
         }
 
+        // ShuffleList(_availableUpgrades);
+
+        
         if (levelUpCanvas.activeInHierarchy)
         {
-            levelUpCanvas.SetActive(false);
+            _globalStateManager.SwitchState(_globalStateManager.GameState);
         }
         else
         {
-            Debug.LogWarning("Level up canvas was already of: In UpgradeScript.cs" );
+            Debug.LogWarning("Level up canvas was already turned off: <Color=yellow>In UpgradeScript.cs</Color>" );
         }
     }
     
     // SHUFFLE LIST
     private void ShuffleList(List<int> list)
     {
+        Debug.Log("Shuffling list");
         for (int i = 0; i < list.Count; i++) 
         {
             int randomIndex = Random.Range(i, list.Count);

@@ -7958,8 +7958,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 732317643}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &519420033
@@ -7980,7 +7979,7 @@ MonoBehaviour:
   maxY: 69
   minX: -90
   minY: -43
-  target: {fileID: 354186608}
+  target: {fileID: 0}
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8496,53 +8495,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 724981366}
   m_CullTransparentMesh: 1
---- !u!1 &732317641
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 732317643}
-  - component: {fileID: 732317642}
-  m_Layer: 0
-  m_Name: Spawn Manger
-  m_TagString: Untagged
-  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &732317642
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 732317641}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 614a0c349568687478d5681311f071bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  smallZombie: {fileID: 2544472624264667037, guid: 82ffd1458aad0c14cb233fa1f5196a50, type: 3}
-  spawnDelay: 1
-  enemyContainer: {fileID: 1244215032}
---- !u!4 &732317643
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 732317641}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 6, z: 10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 519420032}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &865949444
 GameObject:
   m_ObjectHideFlags: 0
@@ -186873,6 +186825,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1244215033}
+  - component: {fileID: 1244215034}
+  - component: {fileID: 1244215035}
   m_Layer: 0
   m_Name: Enemy Container
   m_TagString: Untagged
@@ -186889,12 +186843,48 @@ Transform:
   m_GameObject: {fileID: 1244215032}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1885496686}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1244215034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1244215032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7e31b2e2c05a754781ef4b6bc663ddd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SmoothCameraFollow
+  offset: {x: 0, y: 0, z: 0}
+  damping: 0
+  maxX: 0
+  maxY: 0
+  minX: 0
+  minY: 0
+  target: {fileID: 354186608}
+--- !u!114 &1244215035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1244215032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 614a0c349568687478d5681311f071bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
+  enemies:
+  - {fileID: 2544472624264667037, guid: d5d7bbb08e215f5449efe1801d982371, type: 3}
+  spawnDelay: 1
+  enemyContainer: {fileID: 1885496685}
 --- !u!1 &1247962320
 GameObject:
   m_ObjectHideFlags: 0
@@ -187304,6 +187294,9 @@ MonoBehaviour:
   onLevelUp:
     m_PersistentCalls:
       m_Calls: []
+  onPause:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1361145678
 Transform:
   m_ObjectHideFlags: 0
@@ -187377,6 +187370,7 @@ MonoBehaviour:
   uiCanvas: {fileID: 1894715308}
   pauseCanvas: {fileID: 380914062}
   deathCanvas: {fileID: 2028257772}
+  levelUpCanvas: {fileID: 1409524372}
 --- !u!1 &1363000932
 GameObject:
   m_ObjectHideFlags: 0
@@ -189029,9 +189023,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1361145681}
-        m_TargetAssemblyTypeName: UIScript, Assembly-CSharp
-        m_MethodName: PauseScreen
+      - m_Target: {fileID: 1361145677}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: OnPauseInvoke
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -189382,6 +189376,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1820023542}
   m_CullTransparentMesh: 1
+--- !u!1 &1885496685
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1885496686}
+  m_Layer: 0
+  m_Name: Enemy Pool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1885496686
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885496685}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4.98571, y: -0.32335, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1244215033}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1894715308
 GameObject:
   m_ObjectHideFlags: 0
@@ -190174,6 +190199,7 @@ MonoBehaviour:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 869160898}
   - {fileID: 1363000933}
   - {fileID: 59157393}
   - {fileID: 519420032}
@@ -190191,4 +190217,3 @@ SceneRoots:
   - {fileID: 354186608}
   - {fileID: 1618361079}
   - {fileID: 1244215033}
-  - {fileID: 869160898}

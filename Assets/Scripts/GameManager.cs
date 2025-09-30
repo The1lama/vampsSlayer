@@ -1,6 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
@@ -11,6 +12,7 @@ public class GameManager : MonoBehaviour
     private int _currentScore;
     private int _currentExp;
     [SerializeField] private int levelUpExp = 100;
+    public InputSystem_Actions Input;
     
     [SerializeField] private ExperienceBar experienceBar;
     private UiScoreChanger _textScoreChanger;
@@ -19,6 +21,7 @@ public class GameManager : MonoBehaviour
 
     public UnityEvent onDeath;
     public UnityEvent onLevelUp;
+    public UnityEvent onPause;
     
     void Awake()
     {
@@ -35,10 +38,15 @@ public class GameManager : MonoBehaviour
         onDeath?.AddListener(GameOver);
         onLevelUp?.AddListener(LevelUp);
         
+        
     }
 
     void Start()
     {
+        Input = new InputSystem_Actions();
+        Input.Enable();
+        Input.UI.Pause.performed += PauseFunction;
+        
        _textScoreChanger = GetComponent<UiScoreChanger>();
        _uiStateManager = GetComponent<UiStateManager>();
         
@@ -104,5 +112,16 @@ public class GameManager : MonoBehaviour
         }
     }
     
+    
+    
+    private void PauseFunction(InputAction.CallbackContext ctx)
+    {
+        OnPauseInvoke();
+    }
+
+    public void OnPauseInvoke()
+    {
+        onPause?.Invoke();
+    }
     
 }

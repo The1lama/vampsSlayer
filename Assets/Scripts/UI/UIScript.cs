@@ -19,7 +19,7 @@ public class UIScript : MonoBehaviour
     private void Awake()
     {
         // GameManager.Instance.onDeath.AddListener(DeathMenu);
-        GameManager.Instance.onLevelUp.AddListener(LevelUpMenu);
+        // GameManager.Instance.onLevelUp.AddListener(LevelUpMenu);
 
     }
     
@@ -27,7 +27,7 @@ public class UIScript : MonoBehaviour
     {
         _input = new InputSystem_Actions();
         _input.Enable();
-        _input.Player.Pause.performed += PauseFunction;
+        _input.UI.Pause.performed += PauseFunction;
         
         _deathScore = GetComponent<DeathScore>();
         
@@ -63,7 +63,7 @@ public class UIScript : MonoBehaviour
     public void LevelUpMenu()
     {
         Debug.Log(levelUpCanvas);
-        levelUpCanvas.GetComponentInChildren<UpgradeScript>().ButtonsSet();
+        // levelUpCanvas.GetComponentInChildren<UpgradeScript>().ButtonsSet();
         levelUpCanvas.SetActive(true);
         GamePause();
     }

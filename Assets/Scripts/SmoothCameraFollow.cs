@@ -12,13 +12,21 @@ public class SmoothCameraFollow : MonoBehaviour
     private Vector3 _velocity = Vector3.zero;
 
     private bool _inPlayArea = true;
-    // private Collider2D _collider;
     
     
     [SerializeField] private float maxX, maxY, minX, minY;
     
     public Transform target;
-    
+
+    private void Start()
+    {
+        if (target == null)
+        {
+            Debug.LogWarning($"No target assigned to SmoothCameraFollow, in <color=yellow>{name}</color>");
+        }
+    }
+
+
     private void FixedUpdate()
     {
         
@@ -34,9 +42,7 @@ public class SmoothCameraFollow : MonoBehaviour
 
     private void CheckCameraBarrier(Vector3 player)
     {
-        // if ((transform.position.x > minX && transform.position.x < maxX) &&
-        //     (transform.position.y > minY && transform.position.y < maxY))        
-            
+
         if ((player.x > minX && player.x < maxX) && (player.y > minY && player.y < maxY))
         {
             _inPlayArea =  true;
