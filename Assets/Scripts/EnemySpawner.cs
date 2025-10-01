@@ -1,9 +1,12 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
+using uPools;
 
 public class EnemySpawner : MonoBehaviour
 {
+
     
     public GameObject[] enemies;
     
@@ -12,11 +15,8 @@ public class EnemySpawner : MonoBehaviour
     public float spawnDelay2 = 4f;
     public float spawnDelay3 = 10f;
     
-    [SerializeField] private GameObject enemyContainer;
-    
     [SerializeField] private float spawnRadius;
     private float _angleInDegrees;
-    
     
     void Start()
     {
@@ -24,19 +24,22 @@ public class EnemySpawner : MonoBehaviour
         {
             Debug.LogWarning($"No enemies assigned, in <color=yellow>{name}</color>");
         }
+        
     }
-    
-    
+
+   
     public IEnumerator SpawnRoutine(int enemyListPosition, float spawnDelay)
     {
+ 
         while (true)
         {
             yield return new WaitForSeconds(spawnDelay);
             _angleInDegrees = Random.Range(0, 360);
+            
             Vector2 positionSpawn = GetPositionOnCircle(spawnRadius, _angleInDegrees, transform.position);
             Vector3 spawnHere = new Vector3(positionSpawn.x, positionSpawn.y, 0);
-            GameObject newEnemy = Instantiate(enemies[enemyListPosition], spawnHere, Quaternion.identity);
-            newEnemy.transform.parent = enemyContainer.transform;
+        
+            ObjectPoolManager.SpawnObject(enemies[enemyListPosition], spawnHere, Quaternion.identity);
         }
     }
 

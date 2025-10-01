@@ -33,7 +33,7 @@ public class EnemyLevels : MonoBehaviour
             case 2:
                 Debug.Log("Enemy Level 2");
                 _enemySpawner.spawnDelay1 -= 0.2f;
-                // zombie.runTimeStatSo.speed += 10;
+                zombie.LevelUpEnemy();
                 break;
             case 3:
                 _enemySpawner.StartCoroutine(_enemySpawner.SpawnRoutine(1, _enemySpawner.spawnDelay1));

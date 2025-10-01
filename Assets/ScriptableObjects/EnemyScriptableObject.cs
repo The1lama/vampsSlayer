@@ -14,8 +14,18 @@ public class EnemyScriptableObject : ScriptableObject
     public int speed;
     public int strenght;
 
-    [Header("Game Stat")]
+    [Header("Game Stat")] 
+    public int level;
     public int experienceAmount;
     public int scoreAmount;
- 
+
+    public void LevelUp()
+    {
+        level++;
+        health += 10;
+        strenght += 5;
+        speed += 10;
+    }
+    
+    
 }

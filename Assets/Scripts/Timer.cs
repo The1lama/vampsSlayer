@@ -6,7 +6,7 @@ public class Timer : MonoBehaviour
     [SerializeField] private TextMeshProUGUI timerText;
     private float _elapsedTime;
 
-    [SerializeField] private float enemyLevelUpTime = 30;
+    [SerializeField] private float enemyLevelUpTime = 10;
     
     
     private void Update()
