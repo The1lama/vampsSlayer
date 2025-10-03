@@ -19,11 +19,17 @@ public class GameManager : MonoBehaviour
     
     private UiStateManager _uiStateManager;
 
+    [HideInInspector]
     public UnityEvent onDeath;
+    [HideInInspector]
     public UnityEvent onLevelUp;
+    [HideInInspector]
     public UnityEvent onPause;
-    
+    [HideInInspector]
     public UnityEvent onEnemyLevelUp;
+    
+    public int enemyLevels {get ; set;}
+    
     
     void Awake()
     {

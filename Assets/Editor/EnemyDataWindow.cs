@@ -51,9 +51,9 @@ public class EnemyDataWindow : EditorWindow
             newEnemy.enemyName = _enemyName;
             newEnemy.enemySprite = _enemyImage;
             newEnemy.enemyHit = _enemyHit;
-            newEnemy.health = _enemyHealth;
-            newEnemy.speed = _enemySpeed;
-            newEnemy.strenght = _enemyStrength;
+            newEnemy.baseHealth = _enemyHealth;
+            newEnemy.baseSpeed = _enemySpeed;
+            newEnemy.baseStrenght = _enemyStrength;
             newEnemy.experienceAmount = _enemyExp;
             newEnemy.scoreAmount = _enemyScore;
             

@@ -76,6 +76,7 @@ public class ObjectPoolManager : MonoBehaviour
     /// <param name="poolType"></param>
     private static void CreatePool(GameObject prefab, Vector3 pos, Quaternion rot, PoolType poolType = PoolType.GameObjects)
     {
+        // Creates a pool object and stores the dictionary in _objectPools
         ObjectPool<GameObject> pool = new ObjectPool<GameObject>(
             createFunc: () => CreateObject(prefab, pos, rot, poolType),
             actionOnGet: OnGetObject,

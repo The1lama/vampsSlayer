@@ -177,3 +177,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   statSo: {fileID: 11400000, guid: a02ee46c45bf00849ad46517c9356ad6, type: 2}
+  _maxHealth: 37.373688
+  _moveSpeed: 5.7442923

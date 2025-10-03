@@ -189449,7 +189449,7 @@ GameObject:
   - component: {fileID: 1885496686}
   - component: {fileID: 1885496687}
   m_Layer: 0
-  m_Name: Enemy Pool
+  m_Name: GamePooler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
