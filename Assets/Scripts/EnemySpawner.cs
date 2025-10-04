@@ -6,15 +6,6 @@ public class EnemySpawner : MonoBehaviour
 {
     public GameObject[] enemies;
     
-    public float spawnDelay0 = 1f;
-    public float spawnDelay1 = 0.5f;
-    public float spawnDelay2 = 4f;
-    public float spawnDelay3 = 10f;
-    
-    public int zombieLevel = 1;
-    public int skeletonLevel = 1;
-    public int bigGuyLevel = 1;
-    
     
     [Tooltip("How far away from player enemies spawn")]
     [SerializeField] private float spawnRadius;
@@ -30,26 +21,30 @@ public class EnemySpawner : MonoBehaviour
     }
 
    
-    public IEnumerator SpawnRoutine(int enemyListPosition, float spawnDelay, int level)
+    public IEnumerator SpawnRoutine(int enemyListPosition, int level)
     {
         GameObject enemyPrefab = enemies[enemyListPosition];
         var enemy = enemyPrefab.GetComponent<EnemyBehaviour>();
         
+        
         while (true)
         {
-            yield return new WaitForSeconds(spawnDelay);
             _angleInDegrees = Random.Range(0, 360);
             
             Vector2 positionSpawn = GetPositionOnCircle(spawnRadius, _angleInDegrees, transform.position);
             Vector3 spawnHere = new Vector3(positionSpawn.x, positionSpawn.y, 0);
             
+            SpawnEnemy(enemyPrefab,  spawnHere);
             
-            ObjectPoolManager.SpawnObject(enemyPrefab, spawnHere, Quaternion.identity);
-            // enemy.Initialize(level);
-            
-            
+            yield return new WaitForSeconds(enemy.spawnDelay);
         }
     }
+
+    private void SpawnEnemy(GameObject enemy, Vector3 spawnPoint)
+    {
+        ObjectPoolManager.SpawnObject(enemy, spawnPoint, Quaternion.identity);
+    }
+    
 
 /// <summary>
 /// Creates a radius around an object 

@@ -27,8 +27,11 @@ public class GameManager : MonoBehaviour
     public UnityEvent onPause;
     [HideInInspector]
     public UnityEvent onEnemyLevelUp;
-    
-    public int enemyLevels {get ; set;}
+
+    public int enemyLevels { get; set; } = 1; 
+    /// <summary>
+    /// Get enemy levels from gamemanager and set it on upgrade then check in enemylevels for correct level and spawn it with that level
+    /// </summary>
     
     
     void Awake()

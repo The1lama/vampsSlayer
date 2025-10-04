@@ -3,14 +3,14 @@ using UnityEngine.Events;
 
 public class EnemyLevels : MonoBehaviour
 {
-    public int enemyLevel { get; private set; } = 1;
+    private int enemyLevel;
     private EnemySpawner _enemySpawner;
 
 
     private void Start()
     {
         GameManager.Instance.onEnemyLevelUp?.AddListener( CheckEnemyLevel );
-
+        enemyLevel = GameManager.Instance.enemyLevels;
         _enemySpawner = GetComponent<EnemySpawner>();
         
         CheckEnemyLevel();
@@ -23,27 +23,25 @@ public class EnemyLevels : MonoBehaviour
         switch (enemyLevel)
         {
             case 1:
-                _enemySpawner.StartCoroutine(_enemySpawner.SpawnRoutine(0, _enemySpawner.spawnDelay0, _enemySpawner.zombieLevel));
+                _enemySpawner.StartCoroutine(_enemySpawner.SpawnRoutine(0, enemyLevel));
                 break;
             
             case 2:
                 Debug.Log("Enemy Level 2");
-                _enemySpawner.spawnDelay1 -= 0.2f;
-                _enemySpawner.zombieLevel += 2;
+                enemyLevel++;
                 break;
             case 3:
-                _enemySpawner.StartCoroutine(_enemySpawner.SpawnRoutine(1, _enemySpawner.spawnDelay1, _enemySpawner.skeletonLevel));
+                _enemySpawner.StartCoroutine(_enemySpawner.SpawnRoutine(1,  enemyLevel));
                 break;
             
             case 4:
                 Debug.Log("Enemy Level 3");
-                _enemySpawner.spawnDelay2 -= 0.2f;
-                _enemySpawner.skeletonLevel += 2;
+                enemyLevel++;
                 break;
             
             case 5:
                 Debug.Log("Enemy Level 4");
-                _enemySpawner.StartCoroutine(_enemySpawner.SpawnRoutine(2, _enemySpawner.spawnDelay1, _enemySpawner.bigGuyLevel));
+                _enemySpawner.StartCoroutine(_enemySpawner.SpawnRoutine(2, enemyLevel));
                 break;
 
 

@@ -11,6 +11,7 @@ public class EnemyScriptableObject : ScriptableObject
     public string enemyName;
     public Sprite enemySprite;
     public Color enemyHit;
+    public float spawnTime;
     
     [Header("Basic Stat (unscaled")]
     public int baseHealth;

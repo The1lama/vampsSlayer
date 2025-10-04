@@ -9,12 +9,14 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
 {
     public EnemyScriptableObject statSo;
     
+    [Header("See run time value")]
+    
     [Tooltip("Runtime level Assigned by spawner")]
-    private int _level = 1;
-
-    public float _maxHealth;
+    [SerializeField] private int _level = 1;
+    [SerializeField] private float _maxHealth;
     private float _strength;
-    public float _moveSpeed;
+    [SerializeField] private float _moveSpeed;
+    public float spawnDelay;
     
     private HealthScript _healthScript;
     private MoveToPlayer _moveToPlayerScript;
@@ -35,6 +37,8 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         _healthScript = GetComponent<HealthScript>();
         _moveToPlayerScript = GetComponent<MoveToPlayer>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+
+        spawnDelay = statSo.spawnTime;
         
         _spriteRenderer.sprite = statSo.enemySprite;
         
@@ -50,18 +54,17 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         ApplyStats();
     }
 
-    private void OnEnable()
-    {
-        Initialize(_level);
-    }
-
     private void ApplyStats()
     {
+        _healthScript = GetComponent<HealthScript>();
+        _moveToPlayerScript = GetComponent<MoveToPlayer>();
+        
         _maxHealth = StatScaler.ApplyScaling(statSo.baseHealth, _level, statSo, statSo.healthCurve);
         _strength = StatScaler.ApplyScaling(statSo.baseStrenght, _level, statSo, statSo.strenghtCurve);
         _moveSpeed = StatScaler.ApplyScaling(statSo.baseSpeed, _level, statSo, statSo.speedCurve);
         
-        
+        Debug.Log(_level);
+        Debug.Log($"<Color=blue>{GameManager.Instance.enemyLevels}</Color>");
         Debug.Log(Mathf.RoundToInt(_maxHealth));
         Debug.Log(_moveSpeed);
         
@@ -112,10 +115,14 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
 
     private IEnumerator AnimationWalk()
     {
-        Tween.Rotation(transform, endValue: Quaternion.Euler(0, 0, 20), duration: 0.5f);
-        yield return new WaitForSeconds(0.5f);
-        Tween.Rotation(transform, endValue: Quaternion.Euler(0, 0, -20), duration: 0.5f);
-        yield return new WaitForSeconds(0.5f);
+        while (isActiveAndEnabled)
+        {
+            Tween.Rotation(transform, endValue: Quaternion.Euler(0, 0, 20), duration: 0.5f);
+            yield return new WaitForSeconds(0.5f);
+            Tween.Rotation(transform, endValue: Quaternion.Euler(0, 0, -20), duration: 0.5f);
+            yield return new WaitForSeconds(0.5f);
+        }
+
     }
     
     private void AnimationHurt()
