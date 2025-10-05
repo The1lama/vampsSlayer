@@ -9,7 +9,7 @@
 - [X]  After death restart with old stats
 - [X]  Camera bound area
 - [X]  World barrier
-- [ ]  The difficulty and/or the number of the enemies increase with the passing of time
+- [x]  The difficulty and/or the number of the enemies increase with the passing of time
 
 ### UI
 

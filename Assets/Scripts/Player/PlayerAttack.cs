@@ -1,16 +1,18 @@
 using System;
 using UnityEngine;
 
-
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(BoxCollider2D))]
 public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] private Animator animatorPlayer;
+    // [SerializeField] private Collider2D AttackBox;
 
     private float _meleeSpeed;
     private int _strenght;
     
     private float _timeUntilMelee;
-
+    
 
     public void SetMeleeSpeed(float newMeleeSpeed)
     {
@@ -56,8 +58,10 @@ public class PlayerAttack : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        // Debug.Log(collision.gameObject.name);
+        // Debug.Log("Something hit");
         var obj = collision.GetComponent<IDamageable>();
+        
         if (obj != null)
         {
             obj.TakeDamage(_strenght);

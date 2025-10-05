@@ -63,6 +63,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
     
     public void TakeDamage(int strength)
     {
+        Debug.Log("Enemy Take damage");
         _healthScript.TakeDamage(strength);
         AnimationHurt();
         
