@@ -16,7 +16,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
-        GameManager.Instance.onDeath.AddListener( () => _isPlayerDead = true );
+        GameManager.Instance.onDead.AddListener( () => _isPlayerDead = true );
     }
     
     public IEnumerator SpawnRoutine(GameObject enemyPrefab)

@@ -23,7 +23,7 @@ public class UiStateManager : MonoBehaviour
 
     void Awake()
     {
-        GameManager.Instance.onDeath.AddListener( () => SwitchState(DeathState));
+        GameManager.Instance.onDead.AddListener( () => SwitchState(DeathState));
         GameManager.Instance.onPause.AddListener( CheckPause );
         GameManager.Instance.onLevelUp.AddListener( () => SwitchState(LevelUpState));
     }

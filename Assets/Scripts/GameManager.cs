@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     private UiStateManager _uiStateManager;
 
     [HideInInspector]
-    public UnityEvent onDeath;
+    public UnityEvent onDead;
     [HideInInspector]
     public UnityEvent onLevelUp;
     [HideInInspector]
@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
             Instance = this;
         }
         
-        onDeath?.AddListener(GameOver);
+        onDead?.AddListener(GameOver);
         onLevelUp?.AddListener(LevelUp);
         onEnemyLevelUp?.AddListener(() => EnemyLevels++);
         

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -7,9 +8,11 @@ public class PlayerMovement : MonoBehaviour
 {
 
     private Animator _animator;
+    private AudioSource _audioSource;
     private Rigidbody2D _rb;
     private InputSystem_Actions _playerControl;
-    
+
+    private bool _isPlaying;
     private float _speed;
     private bool _isFacingRight = true;
     
@@ -25,19 +28,18 @@ public class PlayerMovement : MonoBehaviour
     {
         _playerControl.Disable();
     }
-
-    
     
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
         
         _playerControl = new InputSystem_Actions();
         
         OnEnableInput();
         
-        GameManager.Instance.onDeath?.AddListener( OnDisableInput );
+        GameManager.Instance.onDead?.AddListener( OnDisableInput );
         
     }
     
@@ -55,10 +57,24 @@ public class PlayerMovement : MonoBehaviour
         _rb.linearVelocity = new Vector2(_moveDirection.x, _moveDirection.y) * _speed;
         
         AnimationStates();
-        ChangeDirection(); 
-        
+        ChangeDirection();
+
+        if (_rb.linearVelocity.magnitude > 0.1f && !_isPlaying)
+        {
+            StartCoroutine(PlayWalking());
+        }
     }
 
+    IEnumerator PlayWalking()
+    {
+        _isPlaying = true;
+        float randPitch = Random.Range(0.8f, 1.2f);
+        _audioSource.pitch = randPitch;
+        _audioSource.Play();
+        yield return new WaitForSeconds(0.3f);
+        _isPlaying = false;
+    }
+    
 
     void ChangeDirection()
     {

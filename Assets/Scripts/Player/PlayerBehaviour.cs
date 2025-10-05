@@ -70,7 +70,7 @@ public class PlayerBehaviour : MonoBehaviour, IDamageable
         {
             _animator.SetBool("isDead", true);
             
-            GameManager.Instance.onDeath?.Invoke();
+            GameManager.Instance.onDead?.Invoke();
         }
         
         StartCoroutine(IFrames());
