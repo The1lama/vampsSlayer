@@ -6,7 +6,7 @@ public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] private Animator animatorPlayer;
 
-    private float _meleeSpeed;
+    private float _meleeSpeed = 2f;
     private int _strenght;
     
     private float _timeUntilMelee;
@@ -22,7 +22,7 @@ public class PlayerAttack : MonoBehaviour
         _meleeSpeed -= newMeleeSpeed;
         if (_meleeSpeed <= 0)
         {
-            _meleeSpeed = 0.1f;
+            _meleeSpeed = 0.2f;
         }
     }
 
@@ -49,7 +49,7 @@ public class PlayerAttack : MonoBehaviour
             _timeUntilMelee = _meleeSpeed;
         }
         else
-        {
+        {   
             _timeUntilMelee -= Time.deltaTime;
         }
     }
