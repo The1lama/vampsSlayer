@@ -6812,6 +6812,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   playerSo: {fileID: 11400000, guid: fc9735a2ca8fad04888312867ce13e56, type: 2}
   healthBar: {fileID: 1385495003}
+  _isInvincible: 0
 --- !u!95 &354186611
 Animator:
   serializedVersion: 7
@@ -186926,13 +186927,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 614a0c349568687478d5681311f071bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
-  enemies:
-  - {fileID: 2544472624264667037, guid: 4b3d3dfa5ea7b1247bfa89f25332d0d1, type: 3}
-  - {fileID: 2544472624264667037, guid: 82ffd1458aad0c14cb233fa1f5196a50, type: 3}
-  spawnDelay0: 1
-  spawnDelay1: 1
-  spawnDelay2: 0.5
-  spawnDelay3: 4
   spawnRadius: 10
 --- !u!114 &1244215036
 MonoBehaviour:
@@ -186946,6 +186940,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e310c87f38f84554c8e869aff34854df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyLevels
+  enemies:
+  - {fileID: 2544472624264667037, guid: 4b3d3dfa5ea7b1247bfa89f25332d0d1, type: 3}
+  - {fileID: 2544472624264667037, guid: 82ffd1458aad0c14cb233fa1f5196a50, type: 3}
 --- !u!1 &1247962320
 GameObject:
   m_ObjectHideFlags: 0
@@ -187361,6 +187358,7 @@ MonoBehaviour:
   onEnemyLevelUp:
     m_PersistentCalls:
       m_Calls: []
+  <EnemyLevels>k__BackingField: 1
 --- !u!4 &1361145678
 Transform:
   m_ObjectHideFlags: 0

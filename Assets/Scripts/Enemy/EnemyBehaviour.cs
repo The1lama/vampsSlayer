@@ -29,63 +29,36 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         {
             Debug.LogError("EnemyBehaviour does not have its ScriptableObject");
         }
-    }
-    
-    private void Start()
-    {
-
+        
         _healthScript = GetComponent<HealthScript>();
         _moveToPlayerScript = GetComponent<MoveToPlayer>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-
-        spawnDelay = statSo.spawnTime;
         
-        _spriteRenderer.sprite = statSo.enemySprite;
-        
-        Initialize(_level);
-        
-        // Starts walk animation
-        StartCoroutine(AnimationWalk());
     }
-
+     
     public void Initialize(int assignedLevel)
     {
+        spawnDelay = statSo.spawnTime;
+        _spriteRenderer.sprite = statSo.enemySprite;
+        
         _level = assignedLevel;
+        
         ApplyStats();
+        StartCoroutine(AnimationWalk());
+
     }
 
     private void ApplyStats()
     {
-        _healthScript = GetComponent<HealthScript>();
-        _moveToPlayerScript = GetComponent<MoveToPlayer>();
         
         _maxHealth = StatScaler.ApplyScaling(statSo.baseHealth, _level, statSo, statSo.healthCurve);
         _strength = StatScaler.ApplyScaling(statSo.baseStrenght, _level, statSo, statSo.strenghtCurve);
         _moveSpeed = StatScaler.ApplyScaling(statSo.baseSpeed, _level, statSo, statSo.speedCurve);
         
-        Debug.Log(_level);
-        Debug.Log($"<Color=blue>{GameManager.Instance.enemyLevels}</Color>");
-        Debug.Log(Mathf.RoundToInt(_maxHealth));
-        Debug.Log(_moveSpeed);
-        
         _healthScript.SetMaxHealth(Mathf.RoundToInt(_maxHealth));
         _moveToPlayerScript.SetSpeed(_moveSpeed);
         
     }
-    
-    
-    // private void SetUpEnemy()
-    // {
-    //     _runtimeStatSo = Instantiate(statSo);
-    //     // _runtimeStatSo = _runtimeStatSo.ScaleUpForLevel(enemyLevel);
-    //     
-    //     _healthScript.SetMaxHealth(_runtimeStatSo.baseHealth);
-    //     _moveToPlayerScript.SetSpeed(_runtimeStatSo.baseSpeed);
-    //     
-    //     _strenght =  _runtimeStatSo.baseStrenght;
-    //     
-    //     _spriteRenderer.sprite = _runtimeStatSo.enemySprite;
-    // }
     
     
     public void TakeDamage(int strength)
@@ -99,7 +72,8 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         GameManager.Instance.AddScore(statSo.scoreAmount);
         GameManager.Instance.AddExperiencePoints(statSo.experienceAmount);
         
-        ObjectPoolManager.ReturnObjectToPool(gameObject);
+        Destroy(gameObject);
+        // ObjectPoolManager.ReturnObjectToPool(gameObject);
         
     }
     

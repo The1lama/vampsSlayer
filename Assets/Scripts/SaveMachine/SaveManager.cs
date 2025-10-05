@@ -9,22 +9,34 @@ public static class SaveManager
 
     
     // Delete
+    /// <summary>
+    /// Delete given saveProfile
+    /// </summary>
+    /// <param name="profileName">String name of the profileName</param>
     public static void Delete(string profileName)
     {
         if (!File.Exists($"{saveFolder}/{profileName}"))
         {
-            throw new Exception($"Save Profile {profileName} does not exist");
+            Debug.LogWarning($"Save Profile {profileName} does not exist");
+            return;
         }
         Debug.Log($"Successfully deleted {profileName}");
         File.Delete($"{saveFolder}/{profileName}");
     }
     
     // Load
+    /// <summary>
+    /// Loads a given save profile
+    /// </summary>
+    /// <param name="profileName">Name of the save profile to load</param>
+    /// <typeparam name="T">Save Profile data type</typeparam>
+    /// <returns>Json DeserializeObject content of the file to load; Null if no saveProfile found</returns>
     public static SaveProfile<T> Load<T>(string profileName) where T : SavePlayerHighScore
     {
         if (!File.Exists($"{saveFolder}/{profileName}"))
         {
-            throw new Exception($"Save Profile {profileName} does not exist");
+            Debug.LogWarning("No save profile found");
+            return null;
         }
         
         var fileContents = File.ReadAllText($"{saveFolder}/{profileName}");
@@ -35,12 +47,15 @@ public static class SaveManager
     }
 
     // Save
+    
+    /// <summary>
+    /// Saves given saveProfile to file and write 
+    /// </summary>
+    /// <param name="save">Save content data with it </param>
+    /// <typeparam name="T">Uses SaveProfileData profile as a type</typeparam>
     public static void Save<T>(SaveProfile<T> save) where T : SavePlayerHighScore
     {
-        // if (File.Exists($"{saveFolder}/{save.profileName}"))
-        // {
-        //     throw new Exception($"Save Profile {save.profileName} does  exist");
-        // }
+
         var jsonString = JsonConvert.SerializeObject(save, Formatting.Indented, new JsonSerializerSettings{ReferenceLoopHandling = ReferenceLoopHandling.Ignore});
         
         // if add encrypt method

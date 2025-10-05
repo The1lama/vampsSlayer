@@ -14,15 +14,14 @@ public class PlayerMovement : MonoBehaviour
     private bool _isFacingRight = true;
     
     private Vector2 _moveDirection = Vector2.zero;
+    
 
-
-    void Awake()
+    private void OnEnableInput()
     {
-        // GameManager.Instance.onDeath.AddListener(() => _playerControl.Disable());
+        _playerControl.Enable();
     }
     
-    
-    public void OnDisable()
+    private void OnDisableInput()
     {
         _playerControl.Disable();
     }
@@ -35,14 +34,16 @@ public class PlayerMovement : MonoBehaviour
         _animator = GetComponent<Animator>();
         
         _playerControl = new InputSystem_Actions();
-        _playerControl.Enable();
+        
+        OnEnableInput();
+        
+        GameManager.Instance.onDeath?.AddListener( OnDisableInput );
         
     }
     
     
     public void SetSpeed(float newSpeed)
     {
-        
         _speed += newSpeed;
     }
     

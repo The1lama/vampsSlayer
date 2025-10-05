@@ -16,6 +16,7 @@ public class PlayerBehaviour : MonoBehaviour, IDamageable
     
     public healthBar healthBar;
     
+    [SerializeField]
     private bool _isInvincible;
     private float _iFrameTime;
     private Color _hitTint;
@@ -60,7 +61,7 @@ public class PlayerBehaviour : MonoBehaviour, IDamageable
     
     public void TakeDamage(int strength)
     {
-        if (!_isInvincible)  return;     // if player has iFrames do nothing; // Coroutine IFrames switches _isInvincible statement 
+        if (_isInvincible)  return;     // if player has iFrames do nothing; // Coroutine IFrames switches _isInvincible statement 
         
         _healthScript.TakeDamage(strength);
         healthBar.SetHealth(_healthScript.GetCurrentHealth());

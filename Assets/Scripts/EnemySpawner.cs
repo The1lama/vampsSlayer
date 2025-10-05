@@ -1,49 +1,49 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject[] enemies;
+    
+    private bool _isPlayerDead;
     
     
     [Tooltip("How far away from player enemies spawn")]
     [SerializeField] private float spawnRadius;
     private float _angleInDegrees;
-    
-    void Start()
-    {
-        if (enemies == null || enemies.Length == 0)
-        {
-            Debug.LogWarning($"No enemies assigned, in <color=yellow>{name}</color>");
-        }
-        
-    }
 
-   
-    public IEnumerator SpawnRoutine(int enemyListPosition, int level)
+
+    private void Start()
     {
-        GameObject enemyPrefab = enemies[enemyListPosition];
-        var enemy = enemyPrefab.GetComponent<EnemyBehaviour>();
+        GameManager.Instance.onDeath.AddListener( () => _isPlayerDead = true );
+    }
+    
+    public IEnumerator SpawnRoutine(GameObject enemyPrefab)
+    {
+        // GameObject enemyPrefab = enemies[enemyListPosition];
         
-        
-        while (true)
+        //while player is alive
+        while (!_isPlayerDead)
         {
+            // Check enemyLevel from gameManager everytime it should be spawning new enemy
+            int level = GameManager.Instance.EnemyLevels;
             _angleInDegrees = Random.Range(0, 360);
             
+            // Calculate the spawnposition for the enemy and puts it on a vector3
             Vector2 positionSpawn = GetPositionOnCircle(spawnRadius, _angleInDegrees, transform.position);
             Vector3 spawnHere = new Vector3(positionSpawn.x, positionSpawn.y, 0);
             
-            SpawnEnemy(enemyPrefab,  spawnHere);
+            // spawns enemy and returns a gameobject to Initialize enemy stats, and get spawnDelay.
+            var enemy = Instantiate(enemyPrefab, spawnHere, Quaternion.identity);
+            enemy.GetComponent<EnemyBehaviour>().Initialize(level);
+            var spawnDelay = enemy.GetComponent<EnemyBehaviour>().spawnDelay;
             
-            yield return new WaitForSeconds(enemy.spawnDelay);
+            // wait for new spawn
+            yield return new WaitForSeconds(spawnDelay);
         }
     }
 
-    private void SpawnEnemy(GameObject enemy, Vector3 spawnPoint)
-    {
-        ObjectPoolManager.SpawnObject(enemy, spawnPoint, Quaternion.identity);
-    }
     
 
 /// <summary>
