@@ -25,7 +25,7 @@ public class PlayerBehaviour : MonoBehaviour, IDamageable
     {
         _spriteRenderer =  GetComponent<SpriteRenderer>();
         _healthScript = GetComponent<HealthScript>();
-        _playerAttack = GetComponent<PlayerAttack>();
+        _playerAttack = GetComponentInChildren<PlayerAttack>();
         _playerMovement = GetComponent<PlayerMovement>();
         _animator = GetComponent<Animator>();
         

@@ -6,7 +6,7 @@ public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] private Animator animatorPlayer;
 
-    private float _meleeSpeed = 2f;
+    private float _meleeSpeed;
     private int _strenght;
     
     private float _timeUntilMelee;
