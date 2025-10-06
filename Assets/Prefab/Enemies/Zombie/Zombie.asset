@@ -14,37 +14,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyScriptableObject
   enemyName: Zombie
   enemySprite: {fileID: 613658156, guid: 1bc6097228993f045852159e71f81d5b, type: 3}
+  enemyScale: 1
   enemyHit: {r: 1, g: 0, b: 0, a: 1}
-  spawnTime: 1
-  baseHealth: 20
+  baseHealth: 100
   baseSpeed: 5
-  baseStrenght: 20
-  experienceAmount: 13
-  scoreAmount: 30
+  baseStrenght: 10
+  experienceAmount: 10
+  scoreAmount: 10
+  spawnTime: 1
   scalingMethod: 0
-  perLevelMultiplier: 0.5
+  perLevelMultiplier: 0.2
   minLevel: 1
-  maxLevel: 10
+  maxLevel: 20
   healthCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0.11111111
-      outSlope: 0.11111111
-      tangentMode: 34
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.33333334
+      outWeight: 0
     - serializedVersion: 3
-      time: 10
-      value: 2
-      inSlope: 0.11111111
-      outSlope: 0.11111111
-      tangentMode: 34
+      time: 20
+      value: 3
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -53,22 +54,22 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0.11111111
-      outSlope: 0.11111111
-      tangentMode: 34
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 10
-      value: 2
-      inSlope: 0.11111111
-      outSlope: 0.11111111
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -77,24 +78,24 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0.11111111
-      outSlope: 0.11111111
-      tangentMode: 34
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.33333334
+      outWeight: 0
     - serializedVersion: 3
-      time: 10
-      value: 2
-      inSlope: 0.11111111
-      outSlope: 0.11111111
-      tangentMode: 34
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  randomVariance: 0
+  randomVariance: 0.05

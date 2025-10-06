@@ -1,26 +1,38 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using PrimeTween;
-using uPools;
 
 
 public class EnemyBehaviour : MonoBehaviour, IDamageable
 {
-    public EnemyScriptableObject statSo;
+
+    #region Stats and Drops
+
+        public EnemyScriptableObject statSo;
+        public GameObject xpDrop;
+        
+    #endregion
+
+    #region Struc
+
+        [Header("See run time value")]
+        
+        [Tooltip("Runtime level Assigned by spawner")]
+        private int _level = 1;
+        private float _maxHealth;
+        private float _strength;
+        private float _moveSpeed;
+        public float spawnDelay;
+        
+    #endregion
     
-    [Header("See run time value")]
-    
-    [Tooltip("Runtime level Assigned by spawner")]
-    [SerializeField] private int _level = 1;
-    [SerializeField] private float _maxHealth;
-    private float _strength;
-    [SerializeField] private float _moveSpeed;
-    public float spawnDelay;
-    
-    private HealthScript _healthScript;
-    private MoveToPlayer _moveToPlayerScript;
-    private SpriteRenderer _spriteRenderer;
+    #region Componenets
+
+        private HealthScript _healthScript;
+        private MoveToPlayer _moveToPlayerScript;
+        private SpriteRenderer _spriteRenderer;
+
+    #endregion
     
 
     private void Awake()
@@ -70,8 +82,17 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         // If entity is dead
         if (_healthScript.GetCurrentHealth() > 0) return;
         
+        
+        // dropped XP
+        if (xpDrop != null)
+        {
+            var dropped = Instantiate(xpDrop, transform.position, Quaternion.identity);
+            dropped.GetComponent<XPDrop>().xp = statSo.experienceAmount;
+            Debug.Log("Did drop xp");
+        }
+
         GameManager.Instance.AddScore(statSo.scoreAmount);
-        GameManager.Instance.AddExperiencePoints(statSo.experienceAmount);
+
         
         Destroy(gameObject);
         // ObjectPoolManager.ReturnObjectToPool(gameObject);

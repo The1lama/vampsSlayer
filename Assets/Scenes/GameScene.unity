@@ -187077,8 +187077,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyLevels
   enemies:
-  - {fileID: 2544472624264667037, guid: 4b3d3dfa5ea7b1247bfa89f25332d0d1, type: 3}
-  - {fileID: 2544472624264667037, guid: 82ffd1458aad0c14cb233fa1f5196a50, type: 3}
+  - {fileID: 2544472624264667037, guid: 947c85edf16d8204b9485a8caf83fba0, type: 3}
+  - {fileID: 2544472624264667037, guid: 37b97f33303d06c469a6d0360d7dc8f9, type: 3}
+  - {fileID: 2544472624264667037, guid: 72671913a18b5894097e7f24f2ad8d0c, type: 3}
 --- !u!1 &1247962320
 GameObject:
   m_ObjectHideFlags: 0

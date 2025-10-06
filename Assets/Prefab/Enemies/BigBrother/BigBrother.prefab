@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6395919331110839370}
   - component: {fileID: 8187642131454683546}
   m_Layer: 7
-  m_Name: BaseEnemy
+  m_Name: BigBrother
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 172626504, guid: c4d2ccab0c2ad7e47853b6e31a7ac7c2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -91,7 +91,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!61 &3275124960740124108
@@ -176,6 +176,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3d24e8349769cb4ebad01b7011c368d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  statSo: {fileID: 0}
-  xpDrop: {fileID: 0}
+  statSo: {fileID: 11400000, guid: 68bb4c57491b25e47a01671245c08537, type: 2}
+  xpDrop: {fileID: 8150468455172829665, guid: f5016988d5ddaa244a09c4d35c2ff29c, type: 3}
   spawnDelay: 0
