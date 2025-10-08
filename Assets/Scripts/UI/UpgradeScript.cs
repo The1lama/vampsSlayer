@@ -75,20 +75,25 @@ public class UpgradeScript : MonoBehaviour
         switch (upgradeChosen)
         {
             case "Strenght":
-                player.GetComponent<PlayerAttack>().SetStrenght((int)addStat);
+                // player.GetComponent<MeleeAttack>().SetStrenght((int)addStat);
+                // player.GetComponentInChildren<MeleeAttack>().SetStrenght((int)addStat);
+                player.GetComponent<PlayerBehaviour>().SetAttackStrenght((int)addStat);
                 Debug.Log(upgradeChosen);
                 Debug.Log(addStat);
                 break;
+            
             case "Speed":
                 player.GetComponent<PlayerMovement>().SetSpeed((int)addStat);
                 Debug.Log(upgradeChosen);
                 Debug.Log(addStat);
                 break;
+            
             case "AttackSpeed":
-                player.GetComponent<PlayerAttack>().SetNewMeleeSpeed(addStat);
+                // player.GetComponentInChildren<MeleeAttack>().SetNewMeleeSpeed(addStat);
+                player.GetComponent<PlayerBehaviour>().SetNewMeleeSpeed(addStat);
                 Debug.Log(upgradeChosen);
                 Debug.Log(addStat);
-                if (player.GetComponent<PlayerAttack>().GetMeleeSpeed() <= 0.2f)
+                if (player.GetComponentInChildren<MeleeAttack>().GetMeleeSpeed() <= 0.2f)
                 {
                     foreach (var objSo in powerUps)
                     {
@@ -104,6 +109,7 @@ public class UpgradeScript : MonoBehaviour
                 Debug.Log(upgradeChosen);
                 Debug.Log(addStat);
                 break;
+            
            default:
                Debug.LogWarning("Could not find chosen upgrade name: " + upgradeChosen);
                break;

@@ -19,14 +19,23 @@ public class GameManager : MonoBehaviour
     
     private UiStateManager _uiStateManager;
 
-    [HideInInspector]
-    public UnityEvent onDead;
-    [HideInInspector]
-    public UnityEvent onLevelUp;
-    [HideInInspector]
-    public UnityEvent onPause;
-    [HideInInspector]
-    public UnityEvent onEnemyLevelUp;
+    #region Unity Event
+
+        [HideInInspector]
+        public UnityEvent onDead;
+        [HideInInspector]
+        public UnityEvent onLevelUp;
+        [HideInInspector]
+        public UnityEvent onPause;
+        [HideInInspector]
+        public UnityEvent onEnemyLevelUp;
+        [HideInInspector]
+        public UnityEvent onOptionsMenu;
+        [HideInInspector]
+        public UnityEvent onBackButton;
+        
+    #endregion
+    
     
     [field: SerializeField][Header("Change only in runtime")]
     public int EnemyLevels { get; private set; } = 1; 

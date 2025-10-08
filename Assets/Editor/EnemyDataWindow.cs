@@ -231,8 +231,7 @@ public class EnemyDataWindow : EditorWindow
         
         EditorGUILayout.EndScrollView();
     }
-
-
+    
     private void CreateScriptableObject()
     {
         var savePath = $"{_dataSavePath}/{_enemyName}";
@@ -340,9 +339,18 @@ public class EnemyDataWindow : EditorWindow
     private void ResetSomeWindowValues()
     {
         _dataSavePath = "Assets/Prefab/Enemies";
-        _enemyImage = null;
         _enemyName = "New Enemy";
+        _enemyImage = null;
         _enemyScale = 1;
+        
+        #region Stat Unscaled
+            _enemyHealth = 100;
+            _enemySpeed = 5;
+            _enemyStrength = 10;
+            _enemyExp = 10;
+            _enemyScore = 10;
+            _newSpawnTime = 1;
+        #endregion
     }
 
     private bool CanCreateEnemy()
@@ -352,7 +360,6 @@ public class EnemyDataWindow : EditorWindow
                !string.IsNullOrWhiteSpace(_enemyName) &&
                _enemyName != "New Enemy";
     }
-    
     
     private AnimationCurve GetPresetCurve(int curveIndex)
     {
@@ -370,6 +377,5 @@ public class EnemyDataWindow : EditorWindow
             case 3: default: return new AnimationCurve();
         }
     }
-    
     
 }

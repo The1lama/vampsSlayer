@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Events;
 
 public class EnemyLevels : MonoBehaviour
 {
@@ -23,12 +22,13 @@ public class EnemyLevels : MonoBehaviour
 
     private void CheckEnemyLevel()
     {
-        int enemyLevel = GameManager.Instance.EnemyLevels;
+        var enemyLevel = GameManager.Instance.EnemyLevels;
         Debug.Log($"Check enemy level {enemyLevel}");
         
         switch (enemyLevel)
         {
             case 1:
+                Debug.Log("Enemy Level 1");
                 _enemySpawner.StartCoroutine(_enemySpawner.SpawnRoutine(enemies[0]));
                 break;
             
@@ -36,15 +36,16 @@ public class EnemyLevels : MonoBehaviour
                 Debug.Log("Enemy Level 2");
                 break;
             case 3:
+                Debug.Log("Enemy Level 3");
                 _enemySpawner.StartCoroutine(_enemySpawner.SpawnRoutine(enemies[1]));
                 break;
             
             case 4:
-                Debug.Log("Enemy Level 3");
+                Debug.Log("Enemy Level 4");
                 break;
             
             case 5:
-                Debug.Log("Enemy Level 4");
+                Debug.Log("Enemy Level 5");
                 _enemySpawner.StartCoroutine(_enemySpawner.SpawnRoutine(enemies[2]));
                 break;
 

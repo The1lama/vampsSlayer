@@ -16,7 +16,7 @@ MonoBehaviour:
   enemySprite: {fileID: 172626504, guid: c4d2ccab0c2ad7e47853b6e31a7ac7c2, type: 3}
   enemyScale: 1.5
   enemyHit: {r: 1, g: 0, b: 0, a: 1}
-  baseHealth: 200
+  baseHealth: 120
   baseSpeed: 3
   baseStrenght: 30
   experienceAmount: 60

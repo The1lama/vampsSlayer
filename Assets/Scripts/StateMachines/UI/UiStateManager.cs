@@ -4,19 +4,28 @@ using UnityEngine.SceneManagement;
 public class UiStateManager : MonoBehaviour
 {
     private UiBaseState _oldState;
-    
     private UiBaseState _currentState;
-    
-    public UiGameState GameState = new UiGameState();
-    public UiPauseState PauseState = new UiPauseState();
-    public UiDeathState DeathState = new UiDeathState();
-    public UiLevelUpState LevelUpState = new UiLevelUpState();
-    
-    public GameObject uiCanvas;
-    public GameObject pauseCanvas;
-    public GameObject deathCanvas;
-    public GameObject levelUpCanvas;
 
+    #region Diffrent states
+    
+        public UiGameState GameState = new UiGameState();
+        public UiPauseState PauseState = new UiPauseState();
+        public UiDeathState DeathState = new UiDeathState();
+        public UiLevelUpState LevelUpState = new UiLevelUpState();
+        public UiOptionsState OptionsState = new UiOptionsState();
+        
+    #endregion
+
+    #region Ui canvases
+
+        public GameObject uiCanvas;
+        public GameObject pauseCanvas;
+        public GameObject deathCanvas;
+        public GameObject levelUpCanvas;
+        public GameObject optionsCanvas;
+        
+    #endregion
+    
     private DeathScore _deathScore;
     
     private bool _isPaused;
@@ -26,19 +35,25 @@ public class UiStateManager : MonoBehaviour
         GameManager.Instance.onDead.AddListener( () => SwitchState(DeathState));
         GameManager.Instance.onPause.AddListener( CheckPause );
         GameManager.Instance.onLevelUp.AddListener( () => SwitchState(LevelUpState));
+        
+        GameManager.Instance.onOptionsMenu.AddListener( () => SwitchState(OptionsState));
+        GameManager.Instance.onBackButton.AddListener(() => SwitchState(PauseState));
     }
     
     void Start()
     {
-        
-        GameState.UiCanvas = uiCanvas;
-        
-        PauseState.PauseCanvas = pauseCanvas;
-        
-        DeathState.DeathCanvas = deathCanvas;
-        DeathState.DeathScore = GetComponent<DeathScore>();
 
-        LevelUpState.LevelUpCanvas = levelUpCanvas;
+        #region Setup canvas to states
+
+                GameState.UiCanvas = uiCanvas;
+                PauseState.PauseCanvas = pauseCanvas;
+                DeathState.DeathCanvas = deathCanvas;
+                DeathState.DeathScore = GetComponent<DeathScore>();
+        
+                LevelUpState.LevelUpCanvas = levelUpCanvas;
+                OptionsState.OptionsCanvas = optionsCanvas;
+
+        #endregion
         
         _currentState = GameState;
         
@@ -73,7 +88,7 @@ public class UiStateManager : MonoBehaviour
             
             case true:
                 _isPaused = false;
-                SwitchState(_oldState);
+                SwitchState(GameState);
                 break;
         }
     }
@@ -90,6 +105,20 @@ public class UiStateManager : MonoBehaviour
         SceneManager.LoadScene(SceneNames.MainMenu);
         Time.timeScale = 1;
     }
+
+    #region Invoke funcitons
+
+        public void OnBackButtonCall()
+        {
+            GameManager.Instance.onBackButton.Invoke();
+        }
     
+        public void OnOptionsMenuCall()
+        {
+            GameManager.Instance.onOptionsMenu.Invoke();
+        }
+
+    #endregion
+
     
 }

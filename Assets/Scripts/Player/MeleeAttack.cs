@@ -3,10 +3,9 @@ using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(BoxCollider2D))]
-public class PlayerAttack : MonoBehaviour
+public class MeleeAttack : MonoBehaviour
 {
     [SerializeField] private Animator animatorPlayer;
-    // [SerializeField] private Collider2D AttackBox;
 
     private float _meleeSpeed;
     private int _strenght;
@@ -40,10 +39,10 @@ public class PlayerAttack : MonoBehaviour
     
     private void Update()
     {
-        playerAttack();
+        PlayerAttack();
     }
 
-    private void playerAttack()
+    private void PlayerAttack()
     {
         if (_timeUntilMelee <= 0f)
         {
@@ -58,15 +57,12 @@ public class PlayerAttack : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Debug.Log(collision.gameObject.name);
-        // Debug.Log("Something hit");
         var obj = collision.GetComponent<IDamageable>();
         
         if (obj != null)
         {
             obj.TakeDamage(_strenght);
         }
-        
     }
 
 }

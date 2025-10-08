@@ -31,6 +31,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         private HealthScript _healthScript;
         private MoveToPlayer _moveToPlayerScript;
         private SpriteRenderer _spriteRenderer;
+        private Rigidbody2D _rigidbody2D;
 
     #endregion
     
@@ -45,6 +46,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         _healthScript = GetComponent<HealthScript>();
         _moveToPlayerScript = GetComponent<MoveToPlayer>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _rigidbody2D = GetComponent<Rigidbody2D>();
         
     }
      
