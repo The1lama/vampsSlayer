@@ -6,6 +6,9 @@ public class EnemyLevels : MonoBehaviour
 
     public GameObject[] enemies;
     
+    public bool isSpawning = true;
+    
+    
     private void Start()
     {
         if (enemies == null || enemies.Length == 0)
@@ -22,6 +25,8 @@ public class EnemyLevels : MonoBehaviour
 
     private void CheckEnemyLevel()
     {
+        if (!isSpawning) return;
+        
         var enemyLevel = GameManager.Instance.EnemyLevels;
         Debug.Log($"Check enemy level {enemyLevel}");
         

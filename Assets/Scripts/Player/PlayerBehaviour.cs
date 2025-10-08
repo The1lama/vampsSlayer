@@ -28,7 +28,7 @@ public class PlayerBehaviour : MonoBehaviour, IDamageable
                 _spriteRenderer =  GetComponent<SpriteRenderer>();
                 _healthScript = GetComponent<HealthScript>();
                 _meleeAttack = GetComponentInChildren<MeleeAttack>();
-                // _gunAttack = GetComponentInChildren<ShotGunAttack>();
+                _gunAttack = GetComponentInChildren<ShotGunAttack>();
                 _playerMovement = GetComponent<PlayerMovement>();
                 _animator = GetComponent<Animator>();
 
@@ -49,7 +49,7 @@ public class PlayerBehaviour : MonoBehaviour, IDamageable
         
         // Player Attack
         _meleeAttack.SetMeleeSpeed(playerSo.attackSpeed);
-        // _gunAttack.SetMeleeSpeed(playerSo.attackSpeed);
+        _gunAttack.SetMeleeSpeed(playerSo.attackSpeed);
 
         SetAttackStrenght(playerSo.strenght);
         
@@ -60,13 +60,13 @@ public class PlayerBehaviour : MonoBehaviour, IDamageable
     public void SetNewMeleeSpeed(float attackSpeed)
     {
         _meleeAttack.SetNewMeleeSpeed(attackSpeed);
-        // _gunAttack.SetNewMeleeSpeed(attackSpeed);
+        _gunAttack.SetNewMeleeSpeed(attackSpeed);
     }
 
     public void SetAttackStrenght(int strenght)
     {
         _meleeAttack.SetStrenght(strenght);
-        // _gunAttack.SetStrenght(strenght);
+        _gunAttack.SetStrenght(strenght);
     }
     
     public void SetNewMaxHealth(int maxHealth)

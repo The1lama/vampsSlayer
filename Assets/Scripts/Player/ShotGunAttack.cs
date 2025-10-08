@@ -1,22 +1,26 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ShotGunAttack : MonoBehaviour
 {
     [SerializeField] private GameObject bulletPrefab;
-    
+    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject[] bulletSpawnPoints;
+
     private float _meleeSpeed;
     private int _strenght;
     private float _timeUntilMelee;
 
 
     private Vector2 _attackDirection;
-    [SerializeField]
-    
+    private Vector2 _worldPosition;
+    private Vector3 localScale;
+
+
+    #region Initialize attack settings (functions)
     
 
-    #region attack settings functions
-
-        public void SetMeleeSpeed(float newMeleeSpeed)
+    public void SetMeleeSpeed(float newMeleeSpeed)
         {
             _meleeSpeed += newMeleeSpeed;
         }
@@ -40,6 +44,8 @@ public class ShotGunAttack : MonoBehaviour
     
     private void Update()
     {
+        HandleGunRotation();
+        
         if (_timeUntilMelee <= 0f)
         {
             PlayerAttack();
@@ -49,13 +55,42 @@ public class ShotGunAttack : MonoBehaviour
         {   
             _timeUntilMelee -= Time.deltaTime;
         }
-     
     }
 
     private void PlayerAttack()
     {
-        GameObject bulletspawn = Instantiate(bulletPrefab, Vector3.zero, Quaternion.identity);
+
+        foreach (var bulletSpawnPoint in bulletSpawnPoints)
+        {
+            Vector3 position = bulletSpawnPoint.transform.position;
+            GameObject bulletspawn = Instantiate(bulletPrefab, position, transform.rotation);
+        }
     }
+
+    private void HandleGunRotation()
+    {
+        float facingDirection = player.transform.localScale.x;
+        
+        _worldPosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        _attackDirection = (_worldPosition - (Vector2)transform.position).normalized;
+
+        transform.right = _attackDirection; 
+        
+        var angle = Mathf.Atan2(_attackDirection.y, _attackDirection.x) * Mathf.Rad2Deg;
+        
+        Vector3 localScale = new Vector3(facingDirection, 1f, 1f);
+        if (angle > 90 || angle < -90)
+
+        {
+            localScale.y = -1f;
+        }
+        else 
+        {
+            localScale.y = 1f;
+        }
+        transform.localScale = localScale;
+    }
+    
     
     
 }

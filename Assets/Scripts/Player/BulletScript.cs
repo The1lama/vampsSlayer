@@ -8,6 +8,7 @@ public class BulletScript : MonoBehaviour
     [SerializeField] private float destroyTime;
     
     public int strenght;
+    public float bulletDirection = 1f;
     
     private Rigidbody2D _rigidbody;
 
@@ -15,7 +16,7 @@ public class BulletScript : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         
-        SetDestroy();
+        // SetDestroy();
         SetStraightVelocity();
     }
 
@@ -33,9 +34,10 @@ public class BulletScript : MonoBehaviour
     {
         Debug.Log($"<Color=blue>{coll2d.gameObject.name}</Color> on TriggerEnter2D");
 
-        if (coll2d.CompareTag("Enemy"))
+        if (coll2d.CompareTag("Enemy") && coll2d.GetComponent<IDamageable>() != null)
         {
             coll2d.GetComponent<EnemyBehaviour>().TakeDamage(strenght);
+            Destroy(gameObject);
         }
         
 

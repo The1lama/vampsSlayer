@@ -8,7 +8,6 @@ public class EnemySpawner : MonoBehaviour
     
     private bool _isPlayerDead;
     
-    
     [Tooltip("How far away from player enemies spawn")]
     [SerializeField] private float spawnRadius;
     private float _angleInDegrees;
