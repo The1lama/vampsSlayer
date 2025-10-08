@@ -80,8 +80,10 @@ AudioMixerController:
   m_EnableSuspend: 1
   m_UpdateMode: 0
   m_ExposedParameters:
+  - guid: 9e72b390b248cbb40b78e35e56e3962f
+    name: Master
   - guid: ebeef4e3d56eebe40ad7125c36f6fb61
-    name: SFX PitchShifter
+    name: SFX Pitch
   m_AudioMixerGroupViews:
   - guids:
     - 4c8b43de166ad62408ece0e993afdc68
@@ -109,7 +111,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 24400004}
-  m_UserColorIndex: 0
+  m_UserColorIndex: 1
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
@@ -137,7 +139,7 @@ AudioMixerSnapshotController:
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: fe959b5008d302f43aed254da001b3cc
   m_FloatValues:
-    b36a725df14912f46adcf8a4211e8944: -19.928473
+    b36a725df14912f46adcf8a4211e8944: -0.030567795
   m_TransitionOverrides: {}
 --- !u!243 &2686490735579918319
 AudioMixerGroupController:
@@ -154,7 +156,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: -7895389553222751670}
-  m_UserColorIndex: 0
+  m_UserColorIndex: 7
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
@@ -193,7 +195,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: -6118512486458491224}
-  m_UserColorIndex: 0
+  m_UserColorIndex: 8
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0

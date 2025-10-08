@@ -10,8 +10,8 @@ public class EnemyScriptableObject : ScriptableObject
     [Header("Enemy Config")]
     public string enemyName;
     public Sprite enemySprite;
+    public float enemyScale;
     public Color enemyHit;
-    public float spawnTime;
     
     [Header("Basic Stat (unscaled")]
     public int baseHealth;
@@ -19,6 +19,7 @@ public class EnemyScriptableObject : ScriptableObject
     public int baseStrenght;
     public int experienceAmount;
     public int scoreAmount;
+    public float spawnTime;
 
     [Header("Scaling")]
     public ScalingMethod scalingMethod = ScalingMethod.Linear;

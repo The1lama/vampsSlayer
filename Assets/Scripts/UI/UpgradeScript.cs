@@ -70,32 +70,28 @@ public class UpgradeScript : MonoBehaviour
     // UPGRADES
     public void UpgradeChosen(string upgradeChosen, float  addStat)
     {
-        // string[] thing = upgradeChosen.Split("\n");
-        
         switch (upgradeChosen)
         {
             case "Strenght":
-                player.GetComponent<PlayerAttack>().SetStrenght((int)addStat);
+                player.GetComponent<PlayerBehaviour>().SetAttackStrenght((int)addStat);
                 Debug.Log(upgradeChosen);
                 Debug.Log(addStat);
                 break;
+            
             case "Speed":
                 player.GetComponent<PlayerMovement>().SetSpeed((int)addStat);
                 Debug.Log(upgradeChosen);
                 Debug.Log(addStat);
                 break;
+            
             case "AttackSpeed":
-                player.GetComponent<PlayerAttack>().SetNewMeleeSpeed(addStat);
+                player.GetComponent<PlayerBehaviour>().SetNewMeleeSpeed(addStat);
                 Debug.Log(upgradeChosen);
                 Debug.Log(addStat);
-                if (player.GetComponent<PlayerAttack>().GetMeleeSpeed() <= 0.2f)
+                
+                if (player.GetComponentInChildren<MeleeAttack>().GetMeleeSpeed() <= 0.2f)
                 {
-                    foreach (var objSo in powerUps)
-                    {
-                        if (objSo.name != upgradeChosen) continue;
-                        powerUps.Remove(objSo);
-                        break;
-                    }
+                    RemoveObjectFromUpgradePool(upgradeChosen);
                 }
                 break;
             
@@ -104,6 +100,12 @@ public class UpgradeScript : MonoBehaviour
                 Debug.Log(upgradeChosen);
                 Debug.Log(addStat);
                 break;
+            
+            case "Shotgun":
+                player.transform.GetChild(1).gameObject.SetActive(true);
+                RemoveObjectFromUpgradePool(upgradeChosen);
+                break;
+            
            default:
                Debug.LogWarning("Could not find chosen upgrade name: " + upgradeChosen);
                break;
@@ -127,6 +129,16 @@ public class UpgradeScript : MonoBehaviour
         {
             int randomIndex = Random.Range(i, list.Count);
             (list[i], list[randomIndex]) = (list[randomIndex], list[i]);
+        }
+    }
+
+    private void RemoveObjectFromUpgradePool(string upgradeName)
+    {
+        foreach (var objSo in powerUps)
+        {
+            if (objSo.name != upgradeName) continue;
+            powerUps.Remove(objSo);
+            break;
         }
     }
 

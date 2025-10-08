@@ -19,16 +19,26 @@ public class GameManager : MonoBehaviour
     
     private UiStateManager _uiStateManager;
 
-    [HideInInspector]
-    public UnityEvent onDeath;
-    [HideInInspector]
-    public UnityEvent onLevelUp;
-    [HideInInspector]
-    public UnityEvent onPause;
-    [HideInInspector]
-    public UnityEvent onEnemyLevelUp;
+    #region Unity Event
 
-    public int enemyLevels { get; set; } = 1; 
+        [HideInInspector]
+        public UnityEvent onDead;
+        [HideInInspector]
+        public UnityEvent onLevelUp;
+        [HideInInspector]
+        public UnityEvent onPause;
+        [HideInInspector]
+        public UnityEvent onEnemyLevelUp;
+        [HideInInspector]
+        public UnityEvent onOptionsMenu;
+        [HideInInspector]
+        public UnityEvent onBackButton;
+        
+    #endregion
+    
+    
+    [field: SerializeField][Header("Change only in runtime")]
+    public int EnemyLevels { get; private set; } = 1; 
     /// <summary>
     /// Get enemy levels from gamemanager and set it on upgrade then check in enemylevels for correct level and spawn it with that level
     /// </summary>
@@ -46,8 +56,9 @@ public class GameManager : MonoBehaviour
             Instance = this;
         }
         
-        onDeath?.AddListener(GameOver);
+        onDead?.AddListener(GameOver);
         onLevelUp?.AddListener(LevelUp);
+        onEnemyLevelUp?.AddListener(() => EnemyLevels++);
         
         
     }
@@ -111,7 +122,20 @@ public class GameManager : MonoBehaviour
 
     public void SaveHighScore()
     {
-        if (_currentScore > SaveManager.Load<SavePlayerHighScore>("playerHighScore").saveData.HighScore)
+        Debug.Log(Application.persistentDataPath);
+        
+        // Checks if player has no highScore save and if it returns null or
+        // has beaten the last highScore 
+        // makes new save profile.
+        
+        if (SaveManager.Load<SavePlayerHighScore>("playerHighScore") == null)
+        {
+            Debug.LogWarning("Creating new save profile");
+            var playerScoreSave = new SavePlayerHighScore{ HighScore = _currentScore };
+            var saveProfile = new SaveProfile<SavePlayerHighScore>("playerHighScore", playerScoreSave);
+            SaveManager.Save(saveProfile);
+        }
+        else if (_currentScore > SaveManager.Load<SavePlayerHighScore>("playerHighScore").saveData.HighScore)
         {
             var playerScoreSave = new SavePlayerHighScore{ HighScore = _currentScore };
             var saveProfile = new SaveProfile<SavePlayerHighScore>("playerHighScore", playerScoreSave);

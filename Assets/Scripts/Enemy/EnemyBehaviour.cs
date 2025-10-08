@@ -1,26 +1,39 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using PrimeTween;
-using uPools;
 
 
 public class EnemyBehaviour : MonoBehaviour, IDamageable
 {
-    public EnemyScriptableObject statSo;
+
+    #region Stats and Drops
+
+        public EnemyScriptableObject statSo;
+        public GameObject xpDrop;
+        
+    #endregion
+
+    #region Struc
+
+        [Header("See run time value")]
+        
+        [Tooltip("Runtime level Assigned by spawner")]
+        private int _level = 1;
+        private float _maxHealth;
+        private float _strength;
+        private float _moveSpeed;
+        public float spawnDelay;
+        
+    #endregion
     
-    [Header("See run time value")]
-    
-    [Tooltip("Runtime level Assigned by spawner")]
-    [SerializeField] private int _level = 1;
-    [SerializeField] private float _maxHealth;
-    private float _strength;
-    [SerializeField] private float _moveSpeed;
-    public float spawnDelay;
-    
-    private HealthScript _healthScript;
-    private MoveToPlayer _moveToPlayerScript;
-    private SpriteRenderer _spriteRenderer;
+    #region Componenets
+
+        private HealthScript _healthScript;
+        private MoveToPlayer _moveToPlayerScript;
+        private SpriteRenderer _spriteRenderer;
+        private Rigidbody2D _rigidbody2D;
+
+    #endregion
     
 
     private void Awake()
@@ -29,44 +42,32 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         {
             Debug.LogError("EnemyBehaviour does not have its ScriptableObject");
         }
-    }
-    
-    private void Start()
-    {
-
+        
         _healthScript = GetComponent<HealthScript>();
         _moveToPlayerScript = GetComponent<MoveToPlayer>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-
-        spawnDelay = statSo.spawnTime;
+        _rigidbody2D = GetComponent<Rigidbody2D>();
         
-        _spriteRenderer.sprite = statSo.enemySprite;
-        
-        Initialize(_level);
-        
-        // Starts walk animation
-        StartCoroutine(AnimationWalk());
     }
-
+     
     public void Initialize(int assignedLevel)
     {
+        spawnDelay = statSo.spawnTime;
+        _spriteRenderer.sprite = statSo.enemySprite;
+        
         _level = assignedLevel;
+        
         ApplyStats();
+        StartCoroutine(AnimationWalk());
+
     }
 
     private void ApplyStats()
     {
-        _healthScript = GetComponent<HealthScript>();
-        _moveToPlayerScript = GetComponent<MoveToPlayer>();
         
         _maxHealth = StatScaler.ApplyScaling(statSo.baseHealth, _level, statSo, statSo.healthCurve);
         _strength = StatScaler.ApplyScaling(statSo.baseStrenght, _level, statSo, statSo.strenghtCurve);
         _moveSpeed = StatScaler.ApplyScaling(statSo.baseSpeed, _level, statSo, statSo.speedCurve);
-        
-        Debug.Log(_level);
-        Debug.Log($"<Color=blue>{GameManager.Instance.enemyLevels}</Color>");
-        Debug.Log(Mathf.RoundToInt(_maxHealth));
-        Debug.Log(_moveSpeed);
         
         _healthScript.SetMaxHealth(Mathf.RoundToInt(_maxHealth));
         _moveToPlayerScript.SetSpeed(_moveSpeed);
@@ -74,32 +75,29 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
     }
     
     
-    // private void SetUpEnemy()
-    // {
-    //     _runtimeStatSo = Instantiate(statSo);
-    //     // _runtimeStatSo = _runtimeStatSo.ScaleUpForLevel(enemyLevel);
-    //     
-    //     _healthScript.SetMaxHealth(_runtimeStatSo.baseHealth);
-    //     _moveToPlayerScript.SetSpeed(_runtimeStatSo.baseSpeed);
-    //     
-    //     _strenght =  _runtimeStatSo.baseStrenght;
-    //     
-    //     _spriteRenderer.sprite = _runtimeStatSo.enemySprite;
-    // }
-    
-    
     public void TakeDamage(int strength)
     {
+        Debug.Log("Enemy Take damage");
         _healthScript.TakeDamage(strength);
         AnimationHurt();
         
         // If entity is dead
         if (_healthScript.GetCurrentHealth() > 0) return;
         
-        GameManager.Instance.AddScore(statSo.scoreAmount);
-        GameManager.Instance.AddExperiencePoints(statSo.experienceAmount);
         
-        ObjectPoolManager.ReturnObjectToPool(gameObject);
+        // dropped XP
+        if (xpDrop != null)
+        {
+            var dropped = Instantiate(xpDrop, transform.position, Quaternion.identity);
+            dropped.GetComponent<XPDrop>().xp = statSo.experienceAmount;
+            Debug.Log("Did drop xp");
+        }
+
+        GameManager.Instance.AddScore(statSo.scoreAmount);
+
+        
+        Destroy(gameObject);
+        // ObjectPoolManager.ReturnObjectToPool(gameObject);
         
     }
     
