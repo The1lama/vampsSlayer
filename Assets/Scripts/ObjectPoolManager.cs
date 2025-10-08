@@ -11,8 +11,8 @@ public class ObjectPoolManager : MonoBehaviour
     private static GameObject _gameObjectsEmpty;
     private static GameObject _particleSystemEmpty;
     private static GameObject _soundFXEmpty;
-
-
+    private static GameObject _bulletObjectEmpty;
+    
     private static Dictionary<GameObject, ObjectPool<GameObject>> _objectPools;
     private static Dictionary<GameObject, GameObject> _cloneToPreFabMap;
 
@@ -20,14 +20,15 @@ public class ObjectPoolManager : MonoBehaviour
     /// <summary>
     /// Creates the different Pool type categories.
     /// If one would like to add or remove categories add a new,
-    /// add new GameObject variable and a new PoolType Variable,
-    /// and add to SetupEmpties.
+    /// add new "GameObject" variable above and a new "PoolType" Variable,
+    /// and add to "SetupEmpties" and "SetParentObject" function.
     /// </summary>
     public enum PoolType
     {
         GameObjects,
         ParticleSystems,
-        SoundFX
+        SoundFX,
+        BulletObject
     }
     public static PoolType PoolingType;
 
@@ -60,6 +61,9 @@ public class ObjectPoolManager : MonoBehaviour
         _particleSystemEmpty = new GameObject("ParticleSystems");
         _particleSystemEmpty.transform.parent = _emptyHolder.transform;
 
+        _bulletObjectEmpty = new GameObject("BulletObject");
+        _bulletObjectEmpty.transform.parent = _emptyHolder.transform;
+        
         if (_addToDontDestoryOnLoad)
         {
             DontDestroyOnLoad(_particleSystemEmpty.transform.root);
@@ -126,6 +130,9 @@ public class ObjectPoolManager : MonoBehaviour
             
             case PoolType.SoundFX:
                 return _soundFXEmpty;
+            
+            case PoolType.BulletObject:
+                return _bulletObjectEmpty;
             
             default:
                 Debug.LogError("PoolType " + poolType + " not supported");
@@ -238,6 +245,31 @@ public class ObjectPoolManager : MonoBehaviour
         return SpawnObject<GameObject>(gameObjectToSpawn, spawnPos, spawnRot, poolType);
     }
 
+    
+    /// <summary>
+    /// Spawn object and moves to object pool 
+    /// </summary>
+    /// <param name="gameObjectToSpawn">type Prefab to pool</param>
+    /// <param name="spawnPos">Position to spawn at</param>
+    /// <param name="spawnRot">Rotation to spawn at</param>
+    /// <param name="poolType">Pool type to sort object</param>
+    /// <param name="amountOfObjectsToSpawn">Amount of pooled objects to prewarm</param>
+    public static void PreWarmPool(GameObject gameObjectToSpawn, Vector3 spawnPos, Quaternion spawnRot,
+        PoolType poolType = PoolType.GameObjects, int amountOfObjectsToSpawn = 5)
+    {
+        GameObject[] preWarmObjects = new GameObject[amountOfObjectsToSpawn];
+        
+        for (int i = 0; i < amountOfObjectsToSpawn; i++)
+        {
+            preWarmObjects[i] = SpawnObject<GameObject>(gameObjectToSpawn, spawnPos, spawnRot, poolType);
+        }
+
+        foreach (GameObject warmObject in preWarmObjects)
+        {
+            ReturnObjectToPool(warmObject, poolType);
+        }
+    }
+    
     public static void ReturnObjectToPool(GameObject obj, PoolType poolType = PoolType.GameObjects)
     {
         if (_cloneToPreFabMap.TryGetValue(obj, out GameObject prefab))
@@ -253,10 +285,14 @@ public class ObjectPoolManager : MonoBehaviour
             {
                 pool.Release(obj);
             }
+            else
+            {
+                Debug.LogWarning($"Object {obj.name} doesn't have a component of type {typeof(GameObject)}");
+            }
         }
         else
         {
-            Debug.LogError($"Trying to return object of type {obj.name} to {obj.transform.parent.name} pool");
+            Debug.LogWarning($"Trying to return object of type {obj.name} to {obj.transform.parent.name} pool");
         }
     }
     

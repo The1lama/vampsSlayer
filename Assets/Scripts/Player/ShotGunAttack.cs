@@ -10,12 +10,9 @@ public class ShotGunAttack : MonoBehaviour
     private float _meleeSpeed;
     private int _strenght;
     private float _timeUntilMelee;
-
-
+    
     private Vector2 _attackDirection;
     private Vector2 _worldPosition;
-    private Vector3 localScale;
-
 
     #region Initialize attack settings (functions)
     
@@ -63,7 +60,10 @@ public class ShotGunAttack : MonoBehaviour
         foreach (var bulletSpawnPoint in bulletSpawnPoints)
         {
             Vector3 position = bulletSpawnPoint.transform.position;
-            GameObject bulletspawn = Instantiate(bulletPrefab, position, transform.rotation);
+            
+            var bullet = ObjectPoolManager.SpawnObject(bulletPrefab, position, transform.rotation, ObjectPoolManager.PoolType.BulletObject);
+            
+            // GameObject bulletspawn = Instantiate(bulletPrefab, position, transform.rotation);
         }
     }
 

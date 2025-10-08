@@ -55,6 +55,9 @@ public class PlayerBehaviour : MonoBehaviour, IDamageable
         
         // Player Movement
         _playerMovement.SetSpeed(playerSo.speed);
+        
+        // _gunAttack.gameObject.SetActive(false);
+        
     }
     
     public void SetNewMeleeSpeed(float attackSpeed)

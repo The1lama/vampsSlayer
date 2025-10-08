@@ -70,13 +70,9 @@ public class UpgradeScript : MonoBehaviour
     // UPGRADES
     public void UpgradeChosen(string upgradeChosen, float  addStat)
     {
-        // string[] thing = upgradeChosen.Split("\n");
-        
         switch (upgradeChosen)
         {
             case "Strenght":
-                // player.GetComponent<MeleeAttack>().SetStrenght((int)addStat);
-                // player.GetComponentInChildren<MeleeAttack>().SetStrenght((int)addStat);
                 player.GetComponent<PlayerBehaviour>().SetAttackStrenght((int)addStat);
                 Debug.Log(upgradeChosen);
                 Debug.Log(addStat);
@@ -89,18 +85,13 @@ public class UpgradeScript : MonoBehaviour
                 break;
             
             case "AttackSpeed":
-                // player.GetComponentInChildren<MeleeAttack>().SetNewMeleeSpeed(addStat);
                 player.GetComponent<PlayerBehaviour>().SetNewMeleeSpeed(addStat);
                 Debug.Log(upgradeChosen);
                 Debug.Log(addStat);
+                
                 if (player.GetComponentInChildren<MeleeAttack>().GetMeleeSpeed() <= 0.2f)
                 {
-                    foreach (var objSo in powerUps)
-                    {
-                        if (objSo.name != upgradeChosen) continue;
-                        powerUps.Remove(objSo);
-                        break;
-                    }
+                    RemoveObjectFromUpgradePool(upgradeChosen);
                 }
                 break;
             
@@ -108,6 +99,11 @@ public class UpgradeScript : MonoBehaviour
                 player.GetComponent<PlayerBehaviour>().SetNewMaxHealth((int)addStat);
                 Debug.Log(upgradeChosen);
                 Debug.Log(addStat);
+                break;
+            
+            case "Shotgun":
+                player.transform.GetChild(1).gameObject.SetActive(true);
+                RemoveObjectFromUpgradePool(upgradeChosen);
                 break;
             
            default:
@@ -133,6 +129,16 @@ public class UpgradeScript : MonoBehaviour
         {
             int randomIndex = Random.Range(i, list.Count);
             (list[i], list[randomIndex]) = (list[randomIndex], list[i]);
+        }
+    }
+
+    private void RemoveObjectFromUpgradePool(string upgradeName)
+    {
+        foreach (var objSo in powerUps)
+        {
+            if (objSo.name != upgradeName) continue;
+            powerUps.Remove(objSo);
+            break;
         }
     }
 

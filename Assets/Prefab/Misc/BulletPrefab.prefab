@@ -211,6 +211,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   normalBulletSpeed: 10
-  destroyTime: 3
+  destroyTime: 0.2
   strenght: 5
-  bulletDirection: 1
