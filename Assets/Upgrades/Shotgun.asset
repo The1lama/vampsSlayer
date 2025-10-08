@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: efc976bf37906f740912b11b842939cd, type: 3}
-  m_Name: Health
+  m_Name: Shotgun
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeScriptableObject
-  upgradeName: Health
-  upgradeSprite: {fileID: 0}
-  upgradeColor: {r: 1, g: 0.13054681, b: 0, a: 1}
-  upgradeDescription: You feel healthier
-  upgradeStat: 15
+  upgradeName: Shotgun
+  upgradeSprite: {fileID: 7631219046128225658, guid: b81889d61063c6041bd25eb02cbc68ee, type: 3}
+  upgradeColor: {r: 0.3584906, g: 0.3584906, b: 0.3584906, a: 1}
+  upgradeDescription: Pump it real good
+  upgradeStat: 0

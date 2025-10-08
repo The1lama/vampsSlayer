@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using TMPro;
 
@@ -5,10 +6,17 @@ public class Timer : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI timerText;
     private float _elapsedTime;
+    
+    private float enemyLevelUpTime;
+    [SerializeField] private GameObject enemyLevelScript;
 
-    [SerializeField] private float enemyLevelUpTime = 10;
-    
-    
+
+    private void Start()
+    {
+        enemyLevelUpTime = enemyLevelScript.GetComponent<EnemyLevels>().enemyLevelUpTime;
+    }
+
+
     private void Update()
     {
         _elapsedTime += Time.deltaTime;

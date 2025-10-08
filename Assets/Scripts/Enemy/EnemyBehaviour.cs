@@ -10,6 +10,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
 
         public EnemyScriptableObject statSo;
         public GameObject xpDrop;
+        public int playerHealChange;
         
     #endregion
 
@@ -65,9 +66,9 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
     private void ApplyStats()
     {
         
-        _maxHealth = StatScaler.ApplyScaling(statSo.baseHealth, _level, statSo, statSo.healthCurve);
-        _strength = StatScaler.ApplyScaling(statSo.baseStrenght, _level, statSo, statSo.strenghtCurve);
-        _moveSpeed = StatScaler.ApplyScaling(statSo.baseSpeed, _level, statSo, statSo.speedCurve);
+        _maxHealth = StatScaler.ApplyScaling(statSo.baseHealth, _level, statSo, statSo.curve);
+        _strength = StatScaler.ApplyScaling(statSo.baseStrenght, _level, statSo, statSo.curve);
+        _moveSpeed = StatScaler.ApplyScaling(statSo.baseSpeed, _level, statSo, statSo.curve);
         
         _healthScript.SetMaxHealth(Mathf.RoundToInt(_maxHealth));
         _moveToPlayerScript.SetSpeed(_moveSpeed);
@@ -77,7 +78,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
     
     public void TakeDamage(int strength)
     {
-        Debug.Log("Enemy Take damage");
+        // Debug.Log("Enemy Take damage");
         _healthScript.TakeDamage(strength);
         AnimationHurt();
         
@@ -88,16 +89,20 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         // dropped XP
         if (xpDrop != null)
         {
-            var dropped = Instantiate(xpDrop, transform.position, Quaternion.identity);
+            // var dropped = Instantiate(xpDrop, transform.position, Quaternion.identity);
+            var dropped = ObjectPoolManager.SpawnObject(xpDrop,transform.position,Quaternion.identity, ObjectPoolManager.PoolType.DroppedItems);
             dropped.GetComponent<XPDrop>().xp = statSo.experienceAmount;
-            Debug.Log("Did drop xp");
+            if (Random.Range(0, 100) < playerHealChange)
+            {
+                dropped.GetComponent<XPDrop>().canHeal = true;
+            }
         }
 
         GameManager.Instance.AddScore(statSo.scoreAmount);
 
         
-        Destroy(gameObject);
-        // ObjectPoolManager.ReturnObjectToPool(gameObject);
+        // Destroy(gameObject);
+        ObjectPoolManager.ReturnObjectToPool(gameObject);
         
     }
     

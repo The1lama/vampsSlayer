@@ -183,4 +183,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   xp: 0
-  scoreAmount: 0
+  canHeal: 0

@@ -3,11 +3,10 @@ using UnityEngine;
 public class EnemyLevels : MonoBehaviour
 {
     private EnemySpawner _enemySpawner;
-
     public GameObject[] enemies;
-    
+    public int enemyLevelUpTime;
     public bool isSpawning = true;
-    
+    private int _currentEnemySpawn = 0;
     
     private void Start()
     {
@@ -28,38 +27,22 @@ public class EnemyLevels : MonoBehaviour
         if (!isSpawning) return;
         
         var enemyLevel = GameManager.Instance.EnemyLevels;
-        Debug.Log($"Check enemy level {enemyLevel}");
+        Debug.Log($"Check enemy level <Color=green>{enemyLevel}</Color>");
+
         
-        switch (enemyLevel)
+        if ((enemyLevel % 2 != 0) && (_currentEnemySpawn < enemies.Length))
         {
-            case 1:
-                Debug.Log("Enemy Level 1");
-                _enemySpawner.StartCoroutine(_enemySpawner.SpawnRoutine(enemies[0]));
-                break;
-            
-            case 2:
-                Debug.Log("Enemy Level 2");
-                break;
-            case 3:
-                Debug.Log("Enemy Level 3");
-                _enemySpawner.StartCoroutine(_enemySpawner.SpawnRoutine(enemies[1]));
-                break;
-            
-            case 4:
-                Debug.Log("Enemy Level 4");
-                break;
-            
-            case 5:
-                Debug.Log("Enemy Level 5");
-                _enemySpawner.StartCoroutine(_enemySpawner.SpawnRoutine(enemies[2]));
-                break;
-
-
-            default:
-            {
-                Debug.Log("Enemy max Level or ????minus level????");
-                break;
-            }
+            _enemySpawner.StartCoroutine(_enemySpawner.SpawnRoutine(enemies[_currentEnemySpawn]));
+            _currentEnemySpawn++;
+        }
+        else if ((enemyLevel % 2 != 0) && (_currentEnemySpawn > enemies.Length))
+        {
+            Debug.LogWarning("Max Enemy diffrent types has spawned");
+            Debug.Log($"Enemy level: <Color=yellow>{enemyLevel}</Color>");
+        }
+        else
+        {
+            Debug.Log($"Enemy level: <Color=yellow>{enemyLevel}</Color>");
         }
     }
     

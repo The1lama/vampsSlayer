@@ -16,80 +16,32 @@ MonoBehaviour:
   enemySprite: {fileID: 172626504, guid: c4d2ccab0c2ad7e47853b6e31a7ac7c2, type: 3}
   enemyScale: 1.5
   enemyHit: {r: 1, g: 0, b: 0, a: 1}
-  baseHealth: 120
-  baseSpeed: 3
+  baseHealth: 100
+  baseSpeed: 2
   baseStrenght: 30
   experienceAmount: 60
   scoreAmount: 70
-  spawnTime: 0.8
+  spawnTime: 5
   scalingMethod: 0
   perLevelMultiplier: 0.2
   minLevel: 1
   maxLevel: 20
-  healthCurve:
+  curve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 1
+      time: 0
       value: 1
       inSlope: 0
-      outSlope: 0.10526316
+      outSlope: 0.1
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 20
-      value: 3
-      inSlope: 0.10526316
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  strenghtCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0.10526316
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 20
-      value: 3
-      inSlope: 0.10526316
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  speedCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0.10526316
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 20
-      value: 3
-      inSlope: 0.10526316
+      time: 10
+      value: 2
+      inSlope: 0.1
       outSlope: 0
       tangentMode: 0
       weightedMode: 0

@@ -178,4 +178,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   statSo: {fileID: 11400000, guid: 68bb4c57491b25e47a01671245c08537, type: 2}
   xpDrop: {fileID: 8150468455172829665, guid: f5016988d5ddaa244a09c4d35c2ff29c, type: 3}
+  playerHealChange: 0
   spawnDelay: 0

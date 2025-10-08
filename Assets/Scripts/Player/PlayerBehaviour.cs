@@ -36,7 +36,7 @@ public class PlayerBehaviour : MonoBehaviour, IDamageable
         
         Initialize();
     }
-
+    
     private void Initialize()
     {
         // set player health
@@ -56,28 +56,38 @@ public class PlayerBehaviour : MonoBehaviour, IDamageable
         // Player Movement
         _playerMovement.SetSpeed(playerSo.speed);
         
-        // _gunAttack.gameObject.SetActive(false);
+        _gunAttack.gameObject.SetActive(false);
         
     }
     
-    public void SetNewMeleeSpeed(float attackSpeed)
-    {
-        _meleeAttack.SetNewMeleeSpeed(attackSpeed);
-        _gunAttack.SetNewMeleeSpeed(attackSpeed);
-    }
-
-    public void SetAttackStrenght(int strenght)
-    {
-        _meleeAttack.SetStrenght(strenght);
-        _gunAttack.SetStrenght(strenght);
-    }
+    #region Set stats
     
-    public void SetNewMaxHealth(int maxHealth)
-    {
-        _healthScript.SetMaxHealth(maxHealth);
-        healthBar.SetMaxHealth(_healthScript.GetMaxHealth());
-
-    }
+        public void SetNewMeleeSpeed(float attackSpeed)
+        {
+            _meleeAttack.SetNewMeleeSpeed(attackSpeed);
+            _gunAttack.SetNewMeleeSpeed(attackSpeed);
+        }
+    
+        public void SetAttackStrenght(int strenght)
+        {
+            _meleeAttack.SetStrenght(strenght);
+            _gunAttack.SetStrenght(strenght);
+        }
+    
+        public void Heal(int healAmount)
+        {
+            _healthScript.Healing(healAmount);
+            healthBar.SetHealth(_healthScript.GetCurrentHealth());
+        }
+        
+        public void SetNewMaxHealth(int maxHealth)
+        {
+            _healthScript.SetMaxHealth(maxHealth);
+            healthBar.SetMaxHealth(_healthScript.GetMaxHealth());
+    
+        }
+        
+    #endregion
     
     public void TakeDamage(int strength)
     {

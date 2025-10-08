@@ -49,7 +49,7 @@ public class BulletScript : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D coll2d)
     {
-        Debug.Log($"<Color=blue>{coll2d.gameObject.name}</Color> on TriggerEnter2D");
+        // Debug.Log($"<Color=blue>{coll2d.gameObject.name}</Color> on TriggerEnter2D");
 
         if (coll2d.CompareTag("Enemy") && coll2d.GetComponent<IDamageable>() != null)
         {

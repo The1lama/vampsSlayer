@@ -31,9 +31,7 @@ public class EnemyScriptableObject : ScriptableObject
     public int maxLevel = 10;
     
     [Header("Curve (if using Curve)")]
-    public AnimationCurve healthCurve = AnimationCurve.Linear(0, 1, 10, 2); // multiplier over level
-    public AnimationCurve strenghtCurve = AnimationCurve.Linear(0, 1, 10, 2);
-    public AnimationCurve speedCurve = AnimationCurve.Linear(0, 1, 10, 1.2f);
+    public AnimationCurve curve = AnimationCurve.Linear(0, 1, 10, 2); // multiplier over level;
     
     [Header("Random variance")]
     [Range(0f, 0.5f)] public float randomVariance = 0.05f; // ±5%

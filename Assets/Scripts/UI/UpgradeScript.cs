@@ -7,11 +7,8 @@ using UnityEngine.UI;
 
 public class UpgradeScript : MonoBehaviour
 {
-// DEFINE LIST WITH UPGRADES
-
-    // [SerializeField] private UpgradeScriptableObject[] allPowerups;
+    // Dont forget to add new SO to upgrade list
     [SerializeField] private List<UpgradeScriptableObject> powerUps;
-
     [SerializeField] private Button upgradeButton1;
     [SerializeField] private Button upgradeButton2;
     [SerializeField] private GameObject levelUpCanvas;
@@ -22,7 +19,6 @@ public class UpgradeScript : MonoBehaviour
     
     private void Start()
     {
-        // Checks if there is powerups in list 
         if (powerUps == null || powerUps.Count == 0)
         {
             Debug.LogError($"No Powerups Set; {name}"); return;

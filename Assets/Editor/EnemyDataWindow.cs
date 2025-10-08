@@ -8,10 +8,10 @@ public class EnemyDataWindow : EditorWindow
     
     #region Window Settings
         private Vector2 _scrollPos;
-        private bool _statUnscaledShow = true;
-        private bool _scalingShow = true;
-        private bool _preFabShow = true;
-        private bool _curveShow;
+        private bool _showStatUnscaled = true;
+        private bool _showScaling = true;
+        private bool _showPreFab = true;
+        private bool _showCurve;
         private bool _showVariance;
     #endregion
 
@@ -47,13 +47,13 @@ public class EnemyDataWindow : EditorWindow
     private float _curvePreviewValue = 2;
     
     private readonly string[] _curveOptions = new string[] { "Linear", "Ease In", "Ease Out", "Custom" };
-    private int _selectedHealthCurveIndex = 0;
-    private int _selectedStrenghtCurveIndex = 0;
-    private int _selectedSpeedCurveIndex = 0;
+    private int _selectedLevelCurveIndex = 0;
+    // private int _selectedStrenghtCurveIndex = 0;
+    // private int _selectedSpeedCurveIndex = 0;
 
-    private AnimationCurve _healthCurve = AnimationCurve.Linear(0, 0, 1, 1);
-    private AnimationCurve _strenghtCurve = AnimationCurve.Linear(0, 0, 1, 1);
-    private AnimationCurve _speedCurve = AnimationCurve.Linear(0, 0, 1, 1);
+    private AnimationCurve _levelCurve = AnimationCurve.Linear(0, 0, 1, 1);
+    // private AnimationCurve _strenghtCurve = AnimationCurve.Linear(0, 0, 1, 1);
+    // private AnimationCurve _speedCurve = AnimationCurve.Linear(0, 0, 1, 1);
     #endregion
 
     #region Random Variance
@@ -62,10 +62,10 @@ public class EnemyDataWindow : EditorWindow
 
     #region Prefab and ScriptableObject
 
-    private GameObject _deafultPrefab;
-    private GameObject _xpPrefab;
-    private EnemyScriptableObject _newEnemyScriptableObject;
-    
+        private GameObject _deafultPrefab;
+        private GameObject _xpPrefab;
+        private EnemyScriptableObject _newEnemyScriptableObject;
+        
     #endregion
     
     
@@ -82,25 +82,31 @@ public class EnemyDataWindow : EditorWindow
         GUILayout.Label("Enemy Config", EditorStyles.boldLabel);
 
         _enemyName = EditorGUILayout.TextField("Name", _enemyName);
-        _enemyImage = EditorGUILayout.ObjectField(_enemyImage, typeof(Sprite), false) as Sprite;
-        _enemyScale = EditorGUILayout.FloatField("Scaled Enemy", _enemyScale);
-        _enemyHit  = EditorGUILayout.ColorField("Hit", Color.red);
+        GUILayout.Label(" ", EditorStyles.boldLabel);
 
-        #region PreFabs
+
+        #region Basic Enemy
         
-        _preFabShow = EditorGUILayout.Foldout(_preFabShow, "Prefabs");
-        if (_preFabShow)
-        {
-            _deafultPrefab =  EditorGUILayout.ObjectField(label:"Default Enemy Prefab", _deafultPrefab, typeof(GameObject), false) as GameObject;
-            _xpPrefab = EditorGUILayout.ObjectField(label:"Drop Prefab", _xpPrefab, typeof(GameObject), false) as GameObject;
-        }
+            _showPreFab = EditorGUILayout.Foldout(_showPreFab, "Basic Enemy");
+            if (_showPreFab)
+            {
+                _enemyImage = EditorGUILayout.ObjectField("Enemy Sprite", _enemyImage, typeof(Sprite), false) as Sprite;
+                _enemyScale = EditorGUILayout.FloatField("Scaled Enemy", _enemyScale);
+
+                _deafultPrefab =  EditorGUILayout.ObjectField(label:"Default Enemy Prefab", _deafultPrefab, typeof(GameObject), false) as GameObject;
+                _xpPrefab = EditorGUILayout.ObjectField(label:"Drop Prefab", _xpPrefab, typeof(GameObject), false) as GameObject;
+                
+                _enemyHit  = EditorGUILayout.ColorField("Hit color", Color.red);
+                
+                GUILayout.Label(" ", EditorStyles.boldLabel);
+            }
     
         #endregion
         
         #region Stat Unscaled
 
-                _statUnscaledShow = EditorGUILayout.Foldout(_statUnscaledShow, "Stat unscaled");
-                if (_statUnscaledShow)
+                _showStatUnscaled = EditorGUILayout.Foldout(_showStatUnscaled, "Stat unscaled");
+                if (_showStatUnscaled)
                 {
                     _enemyHealth = EditorGUILayout.IntField("Health",_enemyHealth);
                     _enemySpeed = EditorGUILayout.IntField("Speed", _enemySpeed);
@@ -116,8 +122,8 @@ public class EnemyDataWindow : EditorWindow
             
         #region Scaling Settings
         
-               _scalingShow = EditorGUILayout.Foldout(_scalingShow, "Scaling Settings");
-                if (_scalingShow)
+               _showScaling = EditorGUILayout.Foldout(_showScaling, "Scaling Settings");
+                if (_showScaling)
                 {
                     _selectedScalingIndex = EditorGUILayout.Popup("Scaling Method",  _selectedScalingIndex, _scalingMethodNames);
                     _perLevelMultiplier = EditorGUILayout.FloatField("PerLevelMultiplier", _perLevelMultiplier);
@@ -131,26 +137,26 @@ public class EnemyDataWindow : EditorWindow
         
         #region Curve Settings
         
-                _curveShow = EditorGUILayout.Foldout(_curveShow, "Curve Settings");
-                if (_curveShow)
+                _showCurve = EditorGUILayout.Foldout(_showCurve, "Curve Settings");
+                if (_showCurve)
                 {
                             _curvePreviewValue = EditorGUILayout.Slider("Preview value", _curvePreviewValue, _minLevel, _maxLevel);
                             GUILayout.Label(" ", EditorStyles.boldLabel);
                             
                             #region Health Curve
                             
-                                var newHealthIndex = EditorGUILayout.Popup("Health Preset", _selectedHealthCurveIndex, _curveOptions);
-                                if (newHealthIndex != _selectedHealthCurveIndex)
+                                var newHealthIndex = EditorGUILayout.Popup("Health Preset", _selectedLevelCurveIndex, _curveOptions);
+                                if (newHealthIndex != _selectedLevelCurveIndex)
                                 {
-                                    _selectedHealthCurveIndex = newHealthIndex;
-                                    _healthCurve = GetPresetCurve(_selectedHealthCurveIndex);
+                                    _selectedLevelCurveIndex = newHealthIndex;
+                                    _levelCurve = GetPresetCurve(_selectedLevelCurveIndex);
                                 }
                     
                                 // Curve field
-                                _healthCurve = EditorGUILayout.CurveField("Health Curve", _healthCurve);
+                                _levelCurve = EditorGUILayout.CurveField("Health Curve", _levelCurve);
                     
                                 // Preview the evaluated curve value at 0.5
-                                var healthValue = _healthCurve.Evaluate(_curvePreviewValue);
+                                var healthValue = _levelCurve.Evaluate(_curvePreviewValue);
                                 EditorGUILayout.LabelField($"Health at enemy level {_curvePreviewValue}:", healthValue.ToString("F3"));
                     
                             
@@ -159,18 +165,18 @@ public class EnemyDataWindow : EditorWindow
                             #region Strenght Curve
                     
                             // Dropdown
-                                var newStrenghtIndex = EditorGUILayout.Popup("Strenght Preset", _selectedStrenghtCurveIndex, _curveOptions);
-                                if (newStrenghtIndex != _selectedStrenghtCurveIndex)
+                                var newStrenghtIndex = EditorGUILayout.Popup("Strenght Preset", _selectedLevelCurveIndex, _curveOptions);
+                                if (newStrenghtIndex != _selectedLevelCurveIndex)
                                 {
-                                    _selectedStrenghtCurveIndex = newStrenghtIndex;
-                                    _strenghtCurve = GetPresetCurve(_selectedStrenghtCurveIndex);
+                                    _selectedLevelCurveIndex = newStrenghtIndex;
+                                    _levelCurve = GetPresetCurve(_selectedLevelCurveIndex);
                                 }
                     
                                 // Curve field
-                                _strenghtCurve = EditorGUILayout.CurveField("Strength Curve", _strenghtCurve);
+                                _levelCurve = EditorGUILayout.CurveField("Strength Curve", _levelCurve);
                     
                                 // Preview the evaluated curve value at 0.5
-                                var strenghtValue = _strenghtCurve.Evaluate(_curvePreviewValue);
+                                var strenghtValue = _levelCurve.Evaluate(_curvePreviewValue);
                                 EditorGUILayout.LabelField($"Strenght at enemy level {_curvePreviewValue}:", strenghtValue.ToString("F3"));
                     
                             #endregion
@@ -178,18 +184,18 @@ public class EnemyDataWindow : EditorWindow
                             #region Speed Curve
                     
                                 // Dropdown
-                                var newSpeedIndex = EditorGUILayout.Popup("Speed Preset", _selectedSpeedCurveIndex, _curveOptions);
-                                if (newSpeedIndex != _selectedSpeedCurveIndex)
+                                var newSpeedIndex = EditorGUILayout.Popup("Speed Preset", _selectedLevelCurveIndex, _curveOptions);
+                                if (newSpeedIndex != _selectedLevelCurveIndex)
                                 {
-                                    _selectedSpeedCurveIndex = newSpeedIndex;
-                                    _speedCurve = GetPresetCurve(_selectedSpeedCurveIndex);
+                                    _selectedLevelCurveIndex = newSpeedIndex;
+                                    _levelCurve = GetPresetCurve(_selectedLevelCurveIndex);
                                 }
                     
                                 // Curve field
-                                _speedCurve = EditorGUILayout.CurveField("Speed Curve", _speedCurve);
+                                _levelCurve = EditorGUILayout.CurveField("Speed Curve", _levelCurve);
                     
                                 // Preview the evaluated curve value at 0.5
-                                var speedValue = _strenghtCurve.Evaluate(_curvePreviewValue);
+                                var speedValue = _levelCurve.Evaluate(_curvePreviewValue);
                                 EditorGUILayout.LabelField($"Speed at enemy level {_curvePreviewValue}:", speedValue.ToString("F3"));
                     
                             #endregion
@@ -259,11 +265,9 @@ public class EnemyDataWindow : EditorWindow
         #endregion
             
         #region Curve Settings
-            
-        newEnemy.healthCurve = _healthCurve;
-        newEnemy.strenghtCurve = _strenghtCurve;
-        newEnemy.speedCurve = _speedCurve;
-            
+
+            newEnemy.curve = _levelCurve;
+
         #endregion
 
         #region Random Veriance
@@ -377,5 +381,4 @@ public class EnemyDataWindow : EditorWindow
             case 3: default: return new AnimationCurve();
         }
     }
-    
 }

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: efc976bf37906f740912b11b842939cd, type: 3}
-  m_Name: Speed
+  m_Name: Strenght
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeScriptableObject
-  upgradeName: Speed
+  upgradeName: Strenght
   upgradeSprite: {fileID: 0}
-  upgradeColor: {r: 0, g: 0.5943396, b: 0.54414606, a: 1}
-  upgradeDescription: You are Faster
-  upgradeStat: 1
+  upgradeColor: {r: 0.8, g: 0.043137256, b: 0.07058824, a: 1}
+  upgradeDescription: Press F to flex
+  upgradeStat: 10

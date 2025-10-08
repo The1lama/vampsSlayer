@@ -210,6 +210,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a72f6d19205df944accb9c283a81582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  strenght: 5
   normalBulletSpeed: 10
   destroyTime: 0.2
-  strenght: 5

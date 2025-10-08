@@ -9,8 +9,7 @@ public class ObjectPoolManager : MonoBehaviour
     private GameObject _emptyHolder;
 
     private static GameObject _gameObjectsEmpty;
-    private static GameObject _particleSystemEmpty;
-    private static GameObject _soundFXEmpty;
+    private static GameObject _droppedEmpty;
     private static GameObject _bulletObjectEmpty;
     
     private static Dictionary<GameObject, ObjectPool<GameObject>> _objectPools;
@@ -26,8 +25,7 @@ public class ObjectPoolManager : MonoBehaviour
     public enum PoolType
     {
         GameObjects,
-        ParticleSystems,
-        SoundFX,
+        DroppedItems,
         BulletObject
     }
     public static PoolType PoolingType;
@@ -54,19 +52,16 @@ public class ObjectPoolManager : MonoBehaviour
         
         _gameObjectsEmpty = new GameObject("GameObjects");
         _gameObjectsEmpty.transform.parent = _emptyHolder.transform;
-        
-        _soundFXEmpty = new GameObject("SoundFX");
-        _soundFXEmpty.transform.parent = _emptyHolder.transform;
-        
-        _particleSystemEmpty = new GameObject("ParticleSystems");
-        _particleSystemEmpty.transform.parent = _emptyHolder.transform;
+
+        _droppedEmpty = new GameObject("DroppedItems");
+        _droppedEmpty.transform.parent = _emptyHolder.transform;
 
         _bulletObjectEmpty = new GameObject("BulletObject");
         _bulletObjectEmpty.transform.parent = _emptyHolder.transform;
         
         if (_addToDontDestoryOnLoad)
         {
-            DontDestroyOnLoad(_particleSystemEmpty.transform.root);
+            DontDestroyOnLoad(_droppedEmpty.transform.root);
         }
     }
 
@@ -125,11 +120,8 @@ public class ObjectPoolManager : MonoBehaviour
             case PoolType.GameObjects:
                 return _gameObjectsEmpty;
             
-            case PoolType.ParticleSystems: 
-                return _particleSystemEmpty;
-            
-            case PoolType.SoundFX:
-                return _soundFXEmpty;
+            case PoolType.DroppedItems: 
+                return _droppedEmpty;
             
             case PoolType.BulletObject:
                 return _bulletObjectEmpty;

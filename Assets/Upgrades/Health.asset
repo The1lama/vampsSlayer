@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: efc976bf37906f740912b11b842939cd, type: 3}
-  m_Name: Strenght
+  m_Name: Health
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeScriptableObject
-  upgradeName: Strenght
+  upgradeName: Health
   upgradeSprite: {fileID: 0}
-  upgradeColor: {r: 0.8, g: 0.043137256, b: 0.07058824, a: 1}
-  upgradeDescription: you feel stronger
-  upgradeStat: 10
+  upgradeColor: {r: 1, g: 0.13054681, b: 0, a: 1}
+  upgradeDescription: Health nut, no respawns
+  upgradeStat: 15

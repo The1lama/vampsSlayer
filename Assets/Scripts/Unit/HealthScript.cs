@@ -24,9 +24,14 @@ public class HealthScript : MonoBehaviour
         _currentHealth -= damage;
     }
 
+    
     public void Healing(int heal)
     {
         _currentHealth += heal;
+        if (_currentHealth > _maxHealth)
+        {
+            _currentHealth = _maxHealth;
+        }
     }
 
     public int GetCurrentHealth()

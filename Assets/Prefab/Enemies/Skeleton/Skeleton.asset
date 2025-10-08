@@ -17,7 +17,7 @@ MonoBehaviour:
   enemyScale: 1
   enemyHit: {r: 1, g: 0, b: 0, a: 1}
   baseHealth: 10
-  baseSpeed: 6
+  baseSpeed: 4
   baseStrenght: 15
   experienceAmount: 30
   scoreAmount: 30

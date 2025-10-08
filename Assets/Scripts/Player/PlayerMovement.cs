@@ -74,40 +74,44 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         _isPlaying = false;
     }
-    
 
-    void ChangeDirection()
-    {
-        if (_moveDirection.x > 0  && !_isFacingRight)  // if facing right
+
+    #region Sprite Changes
+
+        void ChangeDirection()
         {
-            SpriteChangeDirection();
-        } 
-        else if (_moveDirection.x < 0 && _isFacingRight)    // if facing left
-        {
-            SpriteChangeDirection();
+            if (_moveDirection.x > 0  && !_isFacingRight)  // if facing right
+            {
+                SpriteChangeDirection();
+            } 
+            else if (_moveDirection.x < 0 && _isFacingRight)    // if facing left
+            {
+                SpriteChangeDirection();
+            }
         }
-    }
-
-    void SpriteChangeDirection()
-    {
-        Vector3 currentScale = transform.localScale;
-        currentScale.x *= -1;
-        transform.localScale = currentScale;
-        _isFacingRight = !_isFacingRight; // makes the var reverse of what it is true
+    
+        void SpriteChangeDirection()
+        {
+            Vector3 currentScale = transform.localScale;
+            currentScale.x *= -1;
+            transform.localScale = currentScale;
+            _isFacingRight = !_isFacingRight; // makes the var reverse of what it is true
+            
+        }
         
-    }
-    
-    
-    private void AnimationStates()
-    {
-        if (_rb.linearVelocity.x == 0 && _rb.linearVelocity.y == 0)
+        private void AnimationStates()
         {
-            _animator.SetBool("isRuning", false);
+            if (_rb.linearVelocity.x == 0 && _rb.linearVelocity.y == 0)
+            {
+                _animator.SetBool("isRuning", false);
+            }
+            else
+            {
+                _animator.SetBool("isRuning", true);
+            }
         }
-        else
-        {
-            _animator.SetBool("isRuning", true);
-        }
-    }
+        
+    #endregion
     
+
 }

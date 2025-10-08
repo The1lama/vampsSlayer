@@ -3,13 +3,10 @@ using UnityEngine;
 using UnityEngine.UI;
 public class UppgradeDisplay : MonoBehaviour
 {
-
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI descriptionText;
     public TextMeshProUGUI upgradeNumText;
-
-
-
+    
     public void SetUpUpgradeCard(UpgradeScriptableObject card)
     {
         Debug.Log("Initializing upgrade card");
