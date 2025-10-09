@@ -3,34 +3,46 @@ using UnityEngine.Serialization;
 
 public class MoveToPlayer : MonoBehaviour
 {
-
-    // [SerializeField] private  Animator animator;
     private SpriteRenderer _spriteRenderer;
-
-    // [SerializeField] private float speed = 5; 
-
-    private float speed = 5;
+    
+    private float _speed = 5;
     
     private GameObject _player;
 
     void Start()
     {
         _player = GameObject.Find("Player");
+        if (_player == null)
+        {
+            _player = null;
+            Debug.Log("No player found");
+        }
+        
         _spriteRenderer =  GetComponent<SpriteRenderer>();
     }
 
-    public void SetSpeed(float _speed)
+    public void SetSpeed(float speed)
     {
-        speed = _speed;
+        _speed = speed;
     }
     
     
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, _player.transform.position, speed * Time.deltaTime);
-        
-        AnimationStates();
+        if (_player != null)
+        {
+            transform.position =
+                Vector3.MoveTowards(transform.position, _player.transform.position, _speed * Time.deltaTime);
+            AnimationStates();
+        }
+        else
+        {
+            Vector3 moveTo = new Vector3(transform.position.x + 20, transform.position.y, transform.position.z);
+            transform.position = Vector3.MoveTowards(transform.position,moveTo , _speed * Time.deltaTime);
+        }
     }
+    
+    
     
     private void AnimationStates()
     {

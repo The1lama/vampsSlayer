@@ -187652,7 +187652,7 @@ MonoBehaviour:
   - {fileID: 2544472624264667037, guid: 947c85edf16d8204b9485a8caf83fba0, type: 3}
   - {fileID: 2544472624264667037, guid: 37b97f33303d06c469a6d0360d7dc8f9, type: 3}
   - {fileID: 2544472624264667037, guid: 72671913a18b5894097e7f24f2ad8d0c, type: 3}
-  enemyLevelUpTime: 1
+  enemyLevelUpTime: 30
   isSpawning: 1
 --- !u!1 &1247962320
 GameObject:
@@ -191306,6 +191306,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1929547127}
   - component: {fileID: 1929547126}
+  - component: {fileID: 1929547128}
   m_Layer: 0
   m_Name: Background Music
   m_TagString: Untagged
@@ -191425,6 +191426,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1929547128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1929547125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec9a306b39657c64f84110ed61a15b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &2028257772
 GameObject:
   m_ObjectHideFlags: 0
