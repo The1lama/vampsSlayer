@@ -12,6 +12,9 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         public GameObject xpDrop;
         public int playerHealChange;
         
+        [SerializeField] private AudioClip audioHurt;
+        private bool _isPlayingHurt;
+        
     #endregion
 
     #region Struc
@@ -33,6 +36,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         private MoveToPlayer _moveToPlayerScript;
         private SpriteRenderer _spriteRenderer;
         private Rigidbody2D _rigidbody2D;
+        private AudioSource _audioSource;
 
     #endregion
     
@@ -48,6 +52,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         _moveToPlayerScript = GetComponent<MoveToPlayer>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        _audioSource = GetComponent<AudioSource>();
         
     }
      
@@ -82,9 +87,14 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         _healthScript.TakeDamage(strength);
         AnimationHurt();
         
+        if (!_isPlayingHurt)
+        {
+            StartCoroutine(PlaySound(audioHurt));
+        }
+        StartCoroutine(PlaySound(audioHurt));
+        
         // If entity is dead
         if (_healthScript.GetCurrentHealth() > 0) return;
-        
         
         // dropped XP
         if (xpDrop != null)
@@ -100,8 +110,6 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
 
         GameManager.Instance.AddScore(statSo.scoreAmount);
 
-        
-        // Destroy(gameObject);
         ObjectPoolManager.ReturnObjectToPool(gameObject);
         
     }
@@ -127,6 +135,21 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         }
 
     }
+    
+    private IEnumerator PlaySound(AudioClip audioClip)
+    {
+        _isPlayingHurt = true;
+        
+        var randPitch = Random.Range(0.8f, 1.2f);
+        
+        _audioSource.clip = audioClip;
+        _audioSource.pitch = randPitch;
+        _audioSource.Play();
+        
+        yield return new WaitForSeconds(0.5f);
+        _isPlayingHurt = false;
+    }
+    
     
     private void AnimationHurt()
     {

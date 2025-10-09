@@ -7,6 +7,9 @@ public class EnemyLevels : MonoBehaviour
     public int enemyLevelUpTime;
     public bool isSpawning = true;
     private int _currentEnemySpawn = 0;
+
+    [SerializeField] private AudioClip _audioClip;
+    
     
     private void Start()
     {
@@ -24,11 +27,12 @@ public class EnemyLevels : MonoBehaviour
 
     private void CheckEnemyLevel()
     {
+        // AudioManager.Instance.PlaySound(_audioClip, MixerGroup.SFX);
+        
         if (!isSpawning) return;
         
         var enemyLevel = GameManager.Instance.EnemyLevels;
         Debug.Log($"Check enemy level <Color=green>{enemyLevel}</Color>");
-
         
         if ((enemyLevel % 2 != 0) && (_currentEnemySpawn < enemies.Length))
         {
@@ -37,8 +41,7 @@ public class EnemyLevels : MonoBehaviour
         }
         else if ((enemyLevel % 2 != 0) && (_currentEnemySpawn > enemies.Length))
         {
-            Debug.LogWarning("Max Enemy diffrent types has spawned");
-            Debug.Log($"Enemy level: <Color=yellow>{enemyLevel}</Color>");
+            Debug.LogWarning("Max Enemy different types has spawned");
         }
         else
         {

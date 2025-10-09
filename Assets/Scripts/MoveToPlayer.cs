@@ -1,13 +1,17 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 public class MoveToPlayer : MonoBehaviour
 {
-    private SpriteRenderer _spriteRenderer;
-    
-    private float _speed = 5;
-    
     private GameObject _player;
+    
+    private SpriteRenderer _spriteRenderer;
+    private AudioSource _audioSource;
+    private Rigidbody2D _rb;
+    private float _speed = 5;
+    private bool _isPlayingWalk;
+    
 
     void Start()
     {
@@ -19,6 +23,9 @@ public class MoveToPlayer : MonoBehaviour
         }
         
         _spriteRenderer =  GetComponent<SpriteRenderer>();
+        _audioSource = GetComponent<AudioSource>();
+        _rb = GetComponent<Rigidbody2D>();
+        
     }
 
     public void SetSpeed(float speed)
@@ -40,6 +47,7 @@ public class MoveToPlayer : MonoBehaviour
             Vector3 moveTo = new Vector3(transform.position.x + 20, transform.position.y, transform.position.z);
             transform.position = Vector3.MoveTowards(transform.position,moveTo , _speed * Time.deltaTime);
         }
+        
     }
     
     

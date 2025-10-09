@@ -11,6 +11,7 @@ public class ObjectPoolManager : MonoBehaviour
     private static GameObject _gameObjectsEmpty;
     private static GameObject _droppedEmpty;
     private static GameObject _bulletObjectEmpty;
+    private static GameObject _sfxObjectEmpty;
     
     private static Dictionary<GameObject, ObjectPool<GameObject>> _objectPools;
     private static Dictionary<GameObject, GameObject> _cloneToPreFabMap;
@@ -26,7 +27,8 @@ public class ObjectPoolManager : MonoBehaviour
     {
         GameObjects,
         DroppedItems,
-        BulletObject
+        BulletObject,
+        SFX
     }
     public static PoolType PoolingType;
 
@@ -58,6 +60,9 @@ public class ObjectPoolManager : MonoBehaviour
 
         _bulletObjectEmpty = new GameObject("BulletObject");
         _bulletObjectEmpty.transform.parent = _emptyHolder.transform;
+        
+        _sfxObjectEmpty = new GameObject("SFXObject");
+        _sfxObjectEmpty.transform.parent = _emptyHolder.transform;
         
         if (_addToDontDestoryOnLoad)
         {
@@ -125,6 +130,9 @@ public class ObjectPoolManager : MonoBehaviour
             
             case PoolType.BulletObject:
                 return _bulletObjectEmpty;
+            
+            case PoolType.SFX:
+                return _sfxObjectEmpty;
             
             default:
                 Debug.LogError("PoolType " + poolType + " not supported");
