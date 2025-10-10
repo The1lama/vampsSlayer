@@ -29,41 +29,34 @@
 
 #### Player
 
-- [ ]  Run
-- [ ]  Hurt
+- [x]  Run
 - [ ]  Dead
 
 #### Enemy
 
-- [ ]  Run
-- [ ]  Hurt
-- [ ]  Dead
+- [x]  Hurt
 
 #### Misc
 
-- [ ]  XP
+- [x]  XP
 - [ ]  Level up
-- [ ]  Background music
+- [x]  Background music
 - [ ]  Click noise in menu
 
 # --------------Nice To Have------------
 
 ### GamePlay
 
-- [ ]  More weapons
-- [ ]  Health pickups, from mob drops
+- [x]  More weapons
+- [x]  Health pickups, from mob drops
 - [X]  More Enemy types
 - [X]  Tool to create Enemy
-- [ ]  Presistent highscore between sessions
-- [ ]  Add knockback to enemies
+- [x]  Presistent highscore between sessions
 
 # --------------Notes------------
 
 - Weapon Prefab? for diffrent kindes of weapons?
-- Scriptible weapons and enemyes?
 - State machine for enemy? One state for moving, another state for attacking
-- State machine UI? One state for Game UI, another for death state, With Eventsystem to switch between states if dead n stuff.
 
 # --------------Known BUGS------------
 
-- .

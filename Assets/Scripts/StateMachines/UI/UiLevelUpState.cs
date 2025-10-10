@@ -21,6 +21,7 @@ public class UiLevelUpState : UiBaseState
     public override void ExitState(UiStateManager ui)
     {
         Debug.Log("<Color=Red>Exiting state</Color>");
+        
         Time.timeScale = 1;
         
         LevelUpCanvas.SetActive(false);

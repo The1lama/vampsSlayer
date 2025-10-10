@@ -27,6 +27,8 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         private float _strength;
         private float _moveSpeed;
         public float spawnDelay;
+        public float _expAmount;
+        public float _scoreAmount;
         
     #endregion
     
@@ -75,6 +77,10 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         _strength = StatScaler.ApplyScaling(statSo.baseStrenght, _level, statSo, statSo.curve);
         _moveSpeed = StatScaler.ApplyScaling(statSo.baseSpeed, _level, statSo, statSo.curve);
         
+        _expAmount = StatScaler.ApplyScaling(statSo.experienceAmount, _level, statSo, statSo.curve) * 0.9f;
+        _scoreAmount = StatScaler.ApplyScaling(statSo.scoreAmount, _level, statSo, statSo.curve) * 0.9f;
+        
+        
         _healthScript.SetMaxHealth(Mathf.RoundToInt(_maxHealth));
         _moveToPlayerScript.SetSpeed(_moveSpeed);
         
@@ -101,14 +107,14 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         {
             // var dropped = Instantiate(xpDrop, transform.position, Quaternion.identity);
             var dropped = ObjectPoolManager.SpawnObject(xpDrop,transform.position,Quaternion.identity, ObjectPoolManager.PoolType.DroppedItems);
-            dropped.GetComponent<XPDrop>().xp = statSo.experienceAmount;
+            dropped.GetComponent<XPDrop>().xp = Mathf.RoundToInt(_expAmount);
             if (Random.Range(0, 100) < playerHealChange)
             {
                 dropped.GetComponent<XPDrop>().canHeal = true;
             }
         }
 
-        GameManager.Instance.AddScore(statSo.scoreAmount);
+        GameManager.Instance.AddScore(Mathf.RoundToInt(_scoreAmount));
 
         ObjectPoolManager.ReturnObjectToPool(gameObject);
         

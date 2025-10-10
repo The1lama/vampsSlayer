@@ -51,10 +51,10 @@ public class BulletScript : MonoBehaviour
     {
         // Debug.Log($"<Color=blue>{coll2d.gameObject.name}</Color> on TriggerEnter2D");
 
-        if (coll2d.CompareTag("Enemy") && coll2d.GetComponent<IDamageable>() != null)
+        if (coll2d.CompareTag("Enemy") && coll2d.GetComponent<IDamageable>() != null && coll2d.isActiveAndEnabled)
         {
             coll2d.GetComponent<EnemyBehaviour>().TakeDamage(strenght);
-            ObjectPoolManager.ReturnObjectToPool(gameObject, ObjectPoolManager.PoolType.BulletObject);
+            // ObjectPoolManager.ReturnObjectToPool(gameObject, ObjectPoolManager.PoolType.BulletObject);
         }
         
     }

@@ -2,78 +2,68 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
-using PrimeTween;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class lightninEffect : MonoBehaviour
 {
+    [SerializeField] private bool alwaysOn = true;
+    
     [SerializeField] private Volume postProssesningVolume;
 
-    private Vector4 flashGamma = new Vector4(2f, 2f, 2f, 2f);
-    private Vector4 normalGama = new Vector4(1f, 1f, 1f, 1f);
+    private Vector4 flashGamma = new Vector4(1.5f, 1.5f, 1.5f, 1.5f);
+    private Vector4 normalGama = new Vector4(0f, 0f, 0f, 0f);
 
     [SerializeField] private float flashDuration;
-    [SerializeField] private AudioClip thunderSound;
-
+    [SerializeField] private AudioClip[] thunderSound;
+    private AudioSource audioSource;
     private LiftGammaGain _liftGammaGain;
+
+    private void Awake()
+    {
+        Debug.Log("Awake");
+
+        if (SceneManager.GetActiveScene().buildIndex != 0)
+            GameManager.Instance.onEnemyLevelUp.AddListener(() => StartCoroutine(RandomLightning()));
+        
+        
+        audioSource  = GetComponent<AudioSource>();
+        
+        StartCoroutine(RandomLightningTime());
+    }
     
-
-    private void Start()
+    private IEnumerator RandomLightningTime()
     {
-        StartCoroutine(RandomLightning(thunderSound));
-    }
-
-
-    private IEnumerator RandomLightning(AudioClip audioClip)
-    {
-        while (true)
+        while (alwaysOn)
         {
-                        Debug.Log(audioClip);
-                        
-                        Flash();
-                        
-                        yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(Random.Range(3,9));
+            if (!audioSource.isPlaying)
+            {
+
+                StartCoroutine(RandomLightning());
+            }
+            
         }
-
     }
-
-    private void Flash()
+    
+ 
+    private IEnumerator RandomLightning()
     {
+        audioSource.clip = thunderSound[Random.Range(0, thunderSound.Length)];
+
         if (postProssesningVolume.profile.TryGet<LiftGammaGain>(out _liftGammaGain))
         {
-            Debug.Log(postProssesningVolume.profile);
-            // Example values: You can tweak the Vector4 values
-            Vector4 easedGamma = EaseOutVector4(normalGama, flashGamma, flashDuration);
-            // liftGammaGain.gamma.value = easedGamma;
+            Debug.Log("<Color=yellow><b>LiftGammaGain</b></b></Color>");
             
-            // _liftGammaGain.lift.value = easedGamma;   // Red tint lift
-            _liftGammaGain.gamma.value = easedGamma;     // Normal gamma
-            // _liftGammaGain.gain.value = easedGamma; // Slight gain boost
-
+            _liftGammaGain.gamma.value = flashGamma;  
+            
+            
+            yield return new WaitForSeconds(flashDuration);
+            audioSource.PlayDelayed(Random.Range(0.1f,1f));
+            
+            _liftGammaGain.gamma.value = normalGama;    // Normal gamma
+   
         }
-        
-        
     }
     
-    Vector4 EaseOutReversed(Vector4 start, Vector4 end, float t)
-    {
-        t = Mathf.Clamp01(t);
-        float easedT = EaseOutCubic(1f - t);  // Reverse the direction
-        Debug.Log(easedT);
-        return Vector4.Lerp(start, end, easedT);
-    }
-    
-    Vector4 EaseOutVector4(Vector4 start, Vector4 end, float t)
-    {
-        t = Mathf.Clamp01(t);
-        float easedT = EaseOutCubic(t); // or EaseOut(t), EaseOutSine(t), etc.
-        return Vector4.Lerp(start, end, easedT);
-    }
-    
-    float EaseOutCubic(float t)
-    {
-        t = Mathf.Clamp01(t);
-        return 1f - Mathf.Pow(1f - t, 3);
-    }
-    
-
 }

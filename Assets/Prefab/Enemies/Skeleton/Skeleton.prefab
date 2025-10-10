@@ -307,3 +307,4 @@ MonoBehaviour:
   playerHealChange: 0
   audioHurt: {fileID: 8300000, guid: 6f621fcee617e8d429030aaa78a4447b, type: 3}
   spawnDelay: 0
+  _expAmount: 0

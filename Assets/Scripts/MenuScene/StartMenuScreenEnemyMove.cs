@@ -56,8 +56,12 @@ public class StartMenuScreenEnemyMove : MonoBehaviour
         var spawnPointObject = SpawnPointHolder[randomHolderIndex];
         var enemyPrefab = EnemyTypes[randomEnemyIndex];
         
+        var spawnY = spawnPointObject.transform.position.y + Random.Range(-2,2);
+        var spawnHere = new Vector3(spawnPointObject.transform.position.x, spawnY,spawnPointObject.transform.position.z);
         
-        var enemy = ObjectPoolManager.SpawnObject(enemyPrefab, spawnPointObject.transform.position, Quaternion.identity);
+        
+        
+        var enemy = ObjectPoolManager.SpawnObject(enemyPrefab, spawnHere, Quaternion.identity);
         enemy.GetComponent<EnemyBehaviour>().Initialize(1);
     }
 }

@@ -23,7 +23,7 @@ MonoBehaviour:
   scoreAmount: 70
   spawnTime: 5
   scalingMethod: 0
-  perLevelMultiplier: 0.2
+  perLevelMultiplier: 0.15
   minLevel: 1
   maxLevel: 20
   curve:

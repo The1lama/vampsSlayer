@@ -208,7 +208,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 8
   m_Sprite: {fileID: 613658156, guid: 1bc6097228993f045852159e71f81d5b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -307,3 +307,4 @@ MonoBehaviour:
   playerHealChange: 0
   audioHurt: {fileID: 8300000, guid: 6f621fcee617e8d429030aaa78a4447b, type: 3}
   spawnDelay: 0
+  _expAmount: 0

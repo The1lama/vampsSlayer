@@ -34,7 +34,7 @@ public class EnemyLevels : MonoBehaviour
         var enemyLevel = GameManager.Instance.EnemyLevels;
         Debug.Log($"Check enemy level <Color=green>{enemyLevel}</Color>");
         
-        if ((enemyLevel % 2 != 0) && (_currentEnemySpawn < enemies.Length))
+        if ((enemyLevel % 2 != 0) && (_currentEnemySpawn <= enemies.Length))
         {
             _enemySpawner.StartCoroutine(_enemySpawner.SpawnRoutine(enemies[_currentEnemySpawn]));
             _currentEnemySpawn++;

@@ -13,7 +13,20 @@ public class ShotGunAttack : MonoBehaviour
     
     private Vector2 _attackDirection;
     private Vector2 _worldPosition;
-
+    
+    [SerializeField] private AudioClip shotgunSound;
+    private AudioSource _audioSource;
+    
+    
+    private void Awake()
+    {
+        GameManager.Instance.onDead.AddListener(() => HideObject());
+        
+        _audioSource = GetComponent<AudioSource>();
+        _audioSource.clip = shotgunSound;
+        
+    }
+    
     #region Initialize attack settings (functions)
     
 
@@ -37,7 +50,7 @@ public class ShotGunAttack : MonoBehaviour
         }
 
     #endregion
-
+    
     
     private void Update()
     {
@@ -56,14 +69,16 @@ public class ShotGunAttack : MonoBehaviour
 
     private void PlayerAttack()
     {
-
         foreach (var bulletSpawnPoint in bulletSpawnPoints)
         {
             Vector3 position = bulletSpawnPoint.transform.position;
             
             var bullet = ObjectPoolManager.SpawnObject(bulletPrefab, position, transform.rotation, ObjectPoolManager.PoolType.BulletObject);
+            bullet.GetComponent<BulletScript>().strenght = _strenght;
             
-            // GameObject bulletspawn = Instantiate(bulletPrefab, position, transform.rotation);
+            _audioSource.pitch = Random.Range(0.8f, 1.2f);
+            _audioSource.Play();
+            
         }
     }
 
@@ -91,6 +106,8 @@ public class ShotGunAttack : MonoBehaviour
         transform.localScale = localScale;
     }
     
-    
-    
+    private void HideObject()
+    {
+        gameObject.SetActive(false);
+    }
 }
